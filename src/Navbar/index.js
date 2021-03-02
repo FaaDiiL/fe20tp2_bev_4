@@ -1,6 +1,6 @@
 import React from 'react'
-import styled from "styled-components"
 import { Link } from 'react-router-dom';
+import styled from "styled-components"
 
 const StyledNav = styled.nav`
 width: 280px;
@@ -30,7 +30,7 @@ const Index = () => {
                         <Link to='/'><li>Home</li></Link>
                         <Link to='/about'><li>About</li></Link>
                         <Link to='/contact'><li>Contact</li></Link>
-                        <Link to='/landing'><li>Sign in</li></Link>
+                        <Link to='/member'><li>Sign in</li></Link>
                   </ul>
             </StyledNav>
             )
