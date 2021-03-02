@@ -1,11 +1,12 @@
-// import Login from './Login'
 import React from 'react'
+
+import Login from './Login'
 
 function Member() {
      return (
           <>
                <h1>Member Page!</h1>
-               {/* <Login /> */}
+               <Login />
           </>
      )
 }
