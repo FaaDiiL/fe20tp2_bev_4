@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 
 function App() {
   return (
-
+<>
     <Router>
       <Navbar />
     <div>
@@ -21,6 +21,7 @@ function App() {
       </Switch>
     </div>
     </Router>
+    </>
   );
 }
 
