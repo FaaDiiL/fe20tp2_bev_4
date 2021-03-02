@@ -31,6 +31,7 @@ const Index = () => {
                         <Link to='/about'><li>About</li></Link>
                         <Link to='/contact'><li>Contact</li></Link>
                         <Link to='/landing'><li>Sign in</li></Link>
+                        <Link to='/admin'><li>Admin</li></Link>
                   </ul>
             </StyledNav>
             )

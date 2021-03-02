@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
 function Landing (){
      return (
           <StyledContainer>
+               <h1>Landing page</h1>
                <select className='selectContainer' id="countries">
                     <option value="GBP">GBP</option>
                     <option value="EUR">EUR</option>
