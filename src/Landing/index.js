@@ -9,7 +9,7 @@ const StyledBody = styled.div`
      height: 100vh;
      width: 100%;
      background: #f8f9fa;
-     background: linear-gradient(70deg, #f8f9fa 10%, #fae1dd 30%,  #fcd5ce 80% );
+     background: linear-gradient(70deg, #fae1dd 30%,  #fcd5ce 80% );
      border-radius: 5%;
 `
 
@@ -20,15 +20,15 @@ const StyledCont = styled.div`
      flex-wrap: wrap;
      width: 60%;
      height: 450px;
-     background: #f8f9fa;
-     /* background: linear-gradient(70deg, #f8f9fa 10%, #fae1dd 30%,  #fcd5ce 80% ); */
-     opacity: 0.4;
+     /* background: #f8f9fa; */
+     background: linear-gradient(70deg, #f8f9fa 20%, #fae1dd 40%,  #fcd5ce 95% );
+     opacity: 0.9;
      border-radius: 5%;
 
      input {
      width: 85%;
      padding: 30px;
-     border: 2px solid #a0c4ff;
+     border: 3px solid #f8f9fa;
      margin: 10px 10px;
      border-radius: 2%;
      font-size: 25px;
@@ -44,7 +44,7 @@ const StyledCont = styled.div`
      flex-wrap: nowrap;
      width: 40%;
      padding: 30px;
-     border: 2px solid #a0c4ff;
+     border: 3px solid #f8f9fa;
      border-radius: 2%;
      margin: 5px 15px;
      background-color: white;
@@ -56,7 +56,7 @@ const StyledCont = styled.div`
 
      button {
           width: 90%;
-          border: 1px solid #a0c4ff;
+          border: 3px solid #f8f9fa;
           padding: 30px;
           font-weight: bold;
           font-size: 20px;
