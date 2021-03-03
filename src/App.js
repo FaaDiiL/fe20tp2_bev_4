@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   return (
-
+<>
     <Router>
       <GlobalStyle />
       <Navbar />
@@ -35,6 +35,7 @@ function App() {
       </Switch>
     </div>
     </Router>
+    </>
   );
 }
 
