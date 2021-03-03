@@ -68,24 +68,42 @@ const StyledCont = styled.div`
      button:focus{
           outline:none;
      }
-     
-
      `
+
+     
 
 const Landing  = () => {
 
-     const [convert, setConvert] = useState('')
+     const [convertNr, setConvertNr] = useState(0)
+     const [convertCur, setConvertCur] = useState('GBP')
      const [click, setClick] = useState('')
 
-     const handleClick = () => {
-       setClick(convert)
+
+     const handleChange = (e) => {
+          if(e.target.name=== 'number'){
+               setConvertNr(e.target.value)
+          }
+          if(e.target.name=== 'currency'){
+               setConvertCur(e.target.value)
+          }
+          // console.log(e.target.name.value === 'currency')
+          //  setConvertCur(e.target.name.value)
+          // setConvertNr(e.target.value)
+          
      }
-      
+
+
+
+     const handleConvert = (e) => {
+          setClick(`${convertNr} ${convertCur}`)
+     }
+
+     
      return (
           <StyledBody>
                <StyledCont>
-                    <input onChange={(e) => setConvert(e.target.value)}type='number' />
-               <select onChange={(e) => setConvert(e.target.value)} id="countries">
+                    <input onChange={handleChange} type='number' name='number'/>
+               <select onChange={handleChange} id="countries" name='currency'>
                     <option value="GBP">GBP</option>
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
@@ -95,7 +113,7 @@ const Landing  = () => {
                <option value="EUR">EUR</option>
                <option value="USD">USD</option>
           </select>
-          <button onClick={handleClick}>convert</button>
+          <button onClick={handleConvert}>convert</button>
           </StyledCont>
           <h3>{click}</h3>
      </StyledBody>
