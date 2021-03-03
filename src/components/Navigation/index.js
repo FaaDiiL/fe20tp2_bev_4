@@ -16,6 +16,7 @@ const Navigation = () => (
         ) : (
           <NavigationNonAuth />
         )
+
       }
     </AuthUserContext.Consumer>
   </div>
@@ -40,6 +41,7 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <SignOutButton />
     </li>
+    
   </ul>
 );
 
