@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
+/* import {BsArrowLeftRight} from "react-icons/bs" */
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
+
 
 const StyledBody = styled.div`
      display: flex;
@@ -74,15 +77,18 @@ const StyledCont = styled.div`
 
 const Landing  = () => {
 
-     const [convertNr, setConvertNr] = useState(0)
-     const [convertCur, setConvertCur] = useState('GBP')
+     
+     
+     const [convertNr, setConvertNr] = useState('')
+     const [convertCur, setConvertCur] = useState('')
      const [click, setClick] = useState('')
 
 
      const handleChange = (e) => {
-          if(e.target.name=== 'number'){
-               setConvertNr(e.target.value)
-          }
+          
+        if (e.target.name === 'number'){
+          setConvertNr(e.target.value)
+     } 
           if(e.target.name=== 'currency'){
                setConvertCur(e.target.value)
           }
@@ -94,7 +100,7 @@ const Landing  = () => {
 
 
 
-     const handleConvert = (e) => {
+     const handleConvert = () => {
           setClick(`${convertNr} ${convertCur}`)
      }
 
@@ -108,6 +114,7 @@ const Landing  = () => {
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
                </select>
+               <CompareArrowsIcon />
           <select className='selectContainer' id="countries">
                <option value="GBP">GBP</option>
                <option value="EUR">EUR</option>
