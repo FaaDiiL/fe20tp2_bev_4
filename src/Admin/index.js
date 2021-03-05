@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CgTrash } from 'react-icons/cg'
+/* import { CgTrash } from 'react-icons/cg' */
 
 const Header = styled.header`
   padding: 20px;
@@ -146,9 +146,9 @@ function AdminPage() {
                     <span>{member.lastname}</span>
                     <span>{member.email}</span>
                     <span>{member.role}</span>
-                    <button>
+                    {/* <button>
                       <CgTrash className='icon' />
-                    </button>
+                    </button> */}
                   </li>
                 ))}
               </ul>
