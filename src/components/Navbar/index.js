@@ -21,9 +21,11 @@ const Container = styled.div`
       top: 0;
       left: 0;
       width: 100%;
-      background: lightblue;
-      color: #292a2a;
-      z-index: 4;
+      color: #333;
+      z-index: 10;
+      background-color: #fff;
+      box-shadow: 0 5px 20px -10px #000
+      
     }
 
     .header a {
@@ -69,7 +71,7 @@ const Container = styled.div`
       width: 100%;
       height: 2px;
       margin-bottom: 4px;
-      background-color: #fff;
+      background-color: #333;
       border-radius: 5px;
       transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09);
     }
@@ -150,7 +152,7 @@ class Index extends Component {
       <Container>
         <header className="header">
           <div className="navContainer">
-            <span className="logo" style={{ color: "#fff", fontStyle: "italic", fontWeight: "400" }}>B-E-V</span>
+            <span className="logo" style={{fontStyle: "italic", fontWeight: "400" }}>B-E-V</span>
             <nav>
             <AuthUserContext.Consumer>
 
