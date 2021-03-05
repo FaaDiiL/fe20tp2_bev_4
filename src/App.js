@@ -3,10 +3,10 @@ import Admin from './Admin';
 import Error from './Error';
 import Landing from './Landing';
 import Member from './Member';
-import Navbar from './Navbar';
-import GlobalStyle from './GlobalStyle';
-import About from './About';
-import Contact from './Contact';
+import Navbar from '../Navbar';
+import GlobalStyle from '../GlobalStyle';
+import About from '../About';
+import Contact from '../Contact';
 
 function App() {
   return (
