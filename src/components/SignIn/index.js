@@ -6,13 +6,47 @@ import { PasswordForgetLink } from "../PasswordForget";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
+import styled from 'styled-components'
+
+const PageContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: center; 
+flex-direction: column;
+
+h1 { 
+margin-top: 100px;
+margin-bottom: 50px;
+display: block;
+
+}
+
+p{
+  margin-bottom: 50px;
+}
+
+input {
+  padding: 5px 15px 5px 5px;
+  margin: 5px;
+margin-bottom: 10px;
+}
+
+button {
+  display: inline-block;
+  padding: 5px;
+}
+
+`;
+
+
+
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
+  <PageContainer>
+    <h1>Sign In</h1>
     <SignInForm />
     <SignUpLink />
     <PasswordForgetLink />
-  </div>
+  </PageContainer>
 );
 
 const INITIAL_STATE = {
@@ -59,7 +93,7 @@ class SignInFormBase extends Component {
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder="E-mail..."
         />
 
         <input

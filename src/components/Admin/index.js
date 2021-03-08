@@ -8,54 +8,64 @@ import * as ROUTES from "../../constants/routes";
 import styled from 'styled-components'
 import { CgTrash } from 'react-icons/cg'
 
-const Header = styled.header`
-  padding: 20px;
+const Header = styled.div`
+  padding: 15px;
   display: flex;
   align-items: center;
   margin: 0 auto;
-
   background-color: #053d57;
 
   h1 {
     color: #f2f1ef;
-    font-size: 30px;
+    font-size: 40px;
+    margin: 0 auto;
+    padding: 15px;
+ 
+    @media (max-width: 414px) {
+      font-size: 18px;
+         }
+
+         @media (max-width: 320px) {
+          font-size: 14px;
+             }
   }
 `
 
-const Body = styled.body`
-  background-color: #97bcc7;
-`
-
-const PageContainer = styled.div`
+ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
-
-  h1 {
-    color: white;
-  }
-`
+` 
 
 const Container = styled.div`
-  margin: 20px;
+  margin: 10px;
   width: 75%;
-  height: 400px;
+  min-height: 400px;
   background-color: #f2f1ef;
   color: black;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 
   h2 {
     text-align: center;
+    padding: 15px;
   }
+
+  @media (max-width: 414px) {
+    width: 300px;
+
+    h2{
+      font-size: 14px;
+    }
+    span{
+      font-size: 10px;
+    }
+       }
 `
 
 const Div = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-bottom: 2px solid #97bcc7;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 
   span {
@@ -64,6 +74,7 @@ const Div = styled.div`
     width: 30%;
     font-weight: bold;
   }
+ 
 `
 
 const Members = styled.div`
@@ -166,9 +177,8 @@ class UserListBase extends Component {
          <Header>
         <h1>Admin Dashboard</h1>
       </Header>
-      <Body>
-        <PageContainer>
-          <h1>User Management</h1>
+
+     <PageContainer> 
           {loading && <div>Loading ...</div>}
 
           <Container>
@@ -207,8 +217,8 @@ class UserListBase extends Component {
             <h2>Statistics</h2>
           </Container>
 
-            </PageContainer>
-            </Body>
+      </PageContainer> 
+ 
 
       </div>
     );
@@ -249,12 +259,12 @@ class UserItemBase extends Component {
   render() {
     const { user, loading } = this.state;
     return (
-      <div>
+      <>
            <Header>
         <h1>Admin Dashboard</h1>
       </Header>
-      <Body>
-        <PageContainer>
+
+    <PageContainer> 
         <h2>Member ({this.props.match.params.id})</h2>
           {loading && <div>Loading ...</div>}
 
@@ -287,12 +297,12 @@ class UserItemBase extends Component {
 
             </Members>
             </Container>
-            </PageContainer>
-            </Body>
+       </PageContainer>
+
       
        
      
-      </div>
+      </>
     );
   }
 }
