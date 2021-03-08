@@ -5,11 +5,49 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
 
+import styled from 'styled-components'
+
+const PageContainer = styled.div`
+display: flex;
+align-items: center; 
+flex-direction: column;
+
+h1 { 
+margin-top: 100px;
+margin-bottom: 50px;
+display: block;
+
+}
+
+p{
+  margin-bottom: 50px;
+}
+
+form { 
+  display: flex;
+  flex-direction: column;
+}
+
+
+input {
+  padding: 5px 15px 5px 5px;
+  margin: 5px;
+margin-bottom: 10px;
+}
+
+button {
+  display: inline-block;
+  padding: 5px;
+}
+
+`;
+
+
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
+  <PageContainer>
+    <h1>Create an account</h1>
     <SignUpForm />
-  </div>
+  </PageContainer>
 );
 
 const INITIAL_STATE = {
@@ -95,7 +133,7 @@ class SignUpFormBase extends Component {
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder="E-mail"
         />
         <input
           name="passwordOne"

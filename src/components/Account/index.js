@@ -4,14 +4,35 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 
+import styled from 'styled-components'
+
+const PageContainer = styled.div`
+display: flex;
+align-items: center; 
+flex-direction: column;
+
+h1 { 
+margin-top: 100px;
+display: block;
+}
+
+h2 {
+  margin-bottom: 50px;
+}
+
+`;
+
+
+
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <div>
-        <h1>Account: {authUser.email}</h1>
+      <PageContainer>
+        <h1>Account:</h1> 
+        <h2>{authUser.email}</h2>
         <PasswordForgetForm />
         <PasswordChangeForm />
-      </div>
+      </PageContainer>
     )}
   </AuthUserContext.Consumer>
 );
