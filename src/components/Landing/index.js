@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
 /* import {BsArrowLeftRight} from "react-icons/bs" */
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
-
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 const StyledBody = styled.div`
      display: flex;
@@ -72,20 +71,17 @@ const StyledCont = styled.div`
           outline:none;
      }
      `
-
      
-
 const Landing  = () => {
 
      const API_URL = 'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/'
      const BASE_CUR = 'SEK'
-  
      
      const [rates, setRates] = useState([])
      const [convertNr, setConvertNr] = useState('')
      const [convertCur, setConvertCur] = useState('')
-     const [click, setClick] = useState('')
-     const [pickedCur, setPickedCur] = useState('SEK')
+     const [select1, setSelect1] = useState('SEK')
+     const [select2, setSelect2] = useState('')
  
     useEffect(() => {
          fetch(`${API_URL}${BASE_CUR}`)
@@ -93,30 +89,29 @@ const Landing  = () => {
          .then(data => setRates(data.conversion_rates))
     },[])
 
+    useEffect(() => {
+          fetch(`${API_URL}${select1}`)
+          .then(response => response.json())
+          .then(data => setRates(data.conversion_rates))
+          
+     },[select1])
+
     const handleSelect1 = (e) => {
-     console.log(e.target.value)  
-     fetch(`${API_URL}${e.target.value}`)
-     .then(response => response.json())
-     .then(data => console.log(data.conversion_rates.AED)+ setRates(data.conversion_rates))
+     setSelect1(e.target.value) 
     }
     
     const handleSelect2 = (e) => {
-     console.log(e.target.value)  
+     setSelect2(e.target.value)  
     }
 
-    const handleChange = (e) => {              
-
-     if (e.target.name === 'number'){
-       setConvertNr(e.target.value)
-  } 
-          // console.log(e.target.name.value === 'currency')
-          //  setConvertCur(e.target.name.value)
-          // setConvertNr(e.target.value)
-          
+    const handleChange = (e) => {     
+          if (e.target.name === 'number'){
+          setConvertNr(e.target.value)
+          }           
      }
 
 const handleConvert = () => {
-     setClick(`${convertNr} ${convertCur}`)
+     setConvertCur(`${rates[`${select2}`] * convertNr}`)
 }
 
      
@@ -127,11 +122,10 @@ const handleConvert = () => {
                     <select onChange={handleSelect1} id="countries" name='currency'>
                     {
           !!rates ?
-          Object.entries(rates).map(([curr, vall],i)  => (
-            <option key={i} value={`${curr}`} >{curr}</option>
-            
+          Object.entries(rates).map(([curr, vall])  => (
+            <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>{curr}</option>
           )    
-          ):<option value="GBP">GBP</option>
+          ):<option value={"GBP"}>GBP</option>
         }
                     
                </select>
@@ -140,16 +134,16 @@ const handleConvert = () => {
           <select onChange={handleSelect2} className='selectContainer' id="countries">
           {
           !!rates ?
-          Object.entries(rates).map(([curr, vall],i)  => (
-            <option key={i} value={`${curr}`} >{curr}</option>
+          Object.entries(rates).map(([curr, vall])  => (
+            <option key={curr} value={`${curr}`} >{curr}</option>
             
           )    
-          ):<option value="USD">USD</option>
+          ):<option value={"USD"}>USD</option>
         }
           </select>
           <button onClick={handleConvert}>convert</button>
           </StyledCont>
-          <h3>{click}</h3>
+          <h3>{convertCur}</h3>
      </StyledBody>
     
      )
