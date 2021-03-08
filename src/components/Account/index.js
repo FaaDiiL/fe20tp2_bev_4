@@ -23,7 +23,6 @@ h2 {
 `;
 
 
-
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {(authUser) => (
