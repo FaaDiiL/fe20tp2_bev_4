@@ -1,5 +1,5 @@
 /* import {BsArrowLeftRight} from "react-icons/bs" */
-import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -124,21 +124,61 @@ const Landing  = () => {
     const handleSelect1 = (e) => {
      setSelect1(e.target.value) 
     }
-    
-    const handleSelect2 = (e) => {
-     setSelect2(e.target.value)  
+  }, [])
+
+  const handleSelect1 = (e) => {
+    setSelect1(e.target.value)
+  }
+
+  const handleSelect2 = (e) => {
+    setCurrencyCode(e.target.value)
+  }
+
+  const handleChange = (e) => {
+    if (e.target.name === 'number') {
+      setConvertNr(e.target.value)
     }
+  }
 
-    const handleChange = (e) => {     
-          if (e.target.name === 'number'){
-          setConvertNr(e.target.value)
-          }           
-     }
+  const handleConvert = () => {
+    console.log(convertCur)
 
-const handleConvert = () => {
-     setConvertCur(`${rates[`${select2}`] * convertNr}`)
-}
+    setConvertCur(`${rates[`${currencyCode}`] * convertNr}`)
+  }
 
+  function handleShift() {
+    setCurrencyToggle(!currencyToggle)
+    setConvertCur(
+      `${
+        !currencyToggle
+          ? rates[`${currencyCode}`] * convertNr
+          : convertNr / rates[`${currencyCode}`]
+      }`
+    )
+  }
+
+  return (
+    <StyledBody>
+      <StyledCont>
+        <input
+          onChange={handleChange}
+          type='number'
+          name='number'
+          placeholder={`${convertNr} Kr`}
+        />
+        <select onChange={handleSelect1} id='countries' name='currency'>
+          {!!rates ? (
+            Object.entries(rates).map(([curr, vall]) => (
+              <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>
+                {curr}
+              </option>
+            ))
+          ) : (
+            <option value={select1}>{select1}</option>
+          )}
+        </select>
+
+<<<<<<< HEAD
      
      return (
           <StyledBody>
@@ -180,6 +220,32 @@ const handleConvert = () => {
      </StyledBody>
     
      )
+=======
+        <button onClick={handleShift}>
+          <CompareArrowsIcon />
+        </button>
+        <select
+          onChange={handleSelect2}
+          className='selectContainer'
+          id='countries'
+          value={currencyCode}
+        >
+          {!!rates ? (
+            Object.entries(rates).map(([curr, vall]) => (
+              <option key={curr} value={`${curr}`}>
+                {curr}
+              </option>
+            ))
+          ) : (
+            <option value={currencyCode}>{currencyCode}</option>
+          )}
+        </select>
+        <button onClick={handleConvert}>convert</button>
+      </StyledCont>
+      <h3>{convertCur}</h3>
+    </StyledBody>
+  )
+>>>>>>> main
 }
 
 export default Landing
