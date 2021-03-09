@@ -10,6 +10,11 @@ const StyledBody = styled.div`
      align-items: center;
      width: 100%;
      border-radius: 5%;
+
+     h1{
+       margin-top: 100px;
+       color: #571D85;
+     }
 `
 
 const StyledCont = styled.div`
@@ -70,6 +75,7 @@ const StyledCont = styled.div`
      flex-direction: column;
 
      button {
+       color: #571D85;
            border: none;
             box-shadow: 1px 3px 5px #571D85;
             padding: 30px;
@@ -94,6 +100,7 @@ const StyledCont = styled.div`
 const FlexBoxContainer = styled.div`
 display: flex;
 flex-direction: row;
+align-items: baseline;
 
 button {
   border: none;
@@ -169,6 +176,7 @@ const Landing = () => {
 
   return (
     <StyledBody>
+      <h1>Currency Converter</h1>
       <StyledCont>
         <input
           onChange={handleChange}

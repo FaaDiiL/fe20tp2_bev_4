@@ -40,9 +40,8 @@ const Container = styled.div`
   margin: 10px;
   width: 75%;
   min-height: 400px;
-  background-color: #f2f1ef;
   color: black;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 3px 5px #571D85;
 
   h2 {
     text-align: center;
