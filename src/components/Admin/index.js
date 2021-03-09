@@ -13,10 +13,9 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
-  background-color: #053d57;
 
   h1 {
-    color: #f2f1ef;
+    color: #571D85;
     font-size: 40px;
     margin: 0 auto;
     padding: 15px;
