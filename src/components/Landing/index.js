@@ -8,7 +8,6 @@ const StyledBody = styled.div`
      flex-direction: column;
      justify-content: center;
      align-items: center;
-    /*  height: 100vh; */
      width: 100%;
      border-radius: 5%;
 `
@@ -95,34 +94,45 @@ const StyledCont = styled.div`
 const FlexBoxContainer = styled.div`
 display: flex;
 flex-direction: row;
+
+button {
+  border: none;
+  box-shadow: 1px 3px 5px #571D85;
+
+   &:focus {
+      outline: none; }
+  &:hover {
+    cursor: pointer;
+  
+  }
+}
 `;
 
-const Landing  = () => {
+const Landing = () => {
+  const API_URL =
+    'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
 
-     const API_URL = 'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/'
-     const BASE_CUR = 'SEK'
-     
-     const [rates, setRates] = useState([])
-     const [convertNr, setConvertNr] = useState(1)
-     const [convertCur, setConvertCur] = useState('')
-     const [select1, setSelect1] = useState('SEK')
-     const [select2, setSelect2] = useState('')
- 
-    useEffect(() => {
-         fetch(`${API_URL}${BASE_CUR}`)
-         .then(response => response.json())
-         .then(data => setRates(data.conversion_rates))
-    },[])
+  const [rates, setRates] = useState([])
+  const [convertNr, setConvertNr] = useState(1)
+  const [convertCur, setConvertCur] = useState('')
+  const [select1, setSelect1] = useState('SEK')
+  const [currencyCode, setCurrencyCode] = useState('USD') // ex. USD, EUR
+  const [currencyToggle, setCurrencyToggle] = useState(false)
 
-    useEffect(() => {
-          fetch(`${API_URL}${select1}`)
-          .then(response => response.json())
-          .then(data => setRates(data.conversion_rates))
-          
-     },[select1])
-
-    const handleSelect1 = (e) => {
-     setSelect1(e.target.value) 
+  useEffect(() => {
+    const newDate = new Date().toISOString().split('T')[0] // format the time like: 2021-03-08
+    if (localStorage.getItem(newDate)) {
+      setRates(JSON.parse(localStorage.getItem(newDate)))
+    } else {
+      fetch(API_URL)
+        .then((response) => response.json())
+        .then((data) => {
+          localStorage.setItem(
+            `${newDate}`,
+            JSON.stringify(data.conversion_rates)
+          )
+          setRates(data.conversion_rates)
+        })
     }
   }, [])
 
@@ -166,6 +176,7 @@ const Landing  = () => {
           name='number'
           placeholder={`${convertNr} Kr`}
         />
+        <FlexBoxContainer>
         <select onChange={handleSelect1} id='countries' name='currency'>
           {!!rates ? (
             Object.entries(rates).map(([curr, vall]) => (
@@ -178,49 +189,6 @@ const Landing  = () => {
           )}
         </select>
 
-<<<<<<< HEAD
-     
-     return (
-          <StyledBody>
-               <StyledCont>
-                   
-                    <input onChange={handleChange} placeholder={`${convertNr} kr`} type='number' name='number'/>
-                    <FlexBoxContainer>
-                    <select onChange={handleSelect1} id="countries" name='currency'>
-                    {
-          !!rates ?
-          Object.entries(rates).map(([curr, vall])  => (
-            <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>{curr}</option>
-          )    
-          ):<option value={"GBP"}>GBP</option>
-        }
-                    
-               </select>
-               
-               <CompareArrowsIcon />
-          <select onChange={handleSelect2} className='selectContainer' id="countries">
-          {
-          !!rates ?
-          Object.entries(rates).map(([curr, vall])  => (
-            <option key={curr} value={`${curr}`} >{curr}</option>
-            
-          )    
-          ):<option value={"USD"}>USD</option>
-        }
-          </select>
-          </FlexBoxContainer>   </StyledCont>
-
-<ButtonWrapper>
-          <button onClick={handleConvert}>convert</button>
-          </ButtonWrapper>
-
-       
-          <h3>{convertCur}</h3>
-      
-     </StyledBody>
-    
-     )
-=======
         <button onClick={handleShift}>
           <CompareArrowsIcon />
         </button>
@@ -240,12 +208,15 @@ const Landing  = () => {
             <option value={currencyCode}>{currencyCode}</option>
           )}
         </select>
+        </FlexBoxContainer>
+          </StyledCont>
+        <ButtonWrapper>
         <button onClick={handleConvert}>convert</button>
-      </StyledCont>
+        </ButtonWrapper>
+    
       <h3>{convertCur}</h3>
     </StyledBody>
   )
->>>>>>> main
 }
 
 export default Landing
