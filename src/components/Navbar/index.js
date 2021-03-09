@@ -86,7 +86,7 @@ const Container = styled.div`
       z-index:-1;
       position:fixed;
       height:100vh;
-      background: lightgray;
+    /*   background: lightgray; */
       width:100%;
       left:0;
       right:0;
