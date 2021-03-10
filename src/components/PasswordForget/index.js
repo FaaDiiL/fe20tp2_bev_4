@@ -3,11 +3,40 @@ import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
+import styled from 'styled-components'
+
+const PageContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: center; 
+flex-direction: column;
+
+h1 { 
+margin-top: 100px;
+display: block;
+}
+
+p{
+  margin: 10px;
+}
+
+input {
+  padding: 5px 15px 5px 5px;
+  margin-bottom: 10px;
+}
+button {
+  display: block;
+  margin: 0 auto;
+}
+`;
+
 const PasswordForgetPage = () => (
-  <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
-  </div>
+  <PageContainer>
+    <h1>Forgot your password?</h1>
+
+<p>No worries! Reset it here!</p> 
+   <PasswordForgetForm />
+  </PageContainer>
 );
 
 const INITIAL_STATE = {
@@ -52,7 +81,7 @@ class PasswordForgetFormBase extends Component {
           value={this.state.email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder="E-mail..."
         />
 
         <button disabled={isInvalid} type="submit">
