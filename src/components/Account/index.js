@@ -12,8 +12,8 @@ flex-direction: column;
 margin: 0 auto;
 box-shadow: 1px 3px 5px #571D85;
 margin-top: 100px;
-padding: 50px;
-width: 50%;
+padding: 50px 80px 50px 80px;
+
 
 h1 { 
 
@@ -22,6 +22,7 @@ display: block;
 
 h2 {
   margin-bottom: 50px;
+  font-size: 20px;
 }
 
 `;
