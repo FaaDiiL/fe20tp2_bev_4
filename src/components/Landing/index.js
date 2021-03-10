@@ -164,14 +164,24 @@ const Landing = () => {
   function handleShift() {
     setCurrencyToggle(!currencyToggle)
     
-    setConvertCur(
-      `${
-        !currencyToggle
-          ? rates[`${currencyCode}`] * convertNr
-          : convertNr / rates[`${currencyCode}`]
-      }`
-    )
 
+    if(!currencyToggle){
+      setConvertCur(
+        `${
+           rates[`${currencyCode}`] * convertNr
+           
+        }`
+      )
+      setSelect1(currencyCode)
+      setCurrencyCode(select1)
+    }else {
+      setConvertCur(
+        `${
+          convertNr / rates[`${currencyCode}`]
+        }`
+      )
+      
+    }
   }
   
   const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
