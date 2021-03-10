@@ -85,7 +85,7 @@ const Landing  = () => {
      const [convertNr, setConvertNr] = useState('')
      const [convertCur, setConvertCur] = useState('')
      const [click, setClick] = useState('')
-     const [pickedCur, setPickedCur] = useState('SEK')
+     /* const [pickedCur, setPickedCur] = useState('SEK') */
  
     useEffect(() => {
          fetch(`${API_URL}${BASE_CUR}`)
@@ -94,10 +94,11 @@ const Landing  = () => {
     },[])
 
     const handleSelect1 = (e) => {
+
      console.log(e.target.value)  
      fetch(`${API_URL}${e.target.value}`)
      .then(response => response.json())
-     .then(data => console.log(data.conversion_rates.AED)+ setRates(data.conversion_rates))
+     .then(data => setRates(data.conversion_rates))
     }
     
     const handleSelect2 = (e) => {
