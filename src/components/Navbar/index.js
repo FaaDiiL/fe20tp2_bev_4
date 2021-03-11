@@ -145,12 +145,21 @@ class Index extends Component {
     }
 
     this.handleSidebar = this.handleSidebar.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleSidebar() {
     this.setState({
       sideBar: !this.state.sideBar,
     })
+  }
+  
+  handleClick(e) {
+    if(e.target.nodeName === "LI"){
+      this.setState({
+        sideBar: !this.state.sideBar,
+      })
+    }
   }
 
   render() {
@@ -167,6 +176,8 @@ class Index extends Component {
                 {(authUser) =>
                   authUser ? (
                     <ul
+                    onClick={this.handleClick}
+
                       className='mainNav'
                       style={
                         this.state.sideBar
@@ -197,6 +208,7 @@ class Index extends Component {
                     </ul>
                   ) : (
                     <ul
+                      onClick={this.handleClick}
                       className='mainNav'
                       style={
                         this.state.sideBar
@@ -226,6 +238,7 @@ class Index extends Component {
             <button
               onClick={this.handleSidebar}
               className={`navToggle ${this.state.sideBar ? 'open' : null}`}
+              
             >
               <span />
               <span />

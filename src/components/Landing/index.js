@@ -235,7 +235,7 @@ const Landing = () => {
         {
          !currencyToggle ?
         `${convertNr} ${select1} = ${convertCur} ${currencyCode}`
-        :`${convertCur} ${currencyCode} = ${convertNr} ${select1}`
+        :`${convertNr} ${currencyCode} = ${convertCur} ${select1}`
         
         }
         </h3>
