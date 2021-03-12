@@ -158,22 +158,32 @@ const Landing = () => {
   }
 
   const handleConvert = () => {
-    console.log(convertCur)
-    
-
     setConvertCur(`${rates[`${currencyCode}`] * convertNr}`)
   }
 
   function handleShift() {
     setCurrencyToggle(!currencyToggle)
-    setConvertCur(
-      `${
-        !currencyToggle
-          ? rates[`${currencyCode}`] * convertNr
-          : convertNr / rates[`${currencyCode}`]
-      }`
-    )
+    
+
+    if(!currencyToggle){
+      setConvertCur(
+        `${
+           rates[`${currencyCode}`] * convertNr
+           
+        }`
+      )
+      setSelect1(currencyCode)
+      setCurrencyCode(select1)
+    }else {
+      setConvertCur(
+        `${
+          convertNr / rates[`${currencyCode}`]
+        }`
+      )
+      
+    }
   }
+  
   const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
   return (
     <StyledBody>
@@ -189,7 +199,7 @@ const Landing = () => {
           onChange={handleChange}
         />
         <FlexBoxContainer>
-          <select onChange={handleSelect1} id='countries' name='currency'>
+          <select onChange={handleSelect1} value={select1} id='countries' name='currency'>
             {!!rates ? (
               Object.entries(rates).map(([curr, vall]) => (
                 <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>
@@ -221,7 +231,14 @@ const Landing = () => {
             )}
           </select>
         </FlexBoxContainer>
-        <h3>{`${convertNr} ${select1} = ${convertCur} ${currencyCode}`}</h3>
+        <h3> 
+        {
+         !currencyToggle ?
+        `${convertNr} ${select1} = ${convertCur} ${currencyCode}`
+        :`${convertNr} ${currencyCode} = ${convertCur} ${select1}`
+        
+        }
+        </h3>
         <button className='btn' onClick={handleConvert}>convert</button>
       </StyledCont>
     </StyledBody>
