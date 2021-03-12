@@ -2,6 +2,9 @@
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Chart from "./Chart"
+
+
 
 const StyledBody = styled.div`
   display: flex;
@@ -118,6 +121,9 @@ const FlexBoxContainer = styled.div`
 `
 
 const Landing = () => {
+
+  
+
   const API_URL =
     'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
 
@@ -241,6 +247,7 @@ const Landing = () => {
         </h3>
         <button className='btn' onClick={handleConvert}>convert</button>
       </StyledCont>
+      <Chart />
     </StyledBody>
   )
 }
