@@ -209,7 +209,7 @@ const Landing = () => {
     <StyledBody>
       <h1>Dashboard</h1>
 
-
+      <CurrencyContainer>
       <StyledCont>
       <h2>Currency Converter</h2>
         <input
@@ -257,6 +257,21 @@ const Landing = () => {
      
         <button className='btn' onClick={handleConvert}>convert</button>
       </StyledCont>
+</CurrencyContainer>
+
+
+
+
+<ConvertContainer> 
+<h3>
+        {
+        !currencyToggle?
+           `${convertNr} ${select1} = ${Math.round(total * 100) / 100} ${currencyCode}`
+            : `${convertNr} ${currencyCode} = ${Math.round(total * 100) / 100} ${select1}`
+        }
+</h3>
+        
+</ConvertContainer>
       <Chart />
     </StyledBody>
   )
