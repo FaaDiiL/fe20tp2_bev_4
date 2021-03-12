@@ -2,6 +2,9 @@
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Chart from "./Chart"
+
+
 
 const StyledBody = styled.div`
   display: flex;
@@ -140,6 +143,9 @@ h1 {
 `;
 
 const Landing = () => {
+
+  
+
   const API_URL =
     'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
 
@@ -167,11 +173,6 @@ const Landing = () => {
         })
     }
   }, [])
-
-  useEffect(()=>{
-  
-  }
-  ,[total])
 
 
 
@@ -208,7 +209,7 @@ const Landing = () => {
     <StyledBody>
       <h1>Dashboard</h1>
 
-<CurrencyContainer>
+
       <StyledCont>
       <h2>Currency Converter</h2>
         <input
@@ -256,25 +257,7 @@ const Landing = () => {
      
         <button className='btn' onClick={handleConvert}>convert</button>
       </StyledCont>
-  </CurrencyContainer>
-
-<ConvertContainer> 
-<h3>
-        {
-        !currencyToggle?
-           `${convertNr} ${select1} = ${Math.round(total * 100) / 100} ${currencyCode}`
-            : `${convertNr} ${currencyCode} = ${Math.round(total * 100) / 100} ${select1}`
-        }
-</h3>
-        
-</ConvertContainer>
-
-<GraphContainer>
-
-  <h1>(Graf över valuta här) </h1>
-</GraphContainer>
-  
-
+      <Chart />
     </StyledBody>
   )
 }
