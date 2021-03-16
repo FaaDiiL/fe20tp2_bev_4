@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
-import { withFirebase } from "../Firebase";
+import firebase, { withFirebase } from "../Firebase";
 import { withAuthorization } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import styled from 'styled-components'
 import { CgTrash } from 'react-icons/cg'
+import "firebase/auth";
 
 const Header = styled.div`
   padding: 15px;
@@ -135,6 +136,10 @@ const AdminPage = () => (
   </div>
 );
 
+
+
+
+
 class UserListBase extends Component {
   constructor(props) {
     super(props);
@@ -142,8 +147,11 @@ class UserListBase extends Component {
     this.state = {
       loading: false,
       users: [],
+
     };
   }
+
+  
 
   componentDidMount() {
     this.setState({ loading: true });
@@ -161,14 +169,57 @@ class UserListBase extends Component {
         loading: false,
       });
     });
+
+    
   }
 
   componentWillUnmount() {
     this.props.firebase.users().off();
   }
-
+ 
+  
+  
   render() {
     const { users, loading } = this.state;
+
+    const handleDelete = (e) => {
+      
+   /*    this.props.firebase.auth().delete().then(function(){
+       
+
+  
+      }); */
+     /*  var user = firebase.auth().e;
+
+      user.delete().then(function() {
+        console.log('delete successful?')
+      
+      }).catch(function (error) {
+        console.error({error})
+      }) */
+
+      // console.log("Pressed button: ", e); 
+      // this.props.auth.user()
+      /* this.props.firebase.user(e).remove().then(function() {
+        console.log('User deleted.')
+      // User deleted.
+      }).catch(function(error) {
+        console.log('An error happened: ', error)
+      }) */
+
+    /*   let authUser = this.props.firebase.auth..currentUser.uid).remove().addOnSuccessListener{ FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { console.log('uid removed') } }
+      console.log(authUser) */
+      // mRef.child(FirebaseAuth.getInstance().currentUser.uid).remove().addOnSuccessListener { ... }
+
+      // Authentication remove
+      /* authUser.delete().then(function() {
+        console.log('User deleted from Auth')
+      }).catch(function(error) {
+        console.log('An error happened from Auth', error)
+      }); */
+        
+}  
+  
 
     return (
       <div>
@@ -202,8 +253,8 @@ class UserListBase extends Component {
                   Details
                 </Link>
                   </span> 
-                    <button>
-                      <CgTrash className='icon' />
+                    <button onClick={() => handleDelete(user.uid)}>
+                     <CgTrash className='icon' />
                     </button>
                   </li>
                 ))}
