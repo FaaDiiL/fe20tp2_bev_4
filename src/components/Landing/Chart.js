@@ -27,48 +27,29 @@ const Chart = () => {
     .then(response => setChartData([response.data.rates]))
     .catch(error => console.error(error));
   },[]);
+  
   useEffect(()=>{
     setNewData(chartData.reduce((prev, next)=>{
       // console.log(Object.keys(next[0]).length)
       // let dates = Object.entries(next).filter(dates=>dates[8]==0 && dates[9]==1)
       let dates = Object.entries(next).filter(data=>data[0][8].includes('0') && data[0][9].includes('1') )
       // let rates = Object.values(next)
-      
-      
+      console.log(dates)
+      setSekChart(dates)
       // console.log(rates)
       // if(dates[8] == 0 && dates[9] == 1){
 
       // }
       // prev[dates] = rates
-      return prev[dates]
+      return prev[next]
     },{}))
 
   },[chartData])
-// useEffect(() => {
-//   console.log("från onurs fetch")
-//   fetch("http://data.fixer.io/api/2013-12-24?access_key=fd4a8fdd5b24307002c1bea2c63f14f0&GBP")
-//   .then(response => response.json())
-//   .then(data => console.log(data))
-// }, [])
 
 
-/*
-createGraphData() {
-  let data ={Jan: 65, Feb: 59, Mar: 56}
-
-  const rateData = {
-    labels: Object.keys(data)
-    ...data
-    datasets: {
-      data: Object.values(data)
-    }
-  }
-}
-*/
-
-  chartData.map(data =>{ return data.rates }).map(data=>{ return data })
+  // chartData.map(data =>{ return data.rates }).map(data=>{ return data })
     
-    
+    // console.log()
 
   const rateData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
@@ -78,12 +59,11 @@ createGraphData() {
         backgroundColor: '#c229294b',
         borderColor: '#c22929',
         borderWidth: 2,
-        data: [12, 63, 32, 23, 63, 43, 40, 59, 80, 81, 56, 43,30]
-        // data: newData.length>0?newData:[12, 63, 32, 23, 63, 43, 40, 59, 80, 81, 56, 43,30]
+        // data: [12, 63, 32, 23, 63, 43, 40, 59, 80, 81, 56, 43,30]
+        data: sekChart.length>0?sekChart:[12, 63, 32, 23, 63, 43, 40, 59, 80, 81, 56, 43,30]
       }
     ]
   }
-  
     return (
       <div>
         <Line
