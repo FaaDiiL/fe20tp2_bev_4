@@ -13,7 +13,11 @@ import "@fontsource/audiowide"
 const Container = styled.div`
   li {
     list-style: none;
-    padding: 20px 0;
+    padding: 50px 0px 0px 20px;
+
+    &:hover {
+      color: #571D85;
+    }
   }
 
   .header {
@@ -24,7 +28,7 @@ const Container = styled.div`
     color: #333;
     z-index: 10;
     background-color: #fff;
-    box-shadow: 0 5px 20px -10px #000;
+    box-shadow: 0 5px 20px -10px #571D85 /* #000 */;
   }
 
   .header a {
@@ -88,21 +92,12 @@ const Container = styled.div`
   .navToggle span:last-child {
     margin-bottom: 0;
   }
-  .wrapper {
-    z-index: -1;
-    position: fixed;
-    height: 100vh;
-    /*   background: lightgray; */
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+
   .mainNav {
     position: absolute;
     top: 0;
     right: 0;
-    width: 200px;
+    width: 250px;
     height: 100vh;
     background-color: #f4f4f4;
     padding: 58px 15px;
@@ -145,12 +140,21 @@ class Index extends Component {
     }
 
     this.handleSidebar = this.handleSidebar.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleSidebar() {
     this.setState({
       sideBar: !this.state.sideBar,
     })
+  }
+  
+  handleClick(e) {
+    if(e.target.nodeName === "LI"){
+      this.setState({
+        sideBar: !this.state.sideBar,
+      })
+    }
   }
 
   render() {
@@ -167,6 +171,8 @@ class Index extends Component {
                 {(authUser) =>
                   authUser ? (
                     <ul
+                    onClick={this.handleClick}
+
                       className='mainNav'
                       style={
                         this.state.sideBar
@@ -179,11 +185,19 @@ class Index extends Component {
                       </Link>
 
                       <Link to={ROUTES.HOME}>
-                        <li>Home</li>
+                        <li>Dashboard</li>
                       </Link>
 
-                      <Link to={ROUTES.ACCOUNT}>
+                        <Link to={ROUTES.ACCOUNT}>
                         <li>Account</li>
+                      </Link>
+
+                      <Link to={ROUTES.ABOUT}>
+                        <li>About</li>
+                      </Link>
+
+                      <Link to={ROUTES.CONTACT}>
+                        <li>Contact</li>
                       </Link>
 
                       {!!authUser.roles[ROLES.ADMIN] && (
@@ -197,6 +211,7 @@ class Index extends Component {
                     </ul>
                   ) : (
                     <ul
+                      onClick={this.handleClick}
                       className='mainNav'
                       style={
                         this.state.sideBar
@@ -214,18 +229,12 @@ class Index extends Component {
                     </ul>
                   )
                 }
-
-                {/* <Link to='/'><li>Home</li></Link>
-                  <Link to='/about'><li>About</li></Link>
-                  <Link to='/contact'><li>Contact</li></Link>
-                  <Link to='/landing'><li>Sign in</li></Link>
-                  <Link to='/admin'><li>Admin</li></Link> */}
-                {/* </ul> */}
               </AuthUserContext.Consumer>
             </nav>
             <button
               onClick={this.handleSidebar}
               className={`navToggle ${this.state.sideBar ? 'open' : null}`}
+              
             >
               <span />
               <span />

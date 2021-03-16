@@ -2,10 +2,10 @@ import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-// import About from '../About';
+import About from '../About';
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
-// import Contact from '../Contact';
+
 import Error from '../Error';
 import HomePage from "../Home";
 import LandingPage from '../Landing';
@@ -14,6 +14,7 @@ import PasswordForgetPage from "../PasswordForget";
 import { withAuthentication } from "../Session";
 import SignInPage from "../SignIn";
 import SignUpPage from "../SignUp";
+import ContactPage from "../Contact"; 
 
 const App = () => (
   
@@ -28,6 +29,8 @@ const App = () => (
         <Route path={ROUTES.HOME} component={HomePage} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} /> 
+        <Route path={ROUTES.CONTACT} component={ContactPage} /> 
+        <Route path={ROUTES.ABOUT} component={About} /> 
         <Route component={Error} />
       </Switch>
     </div>

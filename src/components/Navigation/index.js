@@ -28,10 +28,16 @@ const NavigationAuth = ({ authUser }) => (
       <Link to={ROUTES.LANDING}>Landing</Link>
     </li>
     <li>
-      <Link to={ROUTES.HOME}>Home</Link>
+      <Link to={ROUTES.HOME}>Dashboard</Link>
     </li>
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
+    </li>
+    <li>
+      <Link to={ROUTES.ABOUT}>About</Link>
+    </li>
+    <li>
+      <Link to={ROUTES.CONTAC}>Contact</Link>
     </li>
     {!!authUser.roles[ROLES.ADMIN] && (
       <li>

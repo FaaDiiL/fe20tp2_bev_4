@@ -20,6 +20,7 @@ const Header = styled.div`
     font-size: 40px;
     margin: 0 auto;
     padding: 15px;
+    letter-spacing: 1.5px;
  
     @media (max-width: 414px) {
       font-size: 18px;
@@ -261,10 +262,6 @@ class UserListBase extends Component {
               </ul>
             </Members>
             </Container>
-
-          <Container>
-            <h2>Statistics</h2>
-          </Container>
 
       </PageContainer> 
  

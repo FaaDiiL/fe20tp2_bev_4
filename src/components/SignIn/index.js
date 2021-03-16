@@ -15,8 +15,8 @@ justify-content: center;
 flex-direction: column;
 
 h1 { 
-margin-top: 100px;
-margin-bottom: 50px;
+margin-top: 150px;
+margin-bottom: 70px;
 display: block;
 
 }
@@ -37,8 +37,6 @@ button {
 }
 
 `;
-
-
 
 const SignInPage = () => (
   <PageContainer>

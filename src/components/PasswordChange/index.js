@@ -23,7 +23,6 @@ form { 
   flex-direction: column;
 }
 
-
 input {
   padding: 5px 15px 5px 5px;
   margin: 2px;
