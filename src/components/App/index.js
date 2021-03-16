@@ -1,20 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch  } from "react-router-dom";
-import SignUpPage from "../SignUp";
-import SignInPage from "../SignIn";
-import PasswordForgetPage from "../PasswordForget";
-import HomePage from "../Home";
-import AccountPage from "../Account";
-import AdminPage from "../Admin";
-import Error from '../Error';
-import LandingPage from '../Landing';
-import About from '../About';
-import Contact from '../Contact';
-import Navbar from "../Navbar"
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import { withAuthentication } from "../Session";
+import About from '../About';
+import AccountPage from "../Account";
+import AdminPage from "../Admin";
 
+import Error from '../Error';
+import HomePage from "../Home";
+import LandingPage from '../Landing';
+import Navbar from "../Navbar"
+import PasswordForgetPage from "../PasswordForget";
+import { withAuthentication } from "../Session";
+import SignInPage from "../SignIn";
+import SignUpPage from "../SignUp";
+import ContactPage from "../Contact"; 
 
 const App = () => (
   
@@ -29,6 +29,8 @@ const App = () => (
         <Route path={ROUTES.HOME} component={HomePage} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} /> 
+        <Route path={ROUTES.CONTACT} component={ContactPage} /> 
+        <Route path={ROUTES.ABOUT} component={About} /> 
         <Route component={Error} />
       </Switch>
     </div>
@@ -37,6 +39,3 @@ const App = () => (
 
 export default withAuthentication(App);
 
-{/* <Route exact path="/">
-  {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-</Route> */}

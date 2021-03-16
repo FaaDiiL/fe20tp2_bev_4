@@ -6,20 +6,20 @@ import { withAuthorization } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import styled from 'styled-components'
-import { CgTrash } from 'react-icons/cg'
+
 
 const Header = styled.div`
   padding: 15px;
   display: flex;
   align-items: center;
   margin: 0 auto;
-  background-color: #053d57;
 
   h1 {
-    color: #f2f1ef;
+    color: #571D85;
     font-size: 40px;
     margin: 0 auto;
     padding: 15px;
+    letter-spacing: 1.5px;
  
     @media (max-width: 414px) {
       font-size: 18px;
@@ -41,9 +41,8 @@ const Container = styled.div`
   margin: 10px;
   width: 75%;
   min-height: 400px;
-  background-color: #f2f1ef;
   color: black;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 3px 5px #571D85;
 
   h2 {
     text-align: center;
@@ -204,18 +203,12 @@ class UserListBase extends Component {
                   Details
                 </Link>
                   </span> 
-                    <button>
-                      <CgTrash className='icon' />
-                    </button>
+    
                   </li>
                 ))}
               </ul>
             </Members>
             </Container>
-
-          <Container>
-            <h2>Statistics</h2>
-          </Container>
 
       </PageContainer> 
  

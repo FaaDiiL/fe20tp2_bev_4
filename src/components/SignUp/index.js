@@ -29,7 +29,7 @@ form { 
 }
 
 
-input {
+input, select {
   padding: 5px 15px 5px 5px;
   margin: 5px;
 margin-bottom: 10px;
@@ -87,7 +87,7 @@ class SignUpFormBase extends Component {
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.LANDING);
       })
       .catch((error) => {
         this.setState({ error });
@@ -149,6 +149,11 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
+        <select name='bank' className='chooseBank'>
+          <option value="" disabled selected>Select your Bank</option>
+          <option>Swedbank</option>
+          <option>Länsförsäkringar</option>
+        </select>
         <label>
           Admin:
           <input
