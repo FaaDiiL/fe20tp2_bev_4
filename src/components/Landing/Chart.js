@@ -30,17 +30,9 @@ const Chart = () => {
   
   useEffect(()=>{
     setNewData(chartData.reduce((prev, next)=>{
-      // console.log(Object.keys(next[0]).length)
-      // let dates = Object.entries(next).filter(dates=>dates[8]==0 && dates[9]==1)
-      let dates = Object.entries(next).filter(data=>data[0][8].includes('0') && data[0][9].includes('1') )
-      // let rates = Object.values(next)
+      let dates = Object.entries(next).filter(([date,val])=>date[8].includes('0') && date[9].includes('1') )
       console.log(dates)
       setSekChart(dates)
-      // console.log(rates)
-      // if(dates[8] == 0 && dates[9] == 1){
-
-      // }
-      // prev[dates] = rates
       return prev[next]
     },{}))
 
