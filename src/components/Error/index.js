@@ -4,8 +4,8 @@ const Container = styled.div`
 display: flex;
 justify-content: center; 
 align-items: center; 
-flex-flow: column-wrap;
-margin-top: 100px;
+margin-top: 100px; 
+
 `;
 
 const Title = styled.h2`
@@ -13,13 +13,20 @@ color: black;
 text-align: center;
 margin-top: 50px;
 margin-bottom: 50px;
+color: white;
 `;
 
 const InfoBox = styled.div`
-width: 50%;
+min-height: 250px;
 padding: 10px 50px 10px 50px;
 border-radius: 6px;
-background-image: linear-gradient(rgba(194, 186, 175, 0.432), rgba(56, 54, 50, 0.623));
+width: 100%;
+background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+
+p{
+    text-align: center;
+    color: white;
+}
 `;
 
 

@@ -3,20 +3,22 @@ import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import Chart from "./Chart"
+
 const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 5%;
 
   h1 {
+    letter-spacing: 1.5px;
     margin-top: 20px;
     color: #571d85;
     text-align: center
   }
-`
+`;
 
 const StyledCont = styled.div`
   display: flex;
@@ -24,22 +26,14 @@ const StyledCont = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* width: 60%; */
-  min-height: 450px;
   opacity: 0.9;
-  border-radius: 5%;
-
-  @media (max-width: 375px) {
-    /* width: 80%; */
-    input {
-      /* margin-bottom: -150px; */
-    }
-  }
+  padding: 50px;
+  background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+  /* background-color: #613685; */
+ 
 
   input {
-    
-    box-shadow: 1px 3px 5px #571d85;
-    padding: 25px;
+    padding: 10px 0px 10px 0px;
     border: none;
     border-radius: 2%;
     font-size: 25px;
@@ -54,38 +48,38 @@ const StyledCont = styled.div`
       border-bottom: 3px solid #571d85;
     }
   }
+
+  h2 {
+    color: white;
+    margin: 10px;
+  }
+
   select {
+   background: rgb(59, 26, 87); 
     display: flex;
     flex-wrap: nowrap;
-    /* width: 40%; */
-    padding: 25px;
-    border: 3px solid #f8f9fa;
+    color: white;
+    padding: 20px;
     border-radius: 2%;
     margin: 5px 15px;
-    /* margin-bottom: -50px; */
-    background-color: white;
-    box-shadow: 1px 3px 5px #571d85;
-
-    &:focus {
-      outline: none;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      border-bottom: 3px solid #571d85;
-    }
+    outline: none;
+    border: none;
+    box-shadow: 1px 3px 5px rgb(96, 57, 128);
   }
+
+
   .btn {
     width: 60%;
     letter-spacing:1.5px;
     color: #ffffff;
     border: none;
-    box-shadow: 1px 3px 5px #571d85;
+    box-shadow: 1px 3px 5px rgb(96, 57, 128);
     padding: 10px;
     font-weight: bold;
     font-size: 20px;
     text-transform: uppercase;
-    background: #571D85;
-    border-radius: 10px;
+    background: rgb(59, 26, 87);
+    margin-top: 20px;
 
      &:hover {
       cursor: pointer;
@@ -98,15 +92,15 @@ const StyledCont = styled.div`
   }
 `
 
-
-const FlexBoxContainer = styled.div`
+const FlexBoxContainer = styled.form`
   display: flex;
   flex-direction: row;
   align-items: baseline;
 
   button  {
     border: none;
-    box-shadow: 1px 3px 5px #571d85;
+    background-color: transparent;
+    color: white;
 
     &:focus {
       outline: none;
@@ -116,16 +110,50 @@ const FlexBoxContainer = styled.div`
     }
   }
 `
+const CurrencyContainer= styled.div`
+background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+width: 100%;
+`;
+
+const ConvertContainer = styled.div`
+display: flex;
+width: 100%;
+justify-content: center; 
+align-items: center;
+background-color: white;
+min-height: 300px;
+
+h3 {
+  color: black;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 40px;
+}
+`;
+
+const GraphContainer = styled.div`
+height: 300px;
+width: 100%;
+background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+
+h1 {
+  color: white;
+}
+`;
 
 const Landing = () => {
+
+  
+
   const API_URL =
     'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
 
   const [rates, setRates] = useState([])
   const [convertNr, setConvertNr] = useState(1)
-  const [convertCur, setConvertCur] = useState('')
+  const [convertCur, setConvertCur] = useState(1)
   const [select1, setSelect1] = useState('SEK')
   const [currencyCode, setCurrencyCode] = useState('USD') // ex. USD, EUR
+  const [total, setTotal] = useState(null) 
   const [currencyToggle, setCurrencyToggle] = useState(false)
 
   useEffect(() => {
@@ -145,50 +173,46 @@ const Landing = () => {
     }
   }, [])
 
+
+
   const handleSelect1 = (e) => {
     setSelect1(e.target.value)
   }
 
   const handleSelect2 = (e) => {
     setCurrencyCode(e.target.value)
+
   }
 
   const handleChange = (e) => {
-      setConvertNr(e.target.value);  
+    setConvertNr(e.target.value);  
   }
 
-  const handleConvert = () => {
-    setConvertCur(`${rates[`${currencyCode}`] * convertNr}`)
+  const handleConvert = (e) => {
+    e.preventDefault()
+    setTotal(convertNr * rates[currencyCode])
   }
 
-  function handleShift() {
+  function handleShift(e) {
+    e.preventDefault()
     setCurrencyToggle(!currencyToggle)
-    
-
-    if(!currencyToggle){
-      setConvertCur(
-        `${
-           rates[`${currencyCode}`] * convertNr
-           
-        }`
-      )
-      setSelect1(currencyCode)
-      setCurrencyCode(select1)
-    }else {
-      setConvertCur(
-        `${
-          convertNr / rates[`${currencyCode}`]
-        }`
-      )
-      
-    }
+    if(currencyToggle){
+         setTotal(convertNr * rates[currencyCode])
+        
+       }else {
+        setTotal(convertNr / rates[currencyCode])
+       }
   }
+ 
   
   const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
   return (
     <StyledBody>
-      <h1>Currency Converter</h1>
+      <h1>Dashboard</h1>
+
+      <CurrencyContainer>
       <StyledCont>
+      <h2>Currency Converter</h2>
         <input
           type='number'
           name='number'
@@ -200,9 +224,9 @@ const Landing = () => {
         />
         <FlexBoxContainer>
           <select onChange={handleSelect1} value={select1} id='countries' name='currency'>
-            {!!rates ? (
+            {!rates ? (
               Object.entries(rates).map(([curr, vall]) => (
-                <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>
+                <option key={curr} value={curr} name={`${curr} ${vall}`}>
                   {curr}
                 </option>
               ))
@@ -231,16 +255,26 @@ const Landing = () => {
             )}
           </select>
         </FlexBoxContainer>
-        <h3> 
-        {
-         !currencyToggle ?
-        `${convertNr} ${select1} = ${convertCur} ${currencyCode}`
-        :`${convertNr} ${currencyCode} = ${convertCur} ${select1}`
-        
-        }
-        </h3>
+     
         <button className='btn' onClick={handleConvert}>convert</button>
       </StyledCont>
+</CurrencyContainer>
+
+
+
+<ConvertContainer> 
+{total &&
+<h3>
+        {
+        !currencyToggle ?
+           `${convertNr} ${select1} = ${Math.round(total * 100) / 100} ${currencyCode}`
+            : `${convertNr} ${currencyCode} = ${Math.round(total * 100) / 100} ${select1}`
+        }
+</h3>
+        
+}
+</ConvertContainer>
+      <Chart />
     </StyledBody>
   )
 }
