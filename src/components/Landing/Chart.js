@@ -35,6 +35,20 @@ useEffect(() => {
 //   .then(data => console.log(data))
 // }, [])
 
+
+/*
+createGraphData() {
+  let data ={Jan: 65, Feb: 59, Mar: 56}
+
+  const rateData = {
+    labels: Object.keys(data)
+    ...data
+    datasets: {
+      data: Object.values(data)
+    }
+  }
+}
+*/
   const rateData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
     datasets: [

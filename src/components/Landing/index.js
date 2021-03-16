@@ -2,9 +2,8 @@
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
 import Chart from "./Chart"
-
-
 
 const StyledBody = styled.div`
   display: flex;
@@ -93,7 +92,7 @@ const StyledCont = styled.div`
   }
 `
 
-const FlexBoxContainer = styled.div`
+const FlexBoxContainer = styled.form`
   display: flex;
   flex-direction: row;
   align-items: baseline;
@@ -154,7 +153,7 @@ const Landing = () => {
   const [convertCur, setConvertCur] = useState(1)
   const [select1, setSelect1] = useState('SEK')
   const [currencyCode, setCurrencyCode] = useState('USD') // ex. USD, EUR
-  const [total, setTotal] = useState() 
+  const [total, setTotal] = useState(null) 
   const [currencyToggle, setCurrencyToggle] = useState(false)
 
   useEffect(() => {
@@ -189,11 +188,13 @@ const Landing = () => {
     setConvertNr(e.target.value);  
   }
 
-  const handleConvert = () => {
+  const handleConvert = (e) => {
+    e.preventDefault()
     setTotal(convertNr * rates[currencyCode])
   }
 
-  function handleShift() {
+  function handleShift(e) {
+    e.preventDefault()
     setCurrencyToggle(!currencyToggle)
     if(currencyToggle){
          setTotal(convertNr * rates[currencyCode])
@@ -225,7 +226,7 @@ const Landing = () => {
           <select onChange={handleSelect1} value={select1} id='countries' name='currency'>
             {!rates ? (
               Object.entries(rates).map(([curr, vall]) => (
-                <option key={curr} value={`${curr}`} name={`${curr} ${vall}`}>
+                <option key={curr} value={curr} name={`${curr} ${vall}`}>
                   {curr}
                 </option>
               ))
@@ -261,16 +262,17 @@ const Landing = () => {
 
 
 
-
 <ConvertContainer> 
+{total &&
 <h3>
         {
-        !currencyToggle?
+        !currencyToggle ?
            `${convertNr} ${select1} = ${Math.round(total * 100) / 100} ${currencyCode}`
             : `${convertNr} ${currencyCode} = ${Math.round(total * 100) / 100} ${select1}`
         }
 </h3>
         
+}
 </ConvertContainer>
       <Chart />
     </StyledBody>

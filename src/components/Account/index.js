@@ -1,8 +1,8 @@
 import React from "react";
-import { AuthUserContext, withAuthorization } from "../Session";
-import PasswordChangeForm from "../PasswordChange";
-
 import styled from 'styled-components'
+
+import PasswordChangeForm from "../PasswordChange";
+import { AuthUserContext, withAuthorization } from "../Session";
 
 const PageContainer = styled.div`
 display: flex;
