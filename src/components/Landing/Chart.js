@@ -5,6 +5,8 @@ import { Line } from 'react-chartjs-2';
 const Chart = () => {
 
   const [chartData, setChartData] = useState([])
+  const [apiBase, setApiBase] = useState("&base=EUR")
+  const API_URL = 'https://api.exchangerate.host/timeseries?symbols=USD&start_date=2020-01-01&end_date=2020-07-01'
 
   const options = {
     method: 'GET',
@@ -16,13 +18,20 @@ const Chart = () => {
     }
   };
 
-  const API_URL = 'http://data.fixer.io/api/2004-08-10?access_key=d11513f2fab75e1e6957748307f9f943&format=1'
+  useEffect(() => {
+    axios.request(API_URL+apiBase)
+    .then(response => setChartData([response.data]))
+    .catch(error => console.error(error));
+  },[]);
 
-useEffect(() => {
-  axios.request(API_URL)
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
-},[]);
+  // Create a function drawChart
+  // filter the first day and get a obj with {symbol and value} in month push the value to an array
+  // map
+function drawChart() {
+  chartData.map((rates) => console.log(rates.rates))
+ /*  console.log(chartData[0].rates) */
+}
+drawChart()
 
 // useEffect(() => {
 //   console.log("från onurs fetch")
