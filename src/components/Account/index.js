@@ -49,7 +49,6 @@ button {
 }
 `;
 
-
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {(authUser) => (
