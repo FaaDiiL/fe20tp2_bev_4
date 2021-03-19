@@ -11,7 +11,7 @@ const StyledDashBody = styled.main`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
 `;
 const StyledDash = styled.div`
@@ -139,8 +139,8 @@ const HomePage = () => {
         <div className="donutWrapper">
           <Doughnut
             data={data}
-            width={300}
-            height={200}
+            width={200}
+            height={150}
             options={{
               title: {
                 display: true,
