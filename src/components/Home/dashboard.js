@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-// import axios from "axios";
+import { Line, Doughnut } from "react-chartjs-2";
+import axios from "axios";
 import { rates } from "../../constants/rates";
 import { StayCurrentLandscapeOutlined } from "@material-ui/icons";
 import styled from "styled-components";
+
+const StyledChart = styled.div`
+  margin-top: 30px;
+  width: 90%;
+`;
 
 const Chart = () => {
   const [apiBase, setApiBase] = useState("&base=EUR");
@@ -34,7 +39,7 @@ const Chart = () => {
   };
 
   return (
-    <div>
+    <StyledChart>
       <Line
         data={rateData}
         width={600}
@@ -43,7 +48,7 @@ const Chart = () => {
           title: {
             display: true,
             text: "Fluctuations over time",
-            fontSize: 10,
+            fontSize: 14,
           },
           legend: {
             display: true,
@@ -51,7 +56,7 @@ const Chart = () => {
           },
         }}
       />
-    </div>
+    </StyledChart>
   );
 };
 
