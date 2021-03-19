@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const StyledBody = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const StyledBody = styled.div`
     letter-spacing: 1.5px;
     margin-top: 20px;
     color: #571d85;
-    text-align: center
+    text-align: center;
   }
 `;
 
@@ -23,9 +23,11 @@ export const StyledCont = styled.div`
   flex-wrap: wrap;
   opacity: 0.9;
   padding: 50px;
-  background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+  background-image: linear-gradient(
+    rgba(109, 84, 129, 0.829),
+    rgb(96, 57, 128)
+  );
   /* background-color: #613685; */
- 
 
   input {
     padding: 10px 0px 10px 0px;
@@ -50,7 +52,7 @@ export const StyledCont = styled.div`
   }
 
   select {
-   background: rgb(59, 26, 87); 
+    background: rgb(59, 26, 87);
     display: flex;
     flex-wrap: nowrap;
     color: white;
@@ -62,10 +64,9 @@ export const StyledCont = styled.div`
     box-shadow: 1px 3px 5px rgb(96, 57, 128);
   }
 
-
   .btn {
     width: 60%;
-    letter-spacing:1.5px;
+    letter-spacing: 1.5px;
     color: #ffffff;
     border: none;
     box-shadow: 1px 3px 5px rgb(96, 57, 128);
@@ -76,7 +77,7 @@ export const StyledCont = styled.div`
     background: rgb(59, 26, 87);
     margin-top: 20px;
 
-     &:hover {
+    &:hover {
       cursor: pointer;
       text-decoration: underline;
     }
@@ -85,7 +86,7 @@ export const StyledCont = styled.div`
   .btn:focus {
     outline: none;
   }
-`
+`;
 
 export const FlexBoxContainer = styled.form`
   display: flex;
@@ -104,34 +105,40 @@ export const FlexBoxContainer = styled.form`
       cursor: pointer;
     }
   }
-`
-export const CurrencyContainer= styled.div`
-background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
-width: 100%;
+`;
+export const CurrencyContainer = styled.div`
+  background-image: linear-gradient(
+    rgba(109, 84, 129, 0.829),
+    rgb(96, 57, 128)
+  );
+  width: 100%;
 `;
 
 export const ConvertContainer = styled.div`
-display: flex;
-width: 100%;
-justify-content: center; 
-align-items: center;
-background-color: white;
-min-height: 300px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  min-height: 300px;
 
-h3 {
-  color: black;
-  text-align: center;
-  margin-top: 40px;
-  font-size: 40px;
-}
+  h3 {
+    color: black;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 40px;
+  }
 `;
 
 export const GraphContainer = styled.div`
-height: 300px;
-width: 100%;
-background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+  height: 300px;
+  width: 100%;
+  background-image: linear-gradient(
+    rgba(109, 84, 129, 0.829),
+    rgb(96, 57, 128)
+  );
 
-h1 {
-  color: white;
-}
+  h1 {
+    color: white;
+  }
 `;
