@@ -244,6 +244,14 @@ class Index extends Component {
                       <Link to={ROUTES.LANDING}>
                         <li>Landing</li>
                       </Link>
+                      
+                      <Link to={ROUTES.ABOUT}>
+                        <li>About</li>
+                      </Link>
+
+                      <Link to={ROUTES.CONTACT}>
+                        <li>Contact</li>
+                      </Link>
 
                       <Link to={ROUTES.SIGN_IN}>
                         <StyledSignIn><button>Sign In</button></StyledSignIn>
