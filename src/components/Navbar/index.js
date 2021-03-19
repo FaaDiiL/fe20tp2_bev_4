@@ -62,7 +62,7 @@ const Container = styled.div`
     padding: 8px 8px;
     margin: 10px -8px 10px 0px;
     outline: none;
-    cursor: pointer;
+    /* cursor: pointer; */
     z-index: 5;
   }
   .navToggle.open span:first-child {
@@ -131,6 +131,28 @@ const Container = styled.div`
     height: 120%;
   }
 `
+const StyledSignIn = styled.li`
+
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: initial;
+
+  button{
+    background-color: #571D85;
+    padding: 10px 5px 10px 5px;
+    outline: none;
+    border: none;
+    color: white;
+    margin-top: 150px;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+}
+
+`
 
 class Index extends Component {
   constructor(props) {
@@ -150,7 +172,7 @@ class Index extends Component {
   }
   
   handleClick(e) {
-    if(e.target.nodeName === "LI"){
+    if(e.target.nodeName === "LI" || e.target.nodeName === "BUTTON" ){
       this.setState({
         sideBar: !this.state.sideBar,
       })
@@ -224,7 +246,7 @@ class Index extends Component {
                       </Link>
 
                       <Link to={ROUTES.SIGN_IN}>
-                        <li>Sign In </li>
+                        <StyledSignIn><button>Sign In</button></StyledSignIn>
                       </Link>
                     </ul>
                   )
