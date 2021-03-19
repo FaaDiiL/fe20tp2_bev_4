@@ -131,17 +131,15 @@ const Container = styled.div`
     width: 100%;
     height: 120%;
   }
-<<<<<<< HEAD
-`
+`;
 const StyledSignIn = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: initial;
 
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: initial;
-
-  button{
-    background-color: #571D85;
+  button {
+    background-color: #571d85;
     padding: 10px 5px 10px 5px;
     outline: none;
     border: none;
@@ -152,12 +150,8 @@ cursor: initial;
       cursor: pointer;
       text-decoration: underline;
     }
-}
-
-`
-=======
+  }
 `;
->>>>>>> niko
 
 class Index extends Component {
   constructor(props) {
@@ -177,11 +171,7 @@ class Index extends Component {
   }
 
   handleClick(e) {
-<<<<<<< HEAD
-    if(e.target.nodeName === "LI" || e.target.nodeName === "BUTTON" ){
-=======
-    if (e.target.nodeName === "LI") {
->>>>>>> niko
+    if (e.target.nodeName === "LI" || e.target.nodeName === "BUTTON") {
       this.setState({
         sideBar: !this.state.sideBar,
       });
@@ -252,7 +242,7 @@ class Index extends Component {
                       <Link to={ROUTES.LANDING}>
                         <li>Landing</li>
                       </Link>
-                      
+
                       <Link to={ROUTES.ABOUT}>
                         <li>About</li>
                       </Link>
@@ -262,7 +252,9 @@ class Index extends Component {
                       </Link>
 
                       <Link to={ROUTES.SIGN_IN}>
-                        <StyledSignIn><button>Sign In</button></StyledSignIn>
+                        <StyledSignIn>
+                          <button>Sign In</button>
+                        </StyledSignIn>
                       </Link>
                     </ul>
                   )
