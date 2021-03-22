@@ -15,7 +15,6 @@ flex-direction: row;
 `;
 
 const Menu = styled.div`
-
 background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
 width: 210px;
 height: 400px;
@@ -26,15 +25,37 @@ h1 {
   letter-spacing: 1.5px;
   padding: 10px 20px 5px 20px; 
   }
+
   h4 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     color: white;
     padding: 5px 20px 20px 20px;  
   }
+
+  @media (max-width: 375px) {
+    width: 160px;
+  
+    h1{
+      font-size: 14px;
+    }
+    h4{
+      font-size: 12px;
+    }
+
+    @media (max-width: 320px) {
+      width: 130px;
+    
+      h1{
+        font-size: 14px;
+        padding: 4px;
+      }
+      h4{
+        font-size: 10px;
+        padding: 4px;
+      }
 `;
 
 const SelectMenu = styled.div`
-
 h3 { 
   padding: 25px;
   color: white;
@@ -45,15 +66,26 @@ h3 {
   background-color: rgb(96, 57, 128);
 }
 }
+@media (max-width: 375px) {
+
+  h3{
+    font-size: 12px;
+  }
+
+  @media (max-width: 320px) {
+
+    h3{
+ font-size: 10px;
+    }
+
 `;
 
 const PageContainer = styled.div`
 display: flex;
-
 flex-direction: row;
 margin: 0 auto;
 border: 2px solid #571D85;
-width: 60%;
+width: 550px;
 border-radius: 4px;
 `;
 
