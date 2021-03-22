@@ -1,77 +1,119 @@
 import React from "react";
+import {useState} from "react"; 
 import styled from 'styled-components'
-
-import PasswordChangeForm from "../PasswordChange";
+import ChangePassword from '../Account/ChangePassword'; 
+import ChooseBank from '../Account/ChooseBank';
+import DeleteAccount from '../Account/DeleteAccount'; 
 import { AuthUserContext, withAuthorization } from "../Session";
+/* import { FiberPin } from "@material-ui/icons"; */
 
-const PageContainer = styled.div`
+
+const Account = styled.div`
 display: flex;
-align-items: center; 
-justify-content: center;
-flex-direction: column;
-margin: 0 auto;
-box-shadow: 1px 3px 5px #571D85;
-margin-top: 100px;
-padding: 50px;
-width: 100%;
+flex-direction: row; 
+
+`;
+
+const Menu = styled.div`
+
 background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+width: 210px;
+height: 400px;
 
 h1 { 
-
-display: block;
-color: white;
-letter-spacing: 1.5px;
-}
-
-h2 {
-  margin-bottom: 50px;
+  display: block;
   color: white;
-}
-
-h3{
-  margin: 20px;
-color: white;
-}
-select {
-  padding: 5px 15px 5px 5px;
-  margin: 5px;
-margin-bottom: 10px;
-}
-
-button {
-  display: inline-block;
-  padding: 5px;
-
-  &:hover { 
-    cursor: pointer;
-    text-decoration: underline;
+  letter-spacing: 1.5px;
+  padding: 10px 20px 5px 20px; 
   }
+  h4 {
+    margin-bottom: 50px;
+    color: white;
+    padding: 5px 20px 20px 20px;  
+  }
+`;
+
+const SelectMenu = styled.div`
+
+h3 { 
+  padding: 25px;
+  color: white;
+
+&:hover {
+  cursor: pointer;
+
+  background-color: rgb(96, 57, 128);
+}
 }
 `;
 
-const AccountPage = () => (
+const PageContainer = styled.div`
+display: flex;
+
+flex-direction: column;
+margin: 0 auto;
+border: 2px solid #571D85;
+width: 60%;
+border-radius: 4px;
+`;
+
+
+
+
+function AccountPage () {
+
+  const [pageShown, setPageShown] = useState('ChooseBank'); 
+
+  function ChooseBank(){
+    setPageShown("ChooseBank")
+  }
+  
+  function ChangePassword (){
+  setPageShown("ChangePassword")
+  }
+  
+  function DeleteAccount() {
+  setPageShown("DeleteAccount")
+  }
+
+
+const pageShownComponent = (props) => {
+  if (props.pageShown === "ChooseBank") {
+    return  <ChooseBank/> 
+
+  } else if (props.pageShown === "ChangePassword"){
+    return <ChangePassword />
+  }
+   else if (props.pageShown === "DeleteAccount"){
+    return <DeleteAccount />
+  } 
+}
+
+
+return(
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <PageContainer>
-        <h1>Account:</h1> 
-        <h2>{authUser.email}</h2>
-
-        <h3>Change Password</h3>
-        <PasswordChangeForm />
-        <h3>Choose Bank</h3>
-        <select name='bank' className='chooseBank'>
-          <option value="" disabled selected>Select your Bank</option>
-          <option>Swedbank</option>
-          <option>Länsförsäkringar</option>
-        </select>
-        <h3>
-          Delete Account
-          </h3>
-          <button>Delete account</button>
-      </PageContainer>
+<>
+<Account>
+<PageContainer>
+      <Menu>
+            <h1>Account:</h1> 
+            <h4>{authUser.email}</h4>
+            <SelectMenu>
+            <h3 onClick={ChooseBank}>Choose Bank</h3>
+            <h3 onClick={ChangePassword}>Change Password</h3>
+            <h3 onClick={DeleteAccount}>Delete Account</h3>
+            </SelectMenu>
+   </Menu>
+      
+   
+    pageShownComponent()
+       </PageContainer> 
+      </Account>
+      </>
     )}
   </AuthUserContext.Consumer>
-);
+)};
 
 const condition = (authUser) => !!authUser;
 
