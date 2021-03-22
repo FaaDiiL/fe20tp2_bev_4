@@ -1,165 +1,34 @@
-/* import {BsArrowLeftRight} from "react-icons/bs" */
-import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
+import React, { useEffect, useState } from "react";
 
-import Chart from "./Chart"
+import Chart from "./Chart";
 
-const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  h1 {
-    letter-spacing: 1.5px;
-    margin-top: 20px;
-    color: #571d85;
-    text-align: center
-  }
-`;
-
-const StyledCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  opacity: 0.9;
-  padding: 50px;
-  background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
-  /* background-color: #613685; */
- 
-
-  input {
-    padding: 10px 0px 10px 0px;
-    border: none;
-    border-radius: 2%;
-    font-size: 25px;
-    text-align: center;
-    margin-bottom: 25px;
-
-    &:focus {
-      outline: none;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      border-bottom: 3px solid #571d85;
-    }
-  }
-
-  h2 {
-    color: white;
-    margin: 10px;
-  }
-
-  select {
-   background: rgb(59, 26, 87); 
-    display: flex;
-    flex-wrap: nowrap;
-    color: white;
-    padding: 20px;
-    border-radius: 2%;
-    margin: 5px 15px;
-    outline: none;
-    border: none;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128);
-  }
-
-
-  .btn {
-    width: 60%;
-    letter-spacing:1.5px;
-    color: #ffffff;
-    border: none;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128);
-    padding: 10px;
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
-    background: rgb(59, 26, 87);
-    margin-top: 20px;
-
-     &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-
-  .btn:focus {
-    outline: none;
-  }
-`
-
-const FlexBoxContainer = styled.form`
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-
-  button  {
-    border: none;
-    background-color: transparent;
-    color: white;
-
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`
-const CurrencyContainer= styled.div`
-background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
-width: 100%;
-`;
-
-const ConvertContainer = styled.div`
-display: flex;
-width: 100%;
-justify-content: center; 
-align-items: center;
-background-color: white;
-min-height: 300px;
-
-h3 {
-  color: black;
-  text-align: center;
-  margin-top: 40px;
-  font-size: 40px;
-}
-`;
-
-const GraphContainer = styled.div`
-height: 300px;
-width: 100%;
-background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
-
-h1 {
-  color: white;
-}
-`;
+import {
+  StyledBody,
+  StyledCont,
+  FlexBoxContainer,
+  CurrencyContainer,
+  ConvertContainer,
+  GraphContainer,
+} from "./style";
 
 const Landing = () => {
-
-  
-
   const API_URL =
-    'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
+    "https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK";
 
-  const [rates, setRates] = useState([])
-  const [convertNr, setConvertNr] = useState(1)
-  const [convertCur, setConvertCur] = useState(1)
-  const [select1, setSelect1] = useState('SEK')
-  const [currencyCode, setCurrencyCode] = useState('USD') // ex. USD, EUR
-  const [total, setTotal] = useState(null) 
-  const [currencyToggle, setCurrencyToggle] = useState(false)
+  const [rates, setRates] = useState([]);
+  const [convertNr, setConvertNr] = useState(1);
+  const [convertCur, setConvertCur] = useState(1);
+  const [select1, setSelect1] = useState("SEK");
+  const [currencyCode, setCurrencyCode] = useState("USD"); // ex. USD, EUR
+  const [total, setTotal] = useState(null);
+  const [currencyToggle, setCurrencyToggle] = useState(false);
+  const [valueToggle, setValueToggle] = useState(false);
 
   useEffect(() => {
-    const newDate = new Date().toISOString().split('T')[0] // format the time like: 2021-03-08
+    const newDate = new Date().toISOString().split("T")[0]; // format the time like: 2021-03-08
     if (localStorage.getItem(newDate)) {
-      setRates(JSON.parse(localStorage.getItem(newDate)))
+      setRates(JSON.parse(localStorage.getItem(newDate)));
     } else {
       fetch(API_URL)
         .then((response) => response.json())
@@ -167,116 +36,128 @@ const Landing = () => {
           localStorage.setItem(
             `${newDate}`,
             JSON.stringify(data.conversion_rates)
-          )
-          setRates(data.conversion_rates)
-        })
+          );
+          setRates(data.conversion_rates);
+        });
     }
-  }, [])
-
-
+  }, []);
 
   const handleSelect1 = (e) => {
-    setSelect1(e.target.value)
-  }
+    setSelect1(e.target.value);
+  };
 
   const handleSelect2 = (e) => {
-    setCurrencyCode(e.target.value)
-
-  }
+    setCurrencyCode(e.target.value);
+  };
 
   const handleChange = (e) => {
-    setConvertNr(e.target.value);  
-  }
+    setConvertNr(e.target.value);
+  };
 
   const handleConvert = (e) => {
-    e.preventDefault()
-    setTotal(convertNr * rates[currencyCode])
-  }
+    e.preventDefault();
+    setTotal(convertNr * rates[currencyCode]);
+  };
+
+  // const lager = ''
 
   function handleShift(e) {
-    e.preventDefault()
-    setCurrencyToggle(!currencyToggle)
-    if(currencyToggle){
-         setTotal(convertNr * rates[currencyCode])
-        
-       }else {
-        setTotal(convertNr / rates[currencyCode])
-       }
+    e.preventDefault();
+
+    setCurrencyToggle(!currencyToggle);
+    if (currencyToggle) {
+      setCurrencyCode(select1);
+      setSelect1(currencyCode);
+
+      setTotal(convertNr * rates[select1]);
+    } else {
+      setSelect1(currencyCode);
+      setCurrencyCode(select1);
+
+      setTotal(convertNr / rates[currencyCode]);
+    }
   }
- 
-  
-  const blockInvalidChar = e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
+
+  const blockInvalidChar = (e) =>
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   return (
     <StyledBody>
       <h1>Dashboard</h1>
 
       <CurrencyContainer>
-      <StyledCont>
-      <h2>Currency Converter</h2>
-        <input
-          type='number'
-          name='number'
-          min='1'
-          step='1'
-          placeholder={`${convertNr} Kr`}
-          onKeyDown={blockInvalidChar}
-          onChange={handleChange}
-        />
-        <FlexBoxContainer>
-          <select onChange={handleSelect1} value={select1} id='countries' name='currency'>
-            {!rates ? (
-              Object.entries(rates).map(([curr, vall]) => (
-                <option key={curr} value={curr} name={`${curr} ${vall}`}>
-                  {curr}
-                </option>
-              ))
-            ) : (
-              <option value={select1}>{select1}</option>
-            )}
-          </select>
+        <StyledCont>
+          <h2>Currency Converter</h2>
+          <input
+            type="number"
+            name="number"
+            min="1"
+            step="1"
+            placeholder={`${convertNr} Kr`}
+            onKeyDown={blockInvalidChar}
+            onChange={handleChange}
+          />
+          <FlexBoxContainer>
+            <select
+              onChange={handleSelect1}
+              value={select1}
+              id="countries"
+              name="currency"
+            >
+              {!rates ? (
+                Object.entries(rates).map(([curr, vall]) => (
+                  <option key={curr} name={`${curr} ${vall}`}>
+                    {curr}
+                  </option>
+                ))
+              ) : (
+                <option value={select1}>{select1}</option>
+              )}
+            </select>
 
-          <button onClick={handleShift}>
-            <CompareArrowsIcon />
+            <button onClick={handleShift}>
+              <CompareArrowsIcon />
+            </button>
+            <select
+              onChange={handleSelect2}
+              className="selectContainer"
+              id="countries"
+              value={currencyCode}
+            >
+              {!!rates ? (
+                Object.entries(rates).map(([curr, vall]) => (
+                  <option key={curr} value={`${curr}`}>
+                    {curr}
+                  </option>
+                ))
+              ) : (
+                <option value={currencyCode}>{currencyCode}</option>
+              )}
+            </select>
+          </FlexBoxContainer>
+
+          <button className="btn" onClick={handleConvert}>
+            convert
           </button>
-          <select
-            onChange={handleSelect2}
-            className='selectContainer'
-            id='countries'
-            value={currencyCode}
-          >
-            {!!rates ? (
-              Object.entries(rates).map(([curr, vall]) => (
-                <option key={curr} value={`${curr}`}>
-                  {curr}
-                </option>
-              ))
-            ) : (
-              <option value={currencyCode}>{currencyCode}</option>
-            )}
-          </select>
-        </FlexBoxContainer>
-     
-        <button className='btn' onClick={handleConvert}>convert</button>
-      </StyledCont>
-</CurrencyContainer>
+        </StyledCont>
+      </CurrencyContainer>
 
+      <ConvertContainer>
+        {total && (
+          <h3>
+            {!currencyToggle
+              ? `${convertNr} ${select1} = ${
+                  Math.round(total * 100) / 100
+                } ${currencyCode}`
+              : `${convertNr} ${select1} = ${
+                  Math.round(total * 100) / 100
+                } ${currencyCode}`}
+          </h3>
+        )}
+      </ConvertContainer>
 
-
-<ConvertContainer> 
-{total &&
-<h3>
-        {
-        !currencyToggle ?
-           `${convertNr} ${select1} = ${Math.round(total * 100) / 100} ${currencyCode}`
-            : `${convertNr} ${currencyCode} = ${Math.round(total * 100) / 100} ${select1}`
-        }
-</h3>
-        
-}
-</ConvertContainer>
       <Chart />
     </StyledBody>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

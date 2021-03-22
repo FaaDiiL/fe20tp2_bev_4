@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import * as ROLES from '../../constants/roles'
-import * as ROUTES from '../../constants/routes'
-import logoImg from '../../img/owl.svg'
-import { AuthUserContext } from '../Session'
-import SignOutButton from '../SignOut'
+import * as ROLES from "../../constants/roles";
+import * as ROUTES from "../../constants/routes";
+import logoImg from "../../img/owl.svg";
+import { AuthUserContext } from "../Session";
+import SignOutButton from "../SignOut";
 
-import "@fontsource/audiowide"
+import "@fontsource/audiowide";
 
 const Container = styled.div`
   li {
     list-style: none;
     padding: 50px 0px 0px 20px;
 
-    &:hover {
-      color: #571D85;
+    &:hover  {
+      color: #571d85;
     }
   }
 
@@ -28,7 +28,7 @@ const Container = styled.div`
     color: #333;
     z-index: 10;
     background-color: #fff;
-    box-shadow: 0 5px 20px -10px #571D85 /* #000 */;
+    box-shadow: 0 5px 20px -10px #571d85 /* #000 */;
   }
 
   .header a {
@@ -43,14 +43,15 @@ const Container = styled.div`
     margin: 0 auto;
   }
   .logo {
+    margin: auto 0;
     .logo-text {
       font-family: "Audiowide";
-      font-size: 45px;
-      color: #571D85;
-      letter-spacing:5px;
+      font-size: 25px;
+      color: #571d85;
+      letter-spacing: 5px;
     }
     .logo-img {
-      height: 55px;
+      height: 38px;
     }
   }
   .navToggle {
@@ -62,7 +63,7 @@ const Container = styled.div`
     padding: 8px 8px;
     margin: 10px -8px 10px 0px;
     outline: none;
-    cursor: pointer;
+    /* cursor: pointer; */
     z-index: 5;
   }
   .navToggle.open span:first-child {
@@ -130,53 +131,72 @@ const Container = styled.div`
     width: 100%;
     height: 120%;
   }
-`
+`;
+const StyledSignIn = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: initial;
+
+  button {
+    background-color: #571d85;
+    padding: 10px 5px 10px 5px;
+    outline: none;
+    border: none;
+    color: white;
+    margin-top: 150px;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+`;
 
 class Index extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       sideBar: false,
-    }
+    };
 
-    this.handleSidebar = this.handleSidebar.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleSidebar = this.handleSidebar.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSidebar() {
     this.setState({
       sideBar: !this.state.sideBar,
-    })
+    });
   }
-  
+
   handleClick(e) {
-    if(e.target.nodeName === "LI"){
+    if (e.target.nodeName === "LI" || e.target.nodeName === "BUTTON") {
       this.setState({
         sideBar: !this.state.sideBar,
-      })
+      });
     }
   }
 
   render() {
     return (
       <Container>
-        <header className='header'>
-          <div className='navContainer'>
-            <div className={'logo'}>
-              <img src={logoImg} alt={'Site-logo'} className='logo-img' />
-              <span className='logo-text'>BEV</span>
+        <header className="header">
+          <div className="navContainer">
+            <div className={"logo"}>
+              <img src={logoImg} alt={"Site-logo"} className="logo-img" />
+              <span className="logo-text">BEV</span>
             </div>
             <nav>
               <AuthUserContext.Consumer>
                 {(authUser) =>
                   authUser ? (
                     <ul
-                    onClick={this.handleClick}
-
-                      className='mainNav'
+                      onClick={this.handleClick}
+                      className="mainNav"
                       style={
                         this.state.sideBar
-                          ? { transform: 'translateX(0)' }
+                          ? { transform: "translateX(0)" }
                           : null
                       }
                     >
@@ -188,7 +208,7 @@ class Index extends Component {
                         <li>Dashboard</li>
                       </Link>
 
-                        <Link to={ROUTES.ACCOUNT}>
+                      <Link to={ROUTES.ACCOUNT}>
                         <li>Account</li>
                       </Link>
 
@@ -212,10 +232,10 @@ class Index extends Component {
                   ) : (
                     <ul
                       onClick={this.handleClick}
-                      className='mainNav'
+                      className="mainNav"
                       style={
                         this.state.sideBar
-                          ? { transform: 'translateX(0)' }
+                          ? { transform: "translateX(0)" }
                           : null
                       }
                     >
@@ -223,8 +243,18 @@ class Index extends Component {
                         <li>Landing</li>
                       </Link>
 
+                      <Link to={ROUTES.ABOUT}>
+                        <li>About</li>
+                      </Link>
+
+                      <Link to={ROUTES.CONTACT}>
+                        <li>Contact</li>
+                      </Link>
+
                       <Link to={ROUTES.SIGN_IN}>
-                        <li>Sign In </li>
+                        <StyledSignIn>
+                          <button>Sign In</button>
+                        </StyledSignIn>
                       </Link>
                     </ul>
                   )
@@ -233,8 +263,7 @@ class Index extends Component {
             </nav>
             <button
               onClick={this.handleSidebar}
-              className={`navToggle ${this.state.sideBar ? 'open' : null}`}
-              
+              className={`navToggle ${this.state.sideBar ? "open" : null}`}
             >
               <span />
               <span />
@@ -242,14 +271,14 @@ class Index extends Component {
             </button>
             <div
               onClick={this.handleSidebar.bind(this)}
-              className={`overlay ${this.state.sideBar ? 'open' : ''}`}
+              className={`overlay ${this.state.sideBar ? "open" : ""}`}
             />
           </div>
         </header>
-        <div className='wrapper'></div>
+        <div className="wrapper"></div>
       </Container>
-    )
+    );
   }
 }
 
-export default Index
+export default Index;
