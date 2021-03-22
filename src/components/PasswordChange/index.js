@@ -30,6 +30,7 @@ margin-bottom: 5px;
 }
 
 button {
+  margin-top: 10px;
   display: inline-block;
   padding: 5px;
 }

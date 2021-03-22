@@ -1,9 +1,9 @@
 import React from "react";
 import {useState} from "react"; 
 import styled from 'styled-components'
-import ChangePassword from '../Account/ChangePassword'; 
-import ChooseBank from '../Account/ChooseBank';
-import DeleteAccount from '../Account/DeleteAccount'; 
+import Password from '../Account/ChangePassword'; 
+import Bank from '../Account/ChooseBank';
+import Delete from '../Account/DeleteAccount'; 
 import { AuthUserContext, withAuthorization } from "../Session";
 /* import { FiberPin } from "@material-ui/icons"; */
 
@@ -50,11 +50,18 @@ h3 {
 const PageContainer = styled.div`
 display: flex;
 
-flex-direction: column;
+flex-direction: row;
 margin: 0 auto;
 border: 2px solid #571D85;
 width: 60%;
 border-radius: 4px;
+`;
+
+const Show = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0 auto;
 `;
 
 
@@ -77,15 +84,18 @@ function AccountPage () {
   }
 
 
-const pageShownComponent = (props) => {
-  if (props.pageShown === "ChooseBank") {
-    return  <ChooseBank/> 
+const pageShownComponent = () => {
+  if (pageShown === "ChooseBank") {
+    console.log("Hej från choosebank")
+    return  <Bank/> 
 
-  } else if (props.pageShown === "ChangePassword"){
-    return <ChangePassword />
+  } else if (pageShown === "ChangePassword"){
+    console.log("Hej från changepassword")
+    return <Password />
   }
-   else if (props.pageShown === "DeleteAccount"){
-    return <DeleteAccount />
+   else if (pageShown === "DeleteAccount"){
+    console.log("Hej från deleteaccount")
+    return <Delete />
   } 
 }
 
@@ -106,9 +116,11 @@ return(
             </SelectMenu>
    </Menu>
       
-   
-    pageShownComponent()
+   <Show>
+   {pageShownComponent()}
+   </Show>
        </PageContainer> 
+
       </Account>
       </>
     )}
