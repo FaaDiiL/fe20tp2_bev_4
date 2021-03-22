@@ -1,77 +1,163 @@
 import React from "react";
+import {useState} from "react"; 
 import styled from 'styled-components'
-
-import PasswordChangeForm from "../PasswordChange";
+import Password from '../Account/ChangePassword'; 
+import Bank from '../Account/ChooseBank';
+import Delete from '../Account/DeleteAccount'; 
 import { AuthUserContext, withAuthorization } from "../Session";
+/* import { FiberPin } from "@material-ui/icons"; */
+
+
+const Account = styled.div`
+display: flex;
+flex-direction: row; 
+
+`;
+
+const Menu = styled.div`
+background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+width: 210px;
+height: 400px;
+
+h1 { 
+  display: block;
+  color: white;
+  letter-spacing: 1.5px;
+  padding: 10px 20px 5px 20px; 
+  }
+
+  h4 {
+    margin-bottom: 30px;
+    color: white;
+    padding: 5px 20px 20px 20px;  
+  }
+
+  @media (max-width: 375px) {
+    width: 160px;
+  
+    h1{
+      font-size: 14px;
+    }
+    h4{
+      font-size: 12px;
+    }
+
+    @media (max-width: 320px) {
+      width: 130px;
+    
+      h1{
+        font-size: 14px;
+        padding: 4px;
+      }
+      h4{
+        font-size: 10px;
+        padding: 4px;
+      }
+`;
+
+const SelectMenu = styled.div`
+h3 { 
+  padding: 25px;
+  color: white;
+
+&:hover {
+  cursor: pointer;
+
+  background-color: rgb(96, 57, 128);
+}
+}
+@media (max-width: 375px) {
+
+  h3{
+    font-size: 12px;
+  }
+
+  @media (max-width: 320px) {
+
+    h3{
+ font-size: 10px;
+    }
+
+`;
 
 const PageContainer = styled.div`
 display: flex;
-align-items: center; 
-justify-content: center;
-flex-direction: column;
+flex-direction: row;
 margin: 0 auto;
-box-shadow: 1px 3px 5px #571D85;
-margin-top: 100px;
-padding: 50px;
-width: 100%;
-background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
-
-h1 { 
-
-display: block;
-color: white;
-letter-spacing: 1.5px;
-}
-
-h2 {
-  margin-bottom: 50px;
-  color: white;
-}
-
-h3{
-  margin: 20px;
-color: white;
-}
-select {
-  padding: 5px 15px 5px 5px;
-  margin: 5px;
-margin-bottom: 10px;
-}
-
-button {
-  display: inline-block;
-  padding: 5px;
-
-  &:hover { 
-    cursor: pointer;
-    text-decoration: underline;
-  }
-}
+border: 2px solid #571D85;
+width: 550px;
+border-radius: 4px;
 `;
 
-const AccountPage = () => (
+const Show = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0 auto;
+`;
+
+
+
+
+function AccountPage () {
+
+  const [pageShown, setPageShown] = useState('ChooseBank'); 
+
+  function ChooseBank(){
+    setPageShown("ChooseBank")
+  }
+  
+  function ChangePassword (){
+  setPageShown("ChangePassword")
+  }
+  
+  function DeleteAccount() {
+  setPageShown("DeleteAccount")
+  }
+
+
+const pageShownComponent = () => {
+  if (pageShown === "ChooseBank") {
+    console.log("Hej från choosebank")
+    return  <Bank/> 
+
+  } else if (pageShown === "ChangePassword"){
+    console.log("Hej från changepassword")
+    return <Password />
+  }
+   else if (pageShown === "DeleteAccount"){
+    console.log("Hej från deleteaccount")
+    return <Delete />
+  } 
+}
+
+
+return(
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <PageContainer>
-        <h1>Account:</h1> 
-        <h2>{authUser.email}</h2>
+<>
+<Account>
+<PageContainer>
+      <Menu>
+            <h1>Account:</h1> 
+            <h4>{authUser.email}</h4>
+            <SelectMenu>
+            <h3 onClick={ChooseBank}>Choose Bank</h3>
+            <h3 onClick={ChangePassword}>Change Password</h3>
+            <h3 onClick={DeleteAccount}>Delete Account</h3>
+            </SelectMenu>
+   </Menu>
+      
+   <Show>
+   {pageShownComponent()}
+   </Show>
+       </PageContainer> 
 
-        <h3>Change Password</h3>
-        <PasswordChangeForm />
-        <h3>Choose Bank</h3>
-        <select name='bank' className='chooseBank'>
-          <option value="" disabled selected>Select your Bank</option>
-          <option>Swedbank</option>
-          <option>Länsförsäkringar</option>
-        </select>
-        <h3>
-          Delete Account
-          </h3>
-          <button>Delete account</button>
-      </PageContainer>
+      </Account>
+      </>
     )}
   </AuthUserContext.Consumer>
-);
+)};
 
 const condition = (authUser) => !!authUser;
 
