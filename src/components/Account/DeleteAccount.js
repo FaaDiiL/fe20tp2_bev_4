@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import { AuthUserContext, withAuthorization } from "../Session";
+import "firebase/auth";
+import "firebase/database";
+import firebase from 'firebase'
 
 
 const Container = styled.div`
@@ -19,17 +23,37 @@ button{
 `;
 
 
+
 function DeleteAccount () {
+
+    function Delete() {
+     let user = firebase.auth().currentUser;
+    user.delete()
+    .catch(function(error) {
+        alert("Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again")
+      })  
+    }
+
     return ( 
+        <AuthUserContext.Consumer>
+        {(authUser) => (
+  
              <Container>
         <h3>
           Delete Account
           </h3>
-          <button>Delete account</button>
+          <button onClick={Delete}>Delete account</button>
           </Container>
-  );
-}
+    )}
+    </AuthUserContext.Consumer>
+  )};
+
+
+
+  const condition = (authUser) => !!authUser;
+
+  export default withAuthorization(condition)(DeleteAccount);
  
-export default DeleteAccount;
+
          
      
