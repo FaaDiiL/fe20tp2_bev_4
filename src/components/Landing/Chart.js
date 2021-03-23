@@ -1,9 +1,5 @@
 /* import { useState } from "react"; */
 import { Line } from "react-chartjs-2";
-<<<<<<< HEAD
-=======
-// import axios from "axios";
->>>>>>> 5db78ef0551e3c18594dd73f034d98adbd950314
 import { rates } from "../../constants/rates";
 
 
