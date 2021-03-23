@@ -7,10 +7,6 @@ import { rates } from "../../constants/rates";
 
 const Chart = () => {
   const [apiBase, setApiBase] = useState("&base=EUR");
-
-const Chart = () => {
-  /* const [apiBase, setApiBase] = useState("&base=EUR"); */
-
   const ratesData = rates[0].rates;
 
   const chartData = {
