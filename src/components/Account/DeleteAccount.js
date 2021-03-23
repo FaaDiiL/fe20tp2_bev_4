@@ -32,14 +32,17 @@ function DeleteAccount () {
     function Delete() {
         let user = firebase.auth().currentUser;
 
-        let userRef = app.database().ref(`users/${user.uid}`);
-        userRef.remove() 
-     
-    
-    user.delete()
-    .catch(function(error) {
-        alert("Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again")
-      })  
+        try {
+            // Try deleting the user from the user list
+            user.delete()
+
+            // If succesful, also delete the post of the user in the realtime database
+            let userRef = app.database().ref(`users/${user.uid}`);
+            userRef.remove()
+        }
+        catch (error) {
+            alert("Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again")
+        }
     }
 
     return ( 

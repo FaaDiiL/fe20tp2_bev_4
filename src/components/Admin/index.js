@@ -13,6 +13,7 @@ const Header = styled.div`
   padding: 15px;
   display: flex;
   align-items: center;
+  flex-direction: column;
   margin: 0 auto;
 
   h1 {
@@ -30,6 +31,10 @@ const Header = styled.div`
           font-size: 14px;
              }
   }
+  h2 {
+    text-align: center;
+    padding: 15px;
+  }
 `
 
  const PageContainer = styled.div`
@@ -45,17 +50,11 @@ const Container = styled.div`
   color: black;
   box-shadow: 1px 3px 5px #571D85;
 
-  h2 {
-    text-align: center;
-    padding: 15px;
-  }
+
 
   @media (max-width: 414px) {
     width: 300px;
 
-    h2{
-      font-size: 14px;
-    }
     span{
       font-size: 10px;
     }
@@ -71,7 +70,7 @@ const Div = styled.div`
   span {
     padding: 20px;
     color: black;
-    width: 30%;
+    width: 35%;
     font-weight: bold;
   }
  
@@ -269,13 +268,14 @@ class UserListBase extends Component {
       <div>
          <Header>
         <h1>Admin Dashboard</h1>
+        <h2>Members</h2>
       </Header>
 
      <PageContainer> 
           {loading && <div>Loading ...</div>}
 
           <Container>
-            <h2>Members</h2>
+         
             <Div>
               <span>USERNAME:</span>
               <span>EMAIL:</span>
