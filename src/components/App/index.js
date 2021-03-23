@@ -22,8 +22,10 @@ const App = () => (
   <Router>
     <div>
  <AuthUserContext.Consumer>
-    {(authUser) =>     
-      authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB /> : <GlobalStyle />
+    {
+      (authUser) =>
+      authUser ? (
+      authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB /> : <GlobalStyle />):(<GlobalStyle />) 
     }
     </AuthUserContext.Consumer>
 
