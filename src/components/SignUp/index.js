@@ -15,30 +15,27 @@ h1 {
 margin-top: 100px;
 margin-bottom: 50px;
 display: block;
-
 }
 
 p{
   margin-bottom: 50px;
 }
 
-form { 
+form {
   display: flex;
   flex-direction: column;
 }
 
-
 input, select {
   padding: 5px 15px 5px 5px;
   margin: 5px;
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 button {
   display: inline-block;
   padding: 5px;
 }
-
 `;
 
 

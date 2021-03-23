@@ -4,20 +4,7 @@ import styled,{ createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 :root {
   --headerFontColor: #571d85;
-}
-
-  h1,h2,h3,h4,h5,h6{
-    color: var(--headerFontColor);
-  }
-  button{
-    background: var(--headerFontColor);
-    color: white;
-  }
-`;
-// Swedbank
-export const GlobalStyleSB = createGlobalStyle`
-:root {
-  --headerFontColor: #f35b1c;
+  --buttonHoverColor: #3f1363;
 }
 
   h1,h2,h3,h4,h5,h6{
@@ -28,12 +15,64 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
   }
   select{
+    color:black;
+  }
+  .borderColor{
+    border: 2px solid var(--headerFontColor);
+  }
+  .accountMenu{
     background: var(--headerFontColor);
+    
+    h1, h3, h4{
+      color:white;
+      &:hover:not(h4):not(h1) {
+        cursor: pointer;
+        background-color: var(--buttonHoverColor); 
+      }
+    }
+  }
+  .chooseBank{
+      color: black;
+    }
+`;
+// Swedbank
+export const GlobalStyleSB = createGlobalStyle`
+:root {
+  --headerFontColor: #f35b1c;
+  --buttonHoverColor: #c64511;
+}
+
+  h1,h2,h3,h4,h5,h6{
+    color: var(--headerFontColor);
+  }
+  button{
+    background: var(--headerFontColor);
+    color: white;
+  }
+  select{
+    color:black;
   }
   select option {
     background: white;
     color: black;
 
+  }
+  .borderColor{
+    border: 2px solid var(--headerFontColor);
+  }
+  .accountMenu{
+    background: var(--headerFontColor);
+    
+    h1, h3, h4{
+      color:white;
+      &:hover:not(h4):not(h1) {
+        cursor: pointer;
+        background-color: var(--buttonHoverColor); 
+      }
+    }
+    .chooseBank{
+      color: black;
+    }
   }
 `;
 // Länsförsäkringar
@@ -41,6 +80,7 @@ export const GlobalStyleSB = createGlobalStyle`
 export const GlobalStyleLF = createGlobalStyle`
   :root {
   --headerFontColor: #005aa0;
+  --buttonHoverColor: #004982;
 }
   h1,h2,h3,h4,h5,h6{
     color: var(--headerFontColor);
@@ -54,13 +94,30 @@ export const GlobalStyleLF = createGlobalStyle`
     color: white;
   }
   select{
-    background: var(--headerFontColor);
+    color:black;
   }
   select option {
     background: white;
     color: black;
 
   }
+  .borderColor{
+    border: 2px solid var(--headerFontColor);
+  }
+  .accountMenu{
+    background: var(--headerFontColor);
+    
+    h1, h3, h4{
+      color:white;
+      &:hover:not(h4):not(h1) {
+        cursor: pointer;
+        background-color: var(--buttonHoverColor); 
+      }
+    }
+  }
+  .chooseBank{
+      color: black;
+    }
 `;
 
 export default GlobalStyle;

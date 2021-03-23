@@ -12,19 +12,19 @@ h3{
 select {
     padding: 5px 15px 5px 5px;
     margin: 5px;
-  margin-bottom: 30px;
-  outline: none;
+    margin-bottom: 30px;
+    outline: none;
   }
   
   button {
     padding: 5px;
   
-    &:hover { 
+ &:hover {
       cursor: pointer;
       text-decoration: underline;
     }
   }
-  `;
+`;
 
 function Bank ()
  {
