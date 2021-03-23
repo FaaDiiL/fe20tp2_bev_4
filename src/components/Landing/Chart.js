@@ -1,32 +1,40 @@
 /* import { useState } from "react"; */
 import { Line } from "react-chartjs-2";
+<<<<<<< HEAD
+=======
+// import axios from "axios";
+>>>>>>> 5db78ef0551e3c18594dd73f034d98adbd950314
 import { rates } from "../../constants/rates";
 
 
 const Chart = () => {
   /* const [apiBase, setApiBase] = useState("&base=EUR"); */
 
-  const ratesData = Object.entries(rates[0].rates);
+  const ratesData = rates[0].rates;
 
-  let dates = [];
-  let rateOfDate = [];
-
-  for (let i = 0; i < ratesData.length; i++) {
-    if (ratesData[i][0].endsWith("01")) {
-      dates.push(ratesData[i][0]);
-      rateOfDate.push(ratesData[i][1].USD);
-    }
+  const chartData = {
+    labels:[],
+    values:[]
   }
+  Object.entries(ratesData).map(([x,y]) =>{
+    if(x.endsWith("01")){
+      chartData.labels.push(x)
+      chartData.values.push(Object.values(y)[0])
+      
+    }
+  })
+ console.log(chartData)
+
 
   const rateData = {
-    labels: dates,
+    labels: chartData.labels,
     datasets: [
       {
         label: "SEK / USD",
         backgroundColor: "#ecbcfd5b",
         borderColor: "#571d85",
         borderWidth: 2,
-        data: rateOfDate,
+        data: chartData.values
       },
     ],
   };
@@ -51,6 +59,7 @@ const Chart = () => {
       />
     </div>
   );
+
 };
 
 export default Chart;

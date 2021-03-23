@@ -10,7 +10,7 @@ const StyledDashBody = styled.main`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
 `;
 const StyledDash = styled.div`
