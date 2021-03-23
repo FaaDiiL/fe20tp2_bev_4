@@ -149,8 +149,8 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <select name='bank' className='chooseBank' onChange={this.onChange}>
-          <option value="" disabled selected>Select your Bank</option>
+        <select name='bank' className='chooseBank' defaultValue="" onChange={this.onChange}>
+          <option value="" disabled>Select your Bank</option>
           <option value='default'>No Bank</option>
           <option value='SB'>Swedbank</option>
           <option value='LF'>Länsförsäkringar</option>

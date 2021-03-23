@@ -1,7 +1,7 @@
 import app from "firebase/app";
+
 import "firebase/auth";
 import "firebase/database";
-
 
 var config = {
   apiKey: "AIzaSyDWcMs5a_HcHqqDqHTiWZtsP_35CQ2F-I4",
@@ -11,7 +11,6 @@ var config = {
   storageBucket: "fe20tp2-bev-4.appspot.com",
   messagingSenderId: "180893030057",
   appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8"
-
 }
 
 
@@ -64,7 +63,6 @@ class Firebase {
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
   users = () => this.db.ref("users");
-
 }
 
 export default Firebase;

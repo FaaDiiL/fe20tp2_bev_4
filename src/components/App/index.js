@@ -25,7 +25,7 @@ const App = () => (
     {
       (authUser) =>
       authUser ? (
-      authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB />:null):(<GlobalStyle />) 
+      authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB />:<GlobalStyle />):(<GlobalStyle />)
     }
     </AuthUserContext.Consumer>
 

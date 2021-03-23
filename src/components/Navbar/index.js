@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
-import logoImg from "../../img/owl.svg";
+import logoLfImg from "../../img/lf.png";
+import logoBevImg from "../../img/owl.svg";
+import logoSbImg from "../../img/swedbank.png";
 import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
 
@@ -170,6 +172,7 @@ class Index extends Component {
     });
   }
 
+
   handleClick(e) {
     if (e.target.nodeName === "LI" || e.target.nodeName === "BUTTON") {
       this.setState({
@@ -177,20 +180,52 @@ class Index extends Component {
       });
     }
   }
-
+  
   render() {
+
     return (
       <Container>
         <header className="header">
           <div className="navContainer">
             <div className={"logo"}>
-              <img src={logoImg} alt={"Site-logo"} className="logo-img" />
-              <span className="logo-text">BEV</span>
+            <AuthUserContext.Consumer>
+            { 
+              authUser => 
+              authUser ?
+              authUser.bank === "LF"? (
+                <>
+                  <img src={logoLfImg} alt={"Site-logo"} className="logo-img" />
+                </>
+              ):
+              authUser.bank === "SB"?(
+                <>
+                  <img src={logoSbImg} alt={"Site-logo"} className="logo-img" />
+                </>
+              ):
+              (
+                  <>
+                    <img src={logoBevImg} alt={"Site-logo"} className="logo-img" />
+                    <span className="logo-text">BEV</span>
+                  </>
+                ):
+                (
+                  <>
+                    <img src={logoBevImg} alt={"Site-logo"} className="logo-img" />
+                    <span className="logo-text">BEV</span>
+                  </>
+                )
+            }
+              </AuthUserContext.Consumer>
             </div>
             <nav>
+            
               <AuthUserContext.Consumer>
-                {(authUser) =>
-                  authUser ? (
+                {
+                     (authUser) =>   
+                     
+                     authUser ?
+                    (
+
                     <ul
                       onClick={this.handleClick}
                       className="mainNav"
@@ -219,7 +254,6 @@ class Index extends Component {
                       <Link to={ROUTES.CONTACT}>
                         <li>Contact</li>
                       </Link>
-
                       {!!authUser.roles[ROLES.ADMIN] && (
                         <Link to={ROUTES.ADMIN}>
                           <li>Admin</li>
@@ -228,8 +262,9 @@ class Index extends Component {
                       <li>
                         <SignOutButton />
                       </li>
+                  {() => this.setState({currentBank: authUser.bank})}
                     </ul>
-                  ) : (
+                  ): (
                     <ul
                       onClick={this.handleClick}
                       className="mainNav"
@@ -259,6 +294,7 @@ class Index extends Component {
                     </ul>
                   )
                 }
+                
               </AuthUserContext.Consumer>
             </nav>
             <button

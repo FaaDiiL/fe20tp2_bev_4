@@ -1,26 +1,25 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { Line } from "react";
 import { Line } from "react-chartjs-2";
-import styled from "styled-components";
+
+// import styled from "styled-components";
 
 import { rates } from "../../constants/rates";
 
 const Chart = () => {
-  const [apiBase, setApiBase] = useState("&base=EUR");
+  // const [apiBase, setApiBase] = useState("&base=EUR");
   const ratesData = rates[0].rates;
 
   const chartData = {
     labels:[],
     values:[]
   }
-  Object.entries(ratesData).map(([x,y]) =>{
+  Object.entries(ratesData).forEach(([x,y]) =>{
     if(x.endsWith("01")){
       chartData.labels.push(x)
       chartData.values.push(Object.values(y)[0])
-      
     }
   })
- console.log(chartData)
 
 
   const rateData = {

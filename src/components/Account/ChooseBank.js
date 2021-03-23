@@ -32,10 +32,10 @@ function Bank ()
     
     <BankContainer>
     <h3>Choose Bank</h3>
-        <select name='bank' className='chooseBank'>
-          <option value="" disabled selected>Select your Bank</option>
-          <option>Swedbank</option>
-          <option>Länsförsäkringar</option>
+        <select name='bank' className='chooseBank' defaultValue='default'>
+          <option value='default' disabled >Select your Bank</option>
+          <option value='SB'>Swedbank</option>
+          <option value='LF'>Länsförsäkringar</option>
         </select>
 
         <button>Save</button>
