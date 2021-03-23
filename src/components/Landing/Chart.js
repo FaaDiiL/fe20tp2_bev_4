@@ -8,27 +8,31 @@ import styled from "styled-components";
 const Chart = () => {
   const [apiBase, setApiBase] = useState("&base=EUR");
 
-  const ratesData = Object.entries(rates[0].rates);
+  const ratesData = rates[0].rates;
 
-  let dates = [];
-  let rateOfDate = [];
-
-  for (let i = 0; i < ratesData.length; i++) {
-    if (ratesData[i][0].endsWith("01")) {
-      dates.push(ratesData[i][0]);
-      rateOfDate.push(ratesData[i][1].USD);
-    }
+  const chartData = {
+    labels:[],
+    values:[]
   }
+  Object.entries(ratesData).map(([x,y]) =>{
+    if(x.endsWith("01")){
+      chartData.labels.push(x)
+      chartData.values.push(Object.values(y)[0])
+      
+    }
+  })
+ console.log(chartData)
+
 
   const rateData = {
-    labels: dates,
+    labels: chartData.labels,
     datasets: [
       {
         label: "SEK / USD",
         backgroundColor: "#ecbcfd5b",
         borderColor: "#571d85",
         borderWidth: 2,
-        data: rateOfDate,
+        data: chartData.values
       },
     ],
   };
@@ -53,6 +57,7 @@ const Chart = () => {
       />
     </div>
   );
+
 };
 
 export default Chart;
