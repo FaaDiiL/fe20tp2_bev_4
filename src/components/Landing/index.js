@@ -2,15 +2,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import React, { useEffect, useState } from "react";
 
 import Chart from "./Chart";
-
-import {
-  StyledBody,
-  StyledCont,
-  FlexBoxContainer,
-  CurrencyContainer,
-  ConvertContainer,
-  GraphContainer,
-} from "./style";
+import { ConvertContainer, CurrencyContainer, FlexBoxContainer, StyledBody, StyledCont } from "./style";
 
 const Landing = () => {
   const API_URL =
@@ -18,12 +10,10 @@ const Landing = () => {
 
   const [rates, setRates] = useState([]);
   const [convertNr, setConvertNr] = useState(1);
-  const [convertCur, setConvertCur] = useState(1);
   const [select1, setSelect1] = useState("SEK");
   const [currencyCode, setCurrencyCode] = useState("USD"); // ex. USD, EUR
   const [total, setTotal] = useState(null);
   const [currencyToggle, setCurrencyToggle] = useState(false);
-  const [valueToggle, setValueToggle] = useState(false);
 
   useEffect(() => {
     const newDate = new Date().toISOString().split("T")[0]; // format the time like: 2021-03-08

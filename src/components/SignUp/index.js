@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-
-import { withFirebase } from "../Firebase";
-import * as ROUTES from "../../constants/routes";
-import * as ROLES from "../../constants/roles";
-
 import styled from 'styled-components'
+
+import * as ROLES from "../../constants/roles";
+import * as ROUTES from "../../constants/routes";
+import { withFirebase } from "../Firebase";
 
 const PageContainer = styled.div`
 display: flex;
@@ -56,6 +55,7 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   isAdmin: false,
+  bank: '',
   error: null,
 };
 
@@ -67,7 +67,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, isAdmin } = this.state;
+    const { username, email, passwordOne, isAdmin , bank} = this.state;
 
     const roles = {};
 
@@ -83,6 +83,7 @@ class SignUpFormBase extends Component {
           username,
           email,
           roles,
+          bank
         });
       })
       .then(() => {
@@ -110,6 +111,7 @@ class SignUpFormBase extends Component {
       passwordOne,
       passwordTwo,
       isAdmin,
+      bank,
       error,
     } = this.state;
 
@@ -117,7 +119,8 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "";
+      username === "" || 
+      bank === "";
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -149,10 +152,11 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <select name='bank' className='chooseBank'>
+        <select name='bank' className='chooseBank' onChange={this.onChange}>
           <option value="" disabled selected>Select your Bank</option>
-          <option>Swedbank</option>
-          <option>Länsförsäkringar</option>
+          <option value='default'>No Bank</option>
+          <option value='SB'>Swedbank</option>
+          <option value='LF'>Länsförsäkringar</option>
         </select>
         <label>
           Admin:

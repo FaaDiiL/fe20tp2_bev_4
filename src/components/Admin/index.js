@@ -255,7 +255,7 @@ class UserListBase extends Component {
                 </Link>
                   </span> 
                     <button onClick={() => handleDelete(user.uid)}>
-                     <CgTrash className='icon' />
+                    <CgTrash className='icon' />
                     </button>
                   </li>
                 ))}

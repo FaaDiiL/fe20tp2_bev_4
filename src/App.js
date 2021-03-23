@@ -1,18 +1,19 @@
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import About from '../About';
+import Contact from '../Contact';
+import GlobalStyleDefault from '../GlobalStyleDefault';
+import Navbar from '../Navbar';
 import Admin from './Admin';
 import Error from './Error';
 import Landing from './Landing';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
 import Member from './Member';
-import Navbar from '../Navbar';
-import GlobalStyle from '../GlobalStyle';
-import About from '../About';
-import Contact from '../Contact';
 
 function App() {
   return (
     <>
       <Router>
-        <GlobalStyle />
+        <GlobalStyleDefault />
         <Navbar />
         <div>
           <Switch>

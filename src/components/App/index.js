@@ -2,24 +2,31 @@ import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
+import GlobalStyle, { GlobalStyleLF, GlobalStyleSB } from '../../GlobalStyle'
 import About from '../About';
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
-
+import ContactPage from "../Contact";
 import Error from '../Error';
 import HomePage from "../Home";
 import LandingPage from '../Landing';
 import Navbar from "../Navbar"
 import PasswordForgetPage from "../PasswordForget";
 import { withAuthentication } from "../Session";
+import { AuthUserContext } from "../Session";
 import SignInPage from "../SignIn";
 import SignUpPage from "../SignUp";
-import ContactPage from "../Contact"; 
 
 const App = () => (
   
   <Router>
     <div>
+ <AuthUserContext.Consumer>
+    {(authUser) =>     
+      authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB /> : <GlobalStyle />
+    }
+    </AuthUserContext.Consumer>
+
       <Navbar/>
       <Switch>
         <Route exact path={ROUTES.LANDING} component={LandingPage} />

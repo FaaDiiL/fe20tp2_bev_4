@@ -10,7 +10,7 @@ export const StyledBody = styled.div`
   h1 {
     letter-spacing: 1.5px;
     margin-top: 20px;
-    color: #571d85;
+    /* color: #571d85; */
     text-align: center;
   }
 `;
@@ -23,10 +23,10 @@ export const StyledCont = styled.div`
   flex-wrap: wrap;
   opacity: 0.9;
   padding: 50px;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     rgba(109, 84, 129, 0.829),
     rgb(96, 57, 128)
-  );
+  ); */
   /* background-color: #613685; */
 
   input {
@@ -42,17 +42,17 @@ export const StyledCont = styled.div`
       border-top: none;
       border-left: none;
       border-right: none;
-      border-bottom: 3px solid #571d85;
+      /* border-bottom: 3px solid #571d85; */
     }
   }
 
   h2 {
-    color: white;
+    /* color: white; */
     margin: 10px;
   }
 
   select {
-    background: rgb(59, 26, 87);
+    /* background: rgb(59, 26, 87); */
     display: flex;
     flex-wrap: nowrap;
     color: white;
@@ -61,7 +61,7 @@ export const StyledCont = styled.div`
     margin: 5px 15px;
     outline: none;
     border: none;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128);
+    /* box-shadow: 1px 3px 5px rgb(96, 57, 128); */
   }
 
   .btn {
@@ -69,12 +69,12 @@ export const StyledCont = styled.div`
     letter-spacing: 1.5px;
     color: #ffffff;
     border: none;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128);
+    /* box-shadow: 1px 3px 5px rgb(96, 57, 128); */
     padding: 10px;
     font-weight: bold;
     font-size: 20px;
     text-transform: uppercase;
-    background: rgb(59, 26, 87);
+    /* background: rgb(59, 26, 87); */
     margin-top: 20px;
 
     &:hover {
@@ -107,10 +107,10 @@ export const FlexBoxContainer = styled.form`
   }
 `;
 export const CurrencyContainer = styled.div`
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     rgba(109, 84, 129, 0.829),
     rgb(96, 57, 128)
-  );
+  ); */
   width: 100%;
 `;
 
@@ -123,22 +123,10 @@ export const ConvertContainer = styled.div`
   min-height: 300px;
 
   h3 {
-    color: black;
+    /* color: black; */
     text-align: center;
     margin-top: 40px;
     font-size: 40px;
   }
-`;
+`;  
 
-export const GraphContainer = styled.div`
-  height: 300px;
-  width: 100%;
-  background-image: linear-gradient(
-    rgba(109, 84, 129, 0.829),
-    rgb(96, 57, 128)
-  );
-
-  h1 {
-    color: white;
-  }
-`;
