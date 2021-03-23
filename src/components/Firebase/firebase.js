@@ -4,13 +4,14 @@ import "firebase/database";
 
 
 var config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
+  apiKey: "AIzaSyDWcMs5a_HcHqqDqHTiWZtsP_35CQ2F-I4",
+  authDomain: "fe20tp2-bev-4.firebaseapp.com",
+  databaseURL: "https://fe20tp2-bev-4-default-rtdb.firebaseio.com",
+  projectId: "fe20tp2-bev-4",
+  storageBucket: "fe20tp2-bev-4.appspot.com",
+  messagingSenderId: "180893030057",
+  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8"
+
 }
 
 
@@ -63,6 +64,7 @@ class Firebase {
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
   users = () => this.db.ref("users");
+
 }
 
 export default Firebase;
