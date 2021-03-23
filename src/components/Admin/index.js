@@ -341,6 +341,8 @@ class UserItemBase extends Component {
 
   onSendPasswordResetEmail = () => {
     this.props.firebase.doPasswordReset(this.state.user.email);
+
+    alert("E-mail sent!");
   };
 
   render() {
