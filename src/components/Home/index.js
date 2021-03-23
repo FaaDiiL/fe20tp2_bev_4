@@ -1,9 +1,9 @@
 import React from "react";
-import { withAuthorization } from "../Session";
 import { Doughnut } from "react-chartjs-2";
-
-import Chart from "./dashboard";
 import styled from "styled-components";
+
+import { withAuthorization } from "../Session";
+import Chart from "./dashboard";
 
 const StyledDashBody = styled.main`
   display: flex;
@@ -12,6 +12,7 @@ const StyledDashBody = styled.main`
   flex-wrap: wrap;
   width: 100vw;
   margin: 0 auto;
+  margin-top: 100px;
 `;
 const StyledDash = styled.div`
   display: flex;

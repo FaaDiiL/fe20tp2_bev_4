@@ -1,7 +1,8 @@
-/* import { useState } from "react"; */
+/* import { Line } from "react"; */
 import { Line } from "react-chartjs-2";
-import { rates } from "../../constants/rates";
 import styled from "styled-components";
+
+import { rates } from "../../constants/rates";
 
 const StyledChart = styled.div`
   margin-top: 30px;

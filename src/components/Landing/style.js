@@ -55,7 +55,7 @@ export const StyledCont = styled.div`
     /* background: rgb(59, 26, 87); */
     display: flex;
     flex-wrap: nowrap;
-    color: white;
+    /* color: white; */
     padding: 20px;
     border-radius: 2%;
     margin: 5px 15px;
@@ -95,8 +95,8 @@ export const FlexBoxContainer = styled.form`
 
   button  {
     border: none;
-    background-color: transparent;
-    color: white;
+    /* background-color: transparent;
+    color: black; */
 
     &:focus {
       outline: none;

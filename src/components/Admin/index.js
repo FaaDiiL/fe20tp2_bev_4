@@ -73,9 +73,7 @@ const Div = styled.div`
     color: black;
     width: 35%;
     font-weight: bold;
-  }
- 
-`
+  }`
 
 const Members = styled.div`
   display: flex;
@@ -175,7 +173,7 @@ h1 {
     h4{
       font-size: 12px;
     }
-
+  }
     @media (max-width: 320px) {
       width: 130px;
     
@@ -187,6 +185,7 @@ h1 {
         font-size: 10px;
         padding: 4px;
       }
+    }
 `;
 
 

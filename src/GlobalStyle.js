@@ -1,7 +1,12 @@
-import styled,{ createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 // Default
 const GlobalStyle = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 :root {
   --headerFontColor: #571d85;
   --buttonHoverColor: #3f1363;
@@ -37,6 +42,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 :root {
   --headerFontColor: #f35b1c;
   --buttonHoverColor: #c64511;
@@ -50,12 +60,11 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
   }
   select{
-    color:black;
+    box-shadow: 1px 3px 5px #9e9e9e; 
+    color: black;
   }
   select option {
-    background: white;
     color: black;
-
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
@@ -78,6 +87,11 @@ export const GlobalStyleSB = createGlobalStyle`
 // Länsförsäkringar
 
 export const GlobalStyleLF = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
   :root {
   --headerFontColor: #005aa0;
   --buttonHoverColor: #004982;
@@ -95,6 +109,8 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   select{
     color:black;
+    box-shadow: 1px 3px 5px rgb(96, 57, 128); 
+
   }
   select option {
     background: white;
