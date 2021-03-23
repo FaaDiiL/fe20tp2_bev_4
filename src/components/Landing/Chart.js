@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+/* import { useState } from "react"; */
 import { Line } from "react-chartjs-2";
-import axios from "axios";
 import { rates } from "../../constants/rates";
-import { StayCurrentLandscapeOutlined } from "@material-ui/icons";
-import styled from "styled-components";
+
 
 const Chart = () => {
-  const [apiBase, setApiBase] = useState("&base=EUR");
+  /* const [apiBase, setApiBase] = useState("&base=EUR"); */
 
   const ratesData = Object.entries(rates[0].rates);
 

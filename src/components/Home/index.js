@@ -1,5 +1,4 @@
 import React from "react";
-import Landing from "../Landing";
 import { withAuthorization } from "../Session";
 import { Doughnut } from "react-chartjs-2";
 
@@ -42,18 +41,12 @@ const StyledTable = styled.div`
     margin-bottom: 15px;
   }
 
-  /* input :active{
-    outline: 
-  } */
-
   ul {
     width: 100%;
     list-style: none;
     align-self: flex-start;
     text-align: left;
-    /* padding: 10px; */
     margin: 40px 0px 40px 0px;
-    /* background: #b7abd3; */
   }
 
   li {

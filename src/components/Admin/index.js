@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
-import firebase, { withFirebase } from "../Firebase";
+import { withFirebase } from "../Firebase";
 import { withAuthorization } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
@@ -120,12 +120,103 @@ const Members = styled.div`
   }
 `
 
+
 const ResetPasswordButton = styled.button`
 border-radius: 4px;
 outline: none;
 font-size: 12px;
+padding: 15px;
+color: white;
+border: none;
+background-color: #571D85;
+
+&:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 `;
 
+const Menu = styled.div`
+background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
+width: 220px;
+height: 400px;
+
+span{
+  color: white;
+  font-size: 12px;
+  display: block;
+  padding: 0px 10px 5px 20px; 
+}
+
+h3{
+  color: white;
+  padding: 20px;
+}
+
+h1 { 
+  display: block;
+  color: white;
+  letter-spacing: 1.5px;
+  padding: 20px;
+  }
+
+  h4 {
+    margin-bottom: 30px;
+    color: white;
+    padding: 5px 20px 20px 20px;  
+  }
+
+  @media (max-width: 375px) {
+    width: 160px;
+  
+    h1{
+      font-size: 14px;
+    }
+    h4{
+      font-size: 12px;
+    }
+
+    @media (max-width: 320px) {
+      width: 130px;
+    
+      h1{
+        font-size: 14px;
+        padding: 4px;
+      }
+      h4{
+        font-size: 10px;
+        padding: 4px;
+      }
+`;
+
+
+
+const MemberCont = styled.div`
+display: flex;
+flex-direction: row;
+margin: 0 auto;
+border: 2px solid #571D85;
+width: 550px;
+border-radius: 4px;
+`;
+
+const Show = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin: 0 auto;
+
+h3{
+  margin-bottom: 10px;
+  color: #571D85;
+}
+`;
+
+const Back = styled.div`
+text-align: center;
+padding: 30px;
+`;
 
 const AdminPage = () => (
   <div>
@@ -137,10 +228,6 @@ const AdminPage = () => (
   </div>
 );
 
-
-
-
-
 class UserListBase extends Component {
   constructor(props) {
     super(props);
@@ -151,8 +238,6 @@ class UserListBase extends Component {
 
     };
   }
-
-  
 
   componentDidMount() {
     this.setState({ loading: true });
@@ -170,8 +255,6 @@ class UserListBase extends Component {
         loading: false,
       });
     });
-
-    
   }
 
   componentWillUnmount() {
@@ -179,49 +262,9 @@ class UserListBase extends Component {
   }
  
   
-  
   render() {
     const { users, loading } = this.state;
-
-    const handleDelete = (e) => {
-      
-   /*    this.props.firebase.auth().delete().then(function(){
-       
-
-  
-      }); */
-     /*  var user = firebase.auth().e;
-
-      user.delete().then(function() {
-        console.log('delete successful?')
-      
-      }).catch(function (error) {
-        console.error({error})
-      }) */
-
-      // console.log("Pressed button: ", e); 
-      // this.props.auth.user()
-      /* this.props.firebase.user(e).remove().then(function() {
-        console.log('User deleted.')
-      // User deleted.
-      }).catch(function(error) {
-        console.log('An error happened: ', error)
-      }) */
-
-    /*   let authUser = this.props.firebase.auth..currentUser.uid).remove().addOnSuccessListener{ FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { console.log('uid removed') } }
-      console.log(authUser) */
-      // mRef.child(FirebaseAuth.getInstance().currentUser.uid).remove().addOnSuccessListener { ... }
-
-      // Authentication remove
-      /* authUser.delete().then(function() {
-        console.log('User deleted from Auth')
-      }).catch(function(error) {
-        console.log('An error happened from Auth', error)
-      }); */
-        
-}  
-  
-
+ 
     return (
       <div>
          <Header>
@@ -254,7 +297,7 @@ class UserListBase extends Component {
                   Details
                 </Link>
                   </span> 
-                    <button onClick={() => handleDelete(user.uid)}>
+                    <button>
                      <CgTrash className='icon' />
                     </button>
                   </li>
@@ -264,8 +307,6 @@ class UserListBase extends Component {
             </Container>
 
       </PageContainer> 
- 
-
       </div>
     );
   }
@@ -304,51 +345,42 @@ class UserItemBase extends Component {
 
   render() {
     const { user, loading } = this.state;
-    return (
+return (
       <>
            <Header>
         <h1>Admin Dashboard</h1>
       </Header>
 
-    <PageContainer> 
-        <h2>Member ({this.props.match.params.id})</h2>
-          {loading && <div>Loading ...</div>}
 
-          <Container>
-
-            <Div>
-              <span>USERNAME:</span>
-              <span>EMAIL:</span>
-              <span>ID:</span>
-            </Div>
-            <Members>
-            {user && (
-          <div>
-            <span>
-            {user.username}
-            </span>
-            <span>
-            {user.email}
-            </span>
-            <span>
-             {user.uid}
-            </span>
-            <span>
-              <ResetPasswordButton type="button" onClick={this.onSendPasswordResetEmail}>
-                Send Password Reset
+      <MemberCont>
+      {loading && <div>Loading ...</div>}
+      <Menu>
+            <h1>Member Details</h1> 
+           <h3>Username:</h3> 
+           <span> {user.username}</span>
+            <h3>ID:</h3>
+            <span>{this.props.match.params.id}</span>
+           <h3>E-mail:</h3> 
+           <span> {user.email}</span>  
+   </Menu>
+   <Show>
+   <h3>Reset member password</h3>
+          <ResetPasswordButton type="button" onClick={this.onSendPasswordResetEmail}>
+              Password Reset
               </ResetPasswordButton>
-            </span>
-          </div>
-        )}
+              </Show>
+          </MemberCont>    
 
-            </Members>
-            </Container>
-       </PageContainer>
-
-      
-       
-     
-      </>
+<Back>
+            <Link
+                  to={{
+                    pathname: `${ROUTES.ADMIN}`,
+                  }}
+                >
+                  Back
+                </Link> 
+                </Back>
+                </>
     );
   }
 }
@@ -357,8 +389,6 @@ const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
 
 const UserList = withFirebase(UserListBase);
 const UserItem = withFirebase(UserItemBase);
-
-// export default withAuthorization(condition)(withFirebase(AdminPage));
 
 
 export default withAuthorization(condition)(withFirebase(AdminPage));
