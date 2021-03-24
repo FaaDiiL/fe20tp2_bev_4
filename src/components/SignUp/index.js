@@ -80,7 +80,7 @@ class SignUpFormBase extends Component {
           username,
           email,
           roles,
-          bank
+          bank,
         });
       })
       .then(() => {
@@ -164,7 +164,6 @@ class SignUpFormBase extends Component {
             onChange={this.onChangeCheckbox}
           />
         </label>
-
         <button disabled={isInvalid} type="submit">
           Sign Up
         </button>

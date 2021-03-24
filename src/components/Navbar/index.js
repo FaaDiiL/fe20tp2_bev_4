@@ -5,7 +5,9 @@ import styled from "styled-components";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import logoLfImg from "../../img/lf.png";
-import logoBevImg from "../../img/owl.svg";
+import logoBevDeImg from "../../img/owl.svg";
+import logoBevLfImg from "../../img/owlLf.svg";
+import logoBevSbImg from "../../img/owlSb.svg";
 import logoSbImg from "../../img/swedbank.png";
 import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
@@ -46,15 +48,23 @@ const Container = styled.div`
   }
   .logo {
     margin: auto 0;
+    /* for the bev text next to the logo */
     .logo-text {
       font-family: "Audiowide";
       font-size: 25px;
       color: #571d85;
       letter-spacing: 5px;
     }
+    /* for the bev owl image */
     .logo-img {
       height: 38px;
     }
+    /* for the bank-logo image */
+    .bank-logo-img {
+      padding-left: 15px;
+      height: 25px;
+    }
+    
   }
   .navToggle {
     display: block;
@@ -194,23 +204,25 @@ class Index extends Component {
               authUser ?
               authUser.bank === "LF"? (
                 <>
-                  <img src={logoLfImg} alt={"Site-logo"} className="logo-img" />
+                  <img src={logoBevLfImg} alt={"Site-logo"} className="logo-img" />
+                  <img src={logoLfImg} alt={"Site-logo"} className="bank-logo-img" /> 
                 </>
               ):
               authUser.bank === "SB"?(
                 <>
-                  <img src={logoSbImg} alt={"Site-logo"} className="logo-img" />
+                  <img src={logoBevSbImg} alt={"Site-logo"} className="logo-img" />
+                  <img src={logoSbImg} alt={"Site-logo"} className="bank-logo-img" />
                 </>
               ):
               (
                   <>
-                    <img src={logoBevImg} alt={"Site-logo"} className="logo-img" />
+                    <img src={logoBevDeImg} alt={"Site-logo"} className="logo-img" />
                     <span className="logo-text">BEV</span>
                   </>
                 ):
                 (
                   <>
-                    <img src={logoBevImg} alt={"Site-logo"} className="logo-img" />
+                    <img src={logoBevDeImg} alt={"Site-logo"} className="logo-img" />
                     <span className="logo-text">BEV</span>
                   </>
                 )
