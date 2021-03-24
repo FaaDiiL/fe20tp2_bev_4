@@ -121,11 +121,15 @@ select {
   display: block;
 }
 
+label{
+  margin-left: 15px;
+}
+
 input{
   margin: 0 auto;
   display: block;
   padding: 10px;
-  margin: 10px;
+  margin: 0px 15px 15px 15px;
 }
 `;
 
@@ -223,6 +227,7 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+        <label>E-mail
         <input
           name="email"
           value={email}
@@ -230,14 +235,16 @@ class SignInFormBase extends Component {
           type="text"
           placeholder="E-mail..."
         />
+        </label>
 
+        <label>Password
         <input
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
-        />
+        /></label>
 
         <button disabled={isInvalid} type="submit">
           Sign In

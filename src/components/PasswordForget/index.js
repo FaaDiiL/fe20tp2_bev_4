@@ -21,7 +21,7 @@ p{
 
 input {
   padding: 5px 15px 5px 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 button {
   display: block;
@@ -31,6 +31,20 @@ button {
 h3{
   display: block;
   text-align: center;
+}
+`;
+
+const DIV = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
+
+h3{
+  display: block;
+  text-align: center;
+  margin-bottom: 40px;
+  width: 180px;
 }
 `;
 
@@ -78,8 +92,8 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === "";
 
     return (
-      <>
-    
+      <DIV>
+    <h3>No worries! Type in your e-mail and we'll send you a link to reset your password.</h3>
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -94,7 +108,7 @@ class PasswordForgetFormBase extends Component {
         </button>
         {error && <p>{error.message}</p>}
       </form>
-    </>);
+    </DIV>);
   }
 }
 
