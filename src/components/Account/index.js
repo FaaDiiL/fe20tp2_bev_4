@@ -123,15 +123,15 @@ function AccountPage () {
 
 const pageShownComponent = () => {
   if (pageShown === "ChooseBank") {
-    console.log("Hej från choosebank")
+   
     return  <Bank/> 
 
   } else if (pageShown === "ChangePassword"){
-    console.log("Hej från changepassword")
+   
     return <Password />
   }
    else if (pageShown === "DeleteAccount"){
-    console.log("Hej från deleteaccount")
+
     return <Delete />
   } 
 }

@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
-import { SignUpLink } from "../SignUp";
-import { PasswordForgetLink } from "../PasswordForget";
+import { Route, Switch } from "react-router-dom";
+import { SignUpForm } from "../SignUp";
+import { PasswordForgetForm } from "../PasswordForget";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
-
+import {useState} from "react"; 
 import styled from 'styled-components'
 
-const PageContainer = styled.div`
-display: flex;
+const LogIn = styled.div`
+justify-content: center;
 align-items: center;
-justify-content: center; 
-flex-direction: column;
+display: flex;
+`;
+
+const PageContainer = styled.div`
+margin-top: 100px; 
+display: flex;
+flex-direction: row;
+width: 550px;
+border-radius: 4px;
 
 h1 { 
-margin-top: 150px;
+margin-top: 10px;
 margin-bottom: 70px;
 display: block;
-
 }
 
 p{
@@ -32,20 +38,155 @@ margin-bottom: 10px;
 }
 
 button {
-  display: inline-block;
+  display: block;
   padding: 5px;
+  margin: 0 auto;
 }
-
 `;
 
-const SignInPage = () => (
-  <PageContainer>
-    <h1>Sign In</h1>
-    <SignInForm />
-    <SignUpLink />
-    <PasswordForgetLink />
-  </PageContainer>
-);
+const Menu = styled.div`
+padding-bottom:50px;
+/* background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128)); */
+width: 210px;
+height: 400px;
+
+h1 { 
+  display: block;
+  letter-spacing: 1.5px;
+  padding: 10px 20px 5px 20px; 
+  }
+
+  h4 {
+    margin-bottom: 30px;
+    padding: 5px 20px 20px 20px;  
+  }
+
+  @media (max-width: 375px) {
+    width: 160px;
+  
+    h1{
+      font-size: 14px;
+    }
+    h4{
+      font-size: 12px;
+    }
+  }
+    @media (max-width: 320px) {
+      width: 130px;
+    
+      h1{
+        font-size: 14px;
+        padding: 4px;
+      }
+      h4{
+        font-size: 10px;
+        padding: 4px;
+      }
+    }
+`;
+
+const SelectMenu = styled.div`
+h3 { 
+  padding: 25px;
+  /* color: white; */
+
+&:hover {
+  cursor: pointer;
+
+  /* background-color: rgb(96, 57, 128); */
+}
+}
+@media (max-width: 375px) {
+
+  h3{
+    font-size: 12px;
+  }
+}
+  @media (max-width: 320px) {
+
+    h3{
+ font-size: 10px;
+    }
+  }
+`;
+
+const Show = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0 auto;
+
+select {
+  margin: 10px;
+  display: block;
+}
+
+label{
+  margin-left: 15px;
+}
+
+input{
+  margin: 0 auto;
+  display: block;
+  padding: 10px;
+  margin: 0px 15px 15px 15px;
+}
+`;
+
+
+function SignInPage() {
+<Switch>
+  <Route exact path={ROUTES.SIGN_IN} component={SignInForm} />
+</Switch> 
+ 
+const [pageShown, setPageShown] = useState('signIn');  
+
+function signIn(){
+  setPageShown("signIn")
+}
+
+function signUp (){
+setPageShown("signUp")
+}
+
+function forgotPassword() {
+setPageShown("forgotPassword")
+}
+
+
+const pageShownComponent = () => {
+if (pageShown === "signIn") {
+ 
+  return  <SignInForm/> 
+
+} else if (pageShown === "signUp"){
+ 
+  return <SignUpForm />
+}
+ else if (pageShown === "forgotPassword"){
+
+  return <PasswordForgetForm />
+} }
+
+return(
+  <LogIn>
+<PageContainer className='borderColor'>
+      <Menu className='accountMenu'>
+            <h1>Welcome!</h1> 
+            <SelectMenu>
+              <h3 onClick={signIn}>Sign in</h3>
+              <h3 onClick={signUp}>Sign up</h3>
+              <h3 onClick={forgotPassword}>Forgot password?</h3>
+            </SelectMenu>
+   </Menu>
+   <Show>
+   {pageShownComponent()}
+   </Show>
+   </PageContainer> 
+   </LogIn>
+)
+};
+
 
 const INITIAL_STATE = {
   email: "",
@@ -86,6 +227,7 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+        <label>E-mail
         <input
           name="email"
           value={email}
@@ -93,14 +235,16 @@ class SignInFormBase extends Component {
           type="text"
           placeholder="E-mail..."
         />
+        </label>
 
+        <label>Password
         <input
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
-        />
+        /></label>
 
         <button disabled={isInvalid} type="submit">
           Sign In
@@ -112,6 +256,8 @@ class SignInFormBase extends Component {
   }
 }
 
+
 const SignInForm = withRouter(withFirebase(SignInFormBase));
+
 export default SignInPage;
-export { SignInForm };
+export { SignInForm }; 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
-import * as ROUTES from "../../constants/routes";
+
 
 import styled from 'styled-components'
 
@@ -22,22 +21,40 @@ p{
 
 input {
   padding: 5px 15px 5px 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 button {
   display: block;
   margin: 0 auto;
 }
+
+h3{
+  display: block;
+  text-align: center;
+}
 `;
 
-const PasswordForgetPage = () => (
-  <PageContainer>
-    <h1>Forgot your password?</h1>
+const DIV = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
 
-<p>No worries! Reset it here!</p> 
+h3{
+  display: block;
+  text-align: center;
+  margin-bottom: 40px;
+  width: 180px;
+}
+`;
+
+ const PasswordForgetPage = () => (
+  <PageContainer>
+    <h1> Reset your password by entering your e-mail:</h1>
+
    <PasswordForgetForm />
   </PageContainer>
-);
+); 
 
 const INITIAL_STATE = {
   email: "",
@@ -75,6 +92,8 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === "";
 
     return (
+      <DIV>
+    <h3>No worries! Type in your e-mail and we'll send you a link to reset your password.</h3>
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -89,18 +108,13 @@ class PasswordForgetFormBase extends Component {
         </button>
         {error && <p>{error.message}</p>}
       </form>
-    );
+    </DIV>);
   }
 }
 
-const PasswordForgetLink = () => (
-  <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
-  </p>
-);
 
-export default PasswordForgetPage;
+ export default PasswordForgetPage;
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 
-export { PasswordForgetForm, PasswordForgetLink };
+export { PasswordForgetForm};

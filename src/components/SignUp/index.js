@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styled from 'styled-components'
 
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
 
-const PageContainer = styled.div`
+ const PageContainer = styled.div`
 display: flex;
 align-items: center; 
 flex-direction: column;
@@ -37,14 +37,24 @@ button {
   padding: 5px;
 }
 `;
+ 
+const DIV = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
 
+h3{
+  display: block;
+margin-bottom: 15px;
+}
+`;
 
-const SignUpPage = () => (
+ const SignUpPage = () => (
   <PageContainer>
-    <h1>Create an account</h1>
     <SignUpForm />
   </PageContainer>
-);
+); 
 
 const INITIAL_STATE = {
   username: "",
@@ -120,7 +130,10 @@ class SignUpFormBase extends Component {
       bank === "";
 
     return (
+      <DIV>
+      <h3>Create an account</h3>
       <form onSubmit={this.onSubmit}>
+
         <input
           name="username"
           value={username}
@@ -128,6 +141,8 @@ class SignUpFormBase extends Component {
           type="text"
           placeholder="Full Name"
         />
+
+
         <input
           name="email"
           value={email}
@@ -135,6 +150,7 @@ class SignUpFormBase extends Component {
           type="text"
           placeholder="E-mail"
         />
+
         <input
           name="passwordOne"
           value={passwordOne}
@@ -169,18 +185,11 @@ class SignUpFormBase extends Component {
         </button>
         {error && <p>{error.message}</p>}
       </form>
-    );
+   </DIV> );
   }
 }
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
-);
-
-/* const SignUpForm = withRouter(withFirebase(SignUpFormBase)); */
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
-export default SignUpPage;
-export { SignUpForm, SignUpLink };
+export default SignUpPage; 
+export { SignUpForm};
