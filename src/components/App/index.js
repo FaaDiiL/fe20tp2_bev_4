@@ -20,7 +20,6 @@ import SignUpPage from "../SignUp";
 const App = () => (
   
   <Router>
-    <div>
  <AuthUserContext.Consumer>
     {
       (authUser) =>
@@ -28,6 +27,7 @@ const App = () => (
       authUser.bank === 'LF'?<GlobalStyleLF /> :authUser.bank === 'SB'? <GlobalStyleSB />:<GlobalStyle />):(<GlobalStyle />)
     }
     </AuthUserContext.Consumer>
+    <div>
 
       <Navbar/>
       <Switch>

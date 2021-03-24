@@ -8,10 +8,16 @@ import * as ROUTES from "../../constants/routes";
 import {useState} from "react"; 
 import styled from 'styled-components'
 
+const LogIn = styled.div`
+justify-content: center;
+align-items: center;
+display: flex;
+`;
+
 const PageContainer = styled.div`
+margin-top: 100px; 
 display: flex;
 flex-direction: row;
-margin: 0 auto;
 width: 550px;
 border-radius: 4px;
 
@@ -159,6 +165,7 @@ if (pageShown === "signIn") {
 } }
 
 return(
+  <LogIn>
 <PageContainer className='borderColor'>
       <Menu className='accountMenu'>
             <h1>Welcome!</h1> 
@@ -172,6 +179,7 @@ return(
    {pageShownComponent()}
    </Show>
    </PageContainer> 
+   </LogIn>
 )
 };
 

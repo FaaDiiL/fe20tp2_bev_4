@@ -28,16 +28,20 @@ button {
   display: block;
   margin: 0 auto;
 }
+
+h3{
+  display: block;
+  text-align: center;
+}
 `;
 
-const PasswordForgetPage = () => (
+ const PasswordForgetPage = () => (
   <PageContainer>
-    <h1>Forgot your password?</h1>
+    <h1> Reset your password by entering your e-mail:</h1>
 
-<p>No worries! Reset it here!</p> 
    <PasswordForgetForm />
   </PageContainer>
-);
+); 
 
 const INITIAL_STATE = {
   email: "",
@@ -76,7 +80,7 @@ class PasswordForgetFormBase extends Component {
 
     return (
       <>
-      <h3>Reset password</h3>
+    
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -95,14 +99,9 @@ class PasswordForgetFormBase extends Component {
   }
 }
 
-const PasswordForgetLink = () => (
-  <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
-  </p>
-);
 
-export default PasswordForgetPage;
+ export default PasswordForgetPage;
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 
-export { PasswordForgetForm, PasswordForgetLink };
+export { PasswordForgetForm};
