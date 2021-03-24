@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
   padding:0;
   box-sizing:border-box;
 }
+body{
+  margin-top: 50px;
+}
 :root {
   --headerFontColor: #571d85;
   --buttonHoverColor: #3f1363;
@@ -43,6 +46,11 @@ const GlobalStyle = createGlobalStyle`
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
 *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
   margin:0;
   padding:0;
   box-sizing:border-box;
@@ -88,6 +96,11 @@ export const GlobalStyleSB = createGlobalStyle`
 
 export const GlobalStyleLF = createGlobalStyle`
 *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
   margin:0;
   padding:0;
   box-sizing:border-box;
