@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   }
   select{
     color:black;
+    box-shadow: 1px 3px 5px var(--headerFontColor);
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
@@ -71,8 +72,8 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
   }
   select{
-    box-shadow: 1px 3px 5px #9e9e9e; 
     color: black;
+    box-shadow: 1px 3px 5px var(--headerFontColor); 
   }
   select option {
     color: black;
@@ -128,7 +129,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   select{
     color:black;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128); 
+    box-shadow: 1px 3px 5px var(--headerFontColor); 
 
   }
   select option {
