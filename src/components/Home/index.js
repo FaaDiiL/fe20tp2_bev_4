@@ -60,6 +60,9 @@ const StyledTable = styled.div`
   span {
     width: 25%;
   }
+  
+
+
   .first {
     width: 50%;
   }

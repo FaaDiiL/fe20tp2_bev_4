@@ -22,7 +22,7 @@ export const StyledCont = styled.div`
   align-items: center;
   flex-wrap: wrap;
   opacity: 0.9;
-  padding: 50px;
+
   /* background-image: linear-gradient(
     rgba(109, 84, 129, 0.829),
     rgb(96, 57, 128)
@@ -48,7 +48,9 @@ export const StyledCont = styled.div`
 
   h2 {
     /* color: white; */
+    width: 100%;
     margin: 10px;
+    text-align:center;
   }
 
   select {
@@ -65,7 +67,7 @@ export const StyledCont = styled.div`
   }
 
   .btn {
-    width: 60%;
+    width: 200px;
     letter-spacing: 1.5px;
     color: #ffffff;
     border: none;
@@ -119,14 +121,14 @@ export const ConvertContainer = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  min-height: 300px;
+  /* background-color: white; */
+  min-height: 150px;
 
-  h3 {
-    /* color: black; */
+  p {
     text-align: center;
-    margin-top: 40px;
-    font-size: 40px;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 `;  
 
