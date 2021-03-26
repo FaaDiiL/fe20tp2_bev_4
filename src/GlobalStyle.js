@@ -43,6 +43,9 @@ const GlobalStyle = createGlobalStyle`
   .chooseBank{
       color: black;
     }
+  .header{
+    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+  }
 `;
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
@@ -94,6 +97,9 @@ export const GlobalStyleSB = createGlobalStyle`
     .chooseBank{
       color: black;
     }
+    .header{
+      box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+    }
   }
 `;
 // Länsförsäkringar
@@ -118,10 +124,6 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   h1,h2,h3,h4,h5,h6{
     color: var(--headerFontColor);
-  }
-  input {
-    color: black;
-    border-bottom: 3px solid #571d85; 
   }
   button{
     background: var(--headerFontColor);
@@ -154,6 +156,9 @@ export const GlobalStyleLF = createGlobalStyle`
   .chooseBank{
       color: black;
     }
+  .header{
+    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+  }
 `;
 
 export default GlobalStyle;
