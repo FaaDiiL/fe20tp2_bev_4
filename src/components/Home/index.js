@@ -101,7 +101,7 @@ const HomePage = () => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let fullTotal = newTotalAmount.reduce(reducer)
     setTotalAmount(fullTotal)
-  },[])
+  },[doughnut])
 
   function addNewCurrency(e){
     e.preventDefault()
