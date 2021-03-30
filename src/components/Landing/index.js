@@ -2,13 +2,7 @@ import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import React, { useEffect, useState } from 'react'
 
 import Chart from './Chart'
-import {
-  ConvertContainer,
-  CurrencyContainer,
-  FlexBoxContainer,
-  StyledBody,
-  StyledCont,
-} from './style'
+import { ConvertContainer, CurrencyContainer, FlexBoxContainer, StyledBody, StyledCont } from './style'
 
 const Landing = () => {
   const API_URL =
@@ -21,7 +15,7 @@ const Landing = () => {
   const [total, setTotal] = useState(null)
   const [currencyToggle, setCurrencyToggle] = useState(false)
 
-  useEffect(() => {
+  const saveFetchedApiLS =  () =>{
     const newDate = new Date().toISOString().split('T')[0] // format the time like: 2021-03-08
     if (localStorage.getItem(newDate)) {
       setRates(JSON.parse(localStorage.getItem(newDate)))
@@ -36,6 +30,10 @@ const Landing = () => {
           setRates(data.conversion_rates)
         })
     }
+  }
+
+  useEffect(() => {
+    saveFetchedApiLS()
   }, [])
 
   const handleSelect1 = (e) => {

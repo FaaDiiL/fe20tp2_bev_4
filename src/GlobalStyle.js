@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
   }
   select{
     color:black;
-    box-shadow: 1px 3px 5px var(--headerFontColor);
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
@@ -43,9 +42,6 @@ const GlobalStyle = createGlobalStyle`
   .chooseBank{
       color: black;
     }
-  .header{
-    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
-  }
 `;
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
@@ -75,8 +71,8 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
   }
   select{
+    box-shadow: 1px 3px 5px #9e9e9e; 
     color: black;
-    box-shadow: 1px 3px 5px var(--headerFontColor); 
   }
   select option {
     color: black;
@@ -96,9 +92,6 @@ export const GlobalStyleSB = createGlobalStyle`
     }
     .chooseBank{
       color: black;
-    }
-    .header{
-      box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
     }
   }
 `;
@@ -125,13 +118,17 @@ export const GlobalStyleLF = createGlobalStyle`
   h1,h2,h3,h4,h5,h6{
     color: var(--headerFontColor);
   }
+  input {
+    color: black;
+    border-bottom: 3px solid #571d85; 
+  }
   button{
     background: var(--headerFontColor);
     color: white;
   }
   select{
     color:black;
-    box-shadow: 1px 3px 5px var(--headerFontColor); 
+    box-shadow: 1px 3px 5px rgb(96, 57, 128); 
 
   }
   select option {
@@ -156,9 +153,6 @@ export const GlobalStyleLF = createGlobalStyle`
   .chooseBank{
       color: black;
     }
-  .header{
-    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
-  }
 `;
 
 export default GlobalStyle;

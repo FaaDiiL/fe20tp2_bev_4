@@ -1,7 +1,8 @@
 import React from "react";
-import styled from 'styled-components';
 
 import { withFirebase } from "../Firebase";
+
+import styled from 'styled-components'; 
 
 const Div = styled.div`
 display: flex;
@@ -10,9 +11,11 @@ justify-content: center;
 `;
 
 const Button = styled.button`
+background-color: #571D85;
 padding: 10px 5px 10px 5px;
 outline: none;
 border: none;
+color: white;
 margin-top: 150px;
 
 &:hover {

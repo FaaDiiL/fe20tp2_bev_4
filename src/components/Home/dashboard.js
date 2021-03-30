@@ -1,18 +1,32 @@
+import { useEffect, useState } from 'react'
 /* import { Line } from "react"; */
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 
-import { rates } from "../../constants/rates";
+/* import { rates } from "../../constants/rates"; */
 
 const StyledChart = styled.div`
   margin-top: 30px;
   width: 90%;
 `;
 
-const Chart = () => {
-/*   const [apiBase, setApiBase] = useState("&base=EUR"); */
+const Chart = ({curCode,base}) => {
+  console.log(curCode)
+  const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}`
 
-  const ratesData = Object.entries(rates[0].rates);
+  const [rates, setRates] = useState({})
+  
+  useEffect (()=> {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => setRates(data.rates))
+      
+  },[base, curCode])
+  
+    
+  /*   const [apiBase, setApiBase] = useState("&base=EUR"); */
+
+  const ratesData = Object.entries(rates);
 
   let dates = [];
   let rateOfDate = [];
@@ -20,15 +34,18 @@ const Chart = () => {
   for (let i = 0; i < ratesData.length; i++) {
     if (ratesData[i][0].endsWith("01")) {
       dates.push(ratesData[i][0]);
-      rateOfDate.push(ratesData[i][1].USD);
+      rateOfDate.push(ratesData[i][1][curCode]);
     }
   }
+
+  console.log(dates)
+  console.log(rateOfDate)
 
   const rateData = {
     labels: dates,
     datasets: [
       {
-        label: "SEK / USD",
+        label: `${base} / ${curCode}`,
         backgroundColor: "#ecbcfd5b",
         borderColor: "#571d85",
         borderWidth: 2,

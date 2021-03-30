@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 
@@ -88,6 +88,8 @@ const HomePage = () => {
   //   return ~~(Math.random() * (to - frm)) + frm;
   // }
   // //------------->
+const [base, setBase]= useState()
+const [curCode, setCurCode]= useState()
 
   const data = {
     labels: ["USD", "CAD", "THB"],
@@ -151,11 +153,30 @@ const HomePage = () => {
             }}
           />
         </div>
-
-        <Chart />
-        <Chart />
-        <Chart />
-        <Chart />
+        setBase
+        setCurCode
+        <h3>Analyze from which currency?</h3>
+        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>EUR</button>
+        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>USD</button>
+        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>SEK</button>
+        <br/>
+        <br/>
+        <br/>
+        <h3>Analyze to which currency?</h3>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>GBP</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CAD</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>AUD</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>AED</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>TRY</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CLP</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>RUB</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>JPY</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>JPY</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CZK</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>NOK</button>
+        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>DKK</button>
+        <Chart  curCode={curCode} base={base} />
+        
       </StyledDash>
     </StyledDashBody>
   );
