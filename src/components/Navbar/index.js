@@ -32,7 +32,7 @@ const Container = styled.div`
     color: #333;
     z-index: 10;
     background-color: #fff;
-    box-shadow: 0 5px 20px -10px #571d85 /* #000 */;
+    /* box-shadow: 0 5px 20px -10px #571d85 #000; */
   }
 
   .header a {
@@ -96,7 +96,7 @@ const Container = styled.div`
     margin-bottom: 4px;
     background-color: #333;
     border-radius: 5px;
-    transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09);
+    /* transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09); */
   }
   .navToggle.open span {
     background: #333;
@@ -246,6 +246,7 @@ class Index extends Component {
                           ? { transform: "translateX(0)" }
                           : null
                       }
+                      
                     >
                       <Link to={ROUTES.LANDING}>
                         <li>Landing</li>
