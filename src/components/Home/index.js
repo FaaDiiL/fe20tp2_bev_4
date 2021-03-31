@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 
@@ -87,50 +87,64 @@ const HomePage = () => {
   //   return ~~(Math.random() * (to - frm)) + frm;
   // }
   // //------------->
-const [base, setBase]= useState()
-const [curCode, setCurCode]= useState()
+  const [base, setBase]= useState()
+  const [curCode, setCurCode]= useState()
+  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500 },{labels: 'EUR', amount: 250 }])
+  const [totalAmount, setTotalAmount] = useState(0)
+
+  const myLabels = doughnut.map((cur)=> cur.labels)
+  const myAmount = doughnut.map((cur)=> cur.amount)
+  
+  useEffect(()=>{
+    const newTotalAmount = doughnut.map((cur) => cur.amount)
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let fullTotal = newTotalAmount.reduce(reducer)
+    setTotalAmount(fullTotal)
+  },[doughnut])
+
+  function addNewCurrency(e){
+    e.preventDefault()
+    let labels = e.target[0].value.toUpperCase()
+    let amount = parseInt(e.target[1].value)
+    setDoughnut([...doughnut, {labels,  amount }])
+  }
 
   const data = {
-    labels: ["USD", "CAD", "THB"],
+    labels: myLabels,
     datasets: [
       {
-        data: [300, 50, 100],
+        data: myAmount,
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
     ],
   };
+  console.log(data)
 
   return (
     <StyledDashBody>
       <StyledTable>
-        <form>
+        <form onSubmit={addNewCurrency} className='dashboard-form'>
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
+          <button className="dashboard-add-btn">Add</button>
         </form>
         {/* <h4>savings</h4> */}
         <ul>
           <li>
             <span className="first">Savings</span>
-            <span className="first" style={{ textAlign: "right" }}>
-              Total:1011120kr
-            </span>
+            <span className="first" style={{ textAlign: "right" }}> Total: { totalAmount} </span>
           </li>
-          <li>
-            <span className="first">500 USD </span>
-            <span>31020kr</span>
-            <span className="up">12%</span>
-          </li>
-          <li>
-            <span className="first">1250 CAD </span>
-            <span>24030kr</span>
-            <span className="down">8%</span>
-          </li>
-          <li>
-            <span className="first">10780 THB </span>
-            <span>2972kr</span>
-            <span className="down">8%</span>
-          </li>
+          {
+            doughnut.map((cur,index) =>(
+              <li key={index}>
+                <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
+                <span>31020kr</span>
+                <span className="up">12%</span>
+              </li>
+            ))
+          
+          }
         </ul>
       </StyledTable>
       <StyledDash>

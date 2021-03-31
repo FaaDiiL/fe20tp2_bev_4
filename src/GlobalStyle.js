@@ -24,6 +24,16 @@ const GlobalStyle = createGlobalStyle`
   }
   select{
     color:black;
+    box-shadow: 1px 3px 5px #9e9e9e;
+  }
+  .dashboard-form input {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+  .mainNav li{
+    &:hover  {
+      color: var(--headerFontColor);
+    }
   }
   input {
     color: black;
@@ -46,6 +56,9 @@ const GlobalStyle = createGlobalStyle`
   .chooseBank{
       color: black;
     }
+.header{
+  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+}
 `;
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
@@ -71,19 +84,25 @@ export const GlobalStyleSB = createGlobalStyle`
     color: var(--headerFontColor);
   }
   button{
-    background: var(--headerFontColor);
+    background: var(--buttonHoverColor);
     color: white;
   }
   select{
-    box-shadow: 1px 3px 5px #9e9e9e; 
+    box-shadow: 1px 3px 5px #9e9e9e;
     color: black;
+
   }
   select option {
     color: black;
   }
-  input {
+  .dashboard-form input {
     color: black;
-    border-bottom: 3px solid var(--headerFontColor);
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+  .mainNav li{
+    &:hover  {
+      color: var(--headerFontColor);
+    }
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
@@ -102,6 +121,19 @@ export const GlobalStyleSB = createGlobalStyle`
       color: black;
     }
   }
+  .header{
+  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+}
+.dashboard-add-btn{
+  color: var(--headerFontColor);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  &:hover{
+    background-color:var(--headerFontColor);
+  }
+}
 `;
 // Länsförsäkringar
 
@@ -126,23 +158,27 @@ export const GlobalStyleLF = createGlobalStyle`
   h1,h2,h3,h4,h5,h6{
     color: var(--headerFontColor);
   }
-  input {
-    color: black;
-    border-bottom: 3px solid var(--headerFontColor);
-  }
   button{
     background: var(--headerFontColor);
     color: white;
   }
   select{
     color:black;
-    box-shadow: 1px 3px 5px rgb(96, 57, 128); 
-
+    box-shadow: 1px 3px 5px #9e9e9e;
   }
   select option {
     background: white;
     color: black;
 
+  }
+  .dashboard-form input {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+  .mainNav li{
+    &:hover  {
+      color: var(--headerFontColor);
+    }
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
@@ -161,6 +197,9 @@ export const GlobalStyleLF = createGlobalStyle`
   .chooseBank{
       color: black;
     }
+    .header{
+  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+}
 `;
 
 export default GlobalStyle;

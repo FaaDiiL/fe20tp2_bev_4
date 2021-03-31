@@ -76,10 +76,9 @@ const Landing = () => {
     ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault()
   return (
     <StyledBody>
-      <h1>Dashboard</h1>
-
       <CurrencyContainer>
         <StyledCont>
+        <br /><br />
           <h2>Currency Converter</h2>
           <input
             type='number'
