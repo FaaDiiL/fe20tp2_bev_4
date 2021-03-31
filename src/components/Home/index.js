@@ -37,7 +37,6 @@ const StyledTable = styled.div`
     padding: 12px 8px;
     border: none;
     outline: none;
-    border-bottom: 3px solid #571d85;
     display: flex;
     margin-bottom: 15px;
   }
@@ -125,10 +124,10 @@ const HomePage = () => {
   return (
     <StyledDashBody>
       <StyledTable>
-        <form onSubmit={addNewCurrency}>
+        <form onSubmit={addNewCurrency} className='dashboard-form'>
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
-          <button>Add</button>
+          <button className="dashboard-add-btn">Add</button>
         </form>
         {/* <h4>savings</h4> */}
         <ul>
