@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
-import Savings from "./Savings";
+
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
 import { getByPlaceholderText } from "@testing-library/dom";
