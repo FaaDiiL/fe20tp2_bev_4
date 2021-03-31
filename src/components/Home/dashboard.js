@@ -22,9 +22,6 @@ const Chart = ({curCode,base}) => {
       .then(data => setRates(data.rates))
       
   },[base, curCode])
-  
-    
-  /*   const [apiBase, setApiBase] = useState("&base=EUR"); */
 
   const ratesData = Object.entries(rates);
 

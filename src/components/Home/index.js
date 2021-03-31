@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React,{ useEffect, useState } from "react";
+>>>>>>> 4be97734047227fa52f8c7819a2bb749d9ce1a87
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 import Savings from "./Savings";
@@ -109,42 +113,66 @@ const HomePage = () => {
   //   //   `rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`
   //   // );
   // }
+  // //------------->
+  const [base, setBase]= useState()
+  const [curCode, setCurCode]= useState()
+  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500 },{labels: 'EUR', amount: 250 }])
+  const [totalAmount, setTotalAmount] = useState(0)
 
-  let labels = graph.map((cur) => cur.labels);
-  let amount = graph.map((cur) => cur.amount);
+  const myLabels = doughnut.map((cur)=> cur.labels)
+  const myAmount = doughnut.map((cur)=> cur.amount)
+  
+  useEffect(()=>{
+    const newTotalAmount = doughnut.map((cur) => cur.amount)
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let fullTotal = newTotalAmount.reduce(reducer)
+    setTotalAmount(fullTotal)
+  },[doughnut])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let label = e.target[0].value;
-    let amount = e.target[1].value;
-    setGraph([{ labels: label }, { amount: amount }]);
-  };
+  function addNewCurrency(e){
+    e.preventDefault()
+    let labels = e.target[0].value.toUpperCase()
+    let amount = parseInt(e.target[1].value)
+    setDoughnut([...doughnut, {labels,  amount }])
+  }
 
   const data = {
-    labels: labels,
+    labels: myLabels,
     datasets: [
       {
-        data: amount,
+        data: myAmount,
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
     ],
   };
+  console.log(data)
 
   return (
     <StyledDashBody>
       <StyledTable>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={addNewCurrency}>
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
-          <button>save</button>
+          <button>Add</button>
         </form>
         {/* <h4>savings</h4> */}
-        <h1 className="first">Savings</h1>
-        <Savings curCode={curCode} base={base} graph={graph} />
-        <p className="first" style={{ textAlign: "right" }}>
-          Total:1011120kr
-        </p>
+        <ul>
+          <li>
+            <span className="first">Savings</span>
+            <span className="first" style={{ textAlign: "right" }}> Total: { totalAmount} </span>
+          </li>
+          {
+            doughnut.map((cur,index) =>(
+              <li key={index}>
+                <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
+                <span>31020kr</span>
+                <span className="up">12%</span>
+              </li>
+            ))
+          
+          }
+        </ul>
       </StyledTable>
       <StyledDash>
         <div className="donutWrapper">
