@@ -1,9 +1,10 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
-
+import Savings from "./Savings";
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
+import { getByPlaceholderText } from "@testing-library/dom";
 
 const StyledDashBody = styled.main`
   display: flex;
@@ -60,8 +61,6 @@ const StyledTable = styled.div`
   span {
     width: 25%;
   }
-  
-
 
   .first {
     width: 50%;
@@ -77,25 +76,55 @@ const StyledTable = styled.div`
 `;
 
 const HomePage = () => {
-  // //random color generator ------->
-  // let COLORS = [];
-  // while (COLORS.length < 100) {
-  //   COLORS.push(`rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`);
+  const [base, setBase] = useState();
+  const [curCode, setCurCode] = useState();
+  const [colors, setColors] = useState([]);
+  const [graph, setGraph] = useState([
+    { labels: "USD", amount: 500 },
+    { labels: "EUR", amount: 600 },
+  ]);
+
+  //random color generator ------->
+  while (colors.length < 100) {
+    setColors(
+      [...colors],
+      `rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`
+    );
+  }
+
+  // random number generator
+  function rand(frm, to) {
+    return ~~(Math.random() * (to - frm)) + frm;
+  }
+  //------------->
+
+  // // const rand = (from, to) => {
+  // //   return ~~(Math.random() * (to - from)) + from;
+  // // };
+
+  // while (colors.length > 30) {
+  //   console.log("funkar");
+  //   // setColors(
+  //   //   [...colors],
+  //   //   `rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`
+  //   // );
   // }
 
-  // // random number generator
-  // function rand(frm, to) {
-  //   return ~~(Math.random() * (to - frm)) + frm;
-  // }
-  // //------------->
-const [base, setBase]= useState()
-const [curCode, setCurCode]= useState()
+  let labels = graph.map((cur) => cur.labels);
+  let amount = graph.map((cur) => cur.amount);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let label = e.target[0].value;
+    let amount = e.target[1].value;
+    setGraph([{ labels: label }, { amount: amount }]);
+  };
 
   const data = {
-    labels: ["USD", "CAD", "THB"],
+    labels: labels,
     datasets: [
       {
-        data: [300, 50, 100],
+        data: amount,
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
@@ -105,34 +134,17 @@ const [curCode, setCurCode]= useState()
   return (
     <StyledDashBody>
       <StyledTable>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
+          <button>save</button>
         </form>
         {/* <h4>savings</h4> */}
-        <ul>
-          <li>
-            <span className="first">Savings</span>
-            <span className="first" style={{ textAlign: "right" }}>
-              Total:1011120kr
-            </span>
-          </li>
-          <li>
-            <span className="first">500 USD </span>
-            <span>31020kr</span>
-            <span className="up">12%</span>
-          </li>
-          <li>
-            <span className="first">1250 CAD </span>
-            <span>24030kr</span>
-            <span className="down">8%</span>
-          </li>
-          <li>
-            <span className="first">10780 THB </span>
-            <span>2972kr</span>
-            <span className="down">8%</span>
-          </li>
-        </ul>
+        <h1 className="first">Savings</h1>
+        <Savings curCode={curCode} base={base} graph={graph} />
+        <p className="first" style={{ textAlign: "right" }}>
+          Total:1011120kr
+        </p>
       </StyledTable>
       <StyledDash>
         <div className="donutWrapper">
@@ -153,30 +165,103 @@ const [curCode, setCurCode]= useState()
             }}
           />
         </div>
-        setBase
-        setCurCode
+
         <h3>Analyze from which currency?</h3>
-        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>EUR</button>
-        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>USD</button>
-        <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>SEK</button>
-        <br/>
-        <br/>
-        <br/>
+        <button
+          style={{ background: "green" }}
+          onClick={(e) => setBase(e.target.innerText)}
+        >
+          EUR
+        </button>
+        <button
+          style={{ background: "green" }}
+          onClick={(e) => setBase(e.target.innerText)}
+        >
+          USD
+        </button>
+        <button
+          style={{ background: "green" }}
+          onClick={(e) => setBase(e.target.innerText)}
+        >
+          SEK
+        </button>
+        <br />
+        <br />
+        <br />
         <h3>Analyze to which currency?</h3>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>GBP</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CAD</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>AUD</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>AED</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>TRY</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CLP</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>RUB</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>JPY</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>JPY</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>CZK</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>NOK</button>
-        <button style={{background: 'blue'}} onClick={(e)=>setCurCode(e.target.innerText)}>DKK</button>
-        <Chart  curCode={curCode} base={base} />
-        
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          GBP
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          CAD
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          AUD
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          AED
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          TRY
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          CLP
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          RUB
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          JPY
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          JPY
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          CZK
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          NOK
+        </button>
+        <button
+          style={{ background: "blue" }}
+          onClick={(e) => setCurCode(e.target.innerText)}
+        >
+          DKK
+        </button>
+        <Chart curCode={curCode} base={base} />
       </StyledDash>
     </StyledDashBody>
   );
