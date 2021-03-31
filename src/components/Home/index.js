@@ -76,28 +76,6 @@ const StyledTable = styled.div`
 `;
 
 const HomePage = () => {
-  const [base, setBase] = useState();
-  const [curCode, setCurCode] = useState();
-  const [colors, setColors] = useState([]);
-  const [graph, setGraph] = useState([
-    { labels: "USD", amount: 500 },
-    { labels: "EUR", amount: 600 },
-  ]);
-
-  //random color generator ------->
-  while (colors.length < 100) {
-    setColors(
-      [...colors],
-      `rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`
-    );
-  }
-
-  // random number generator
-  function rand(frm, to) {
-    return ~~(Math.random() * (to - frm)) + frm;
-  }
-  //------------->
-
   // // const rand = (from, to) => {
   // //   return ~~(Math.random() * (to - from)) + from;
   // // };
