@@ -25,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
   select{
     color:black;
   }
+  input {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor)
+  }
   .borderColor{
     border: 2px solid var(--headerFontColor);
   }
@@ -77,6 +81,10 @@ export const GlobalStyleSB = createGlobalStyle`
   select option {
     color: black;
   }
+  input {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor);
+  }
   .borderColor{
     border: 2px solid var(--headerFontColor);
   }
@@ -120,7 +128,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   input {
     color: black;
-    border-bottom: 3px solid #571d85; 
+    border-bottom: 3px solid var(--headerFontColor);
   }
   button{
     background: var(--headerFontColor);

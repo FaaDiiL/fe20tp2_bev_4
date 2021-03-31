@@ -37,7 +37,6 @@ const StyledTable = styled.div`
     padding: 12px 8px;
     border: none;
     outline: none;
-    border-bottom: 3px solid #571d85;
     display: flex;
     margin-bottom: 15px;
   }
