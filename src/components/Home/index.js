@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-=======
-import React,{ useEffect, useState } from "react";
->>>>>>> 4be97734047227fa52f8c7819a2bb749d9ce1a87
+import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 import Savings from "./Savings";
@@ -114,26 +110,29 @@ const HomePage = () => {
   //   // );
   // }
   // //------------->
-  const [base, setBase]= useState()
-  const [curCode, setCurCode]= useState()
-  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500 },{labels: 'EUR', amount: 250 }])
-  const [totalAmount, setTotalAmount] = useState(0)
+  const [base, setBase] = useState();
+  const [curCode, setCurCode] = useState();
+  const [doughnut, setDoughnut] = useState([
+    { labels: "USD", amount: 500 },
+    { labels: "EUR", amount: 250 },
+  ]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
-  const myLabels = doughnut.map((cur)=> cur.labels)
-  const myAmount = doughnut.map((cur)=> cur.amount)
-  
-  useEffect(()=>{
-    const newTotalAmount = doughnut.map((cur) => cur.amount)
+  const myLabels = doughnut.map((cur) => cur.labels);
+  const myAmount = doughnut.map((cur) => cur.amount);
+
+  useEffect(() => {
+    const newTotalAmount = doughnut.map((cur) => cur.amount);
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let fullTotal = newTotalAmount.reduce(reducer)
-    setTotalAmount(fullTotal)
-  },[doughnut])
+    let fullTotal = newTotalAmount.reduce(reducer);
+    setTotalAmount(fullTotal);
+  }, [doughnut]);
 
-  function addNewCurrency(e){
-    e.preventDefault()
-    let labels = e.target[0].value.toUpperCase()
-    let amount = parseInt(e.target[1].value)
-    setDoughnut([...doughnut, {labels,  amount }])
+  function addNewCurrency(e) {
+    e.preventDefault();
+    let labels = e.target[0].value.toUpperCase();
+    let amount = parseInt(e.target[1].value);
+    setDoughnut([...doughnut, { labels, amount }]);
   }
 
   const data = {
@@ -146,7 +145,7 @@ const HomePage = () => {
       },
     ],
   };
-  console.log(data)
+  console.log(data);
 
   return (
     <StyledDashBody>
@@ -160,18 +159,18 @@ const HomePage = () => {
         <ul>
           <li>
             <span className="first">Savings</span>
-            <span className="first" style={{ textAlign: "right" }}> Total: { totalAmount} </span>
+            <span className="first" style={{ textAlign: "right" }}>
+              {" "}
+              Total: {totalAmount}{" "}
+            </span>
           </li>
-          {
-            doughnut.map((cur,index) =>(
-              <li key={index}>
-                <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
-                <span>31020kr</span>
-                <span className="up">12%</span>
-              </li>
-            ))
-          
-          }
+          {doughnut.map((cur, index) => (
+            <li key={index}>
+              <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
+              <span>31020kr</span>
+              <span className="up">12%</span>
+            </li>
+          ))}
         </ul>
       </StyledTable>
       <StyledDash>
