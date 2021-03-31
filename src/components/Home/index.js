@@ -108,8 +108,11 @@ const HomePage = () => {
     
       fetch(`https://api.exchangerate.host/timeseries?symbols=${labels}&start_date=${date}&end_date=${date}&base=EUR`)
       .then(res => res.json())
-      .then(data => setRatesOnDate(data.rates[date][labels]))
-        setDoughnut([...doughnut, {labels,  amount, date, ratesOnDate }])
+      .then(data => {
+        let responseDateRate = data.rates[date][labels] 
+        setDoughnut([...doughnut, {labels,  amount, date, responseDateRate }])
+      } )
+        
   }
 
   const data = {
