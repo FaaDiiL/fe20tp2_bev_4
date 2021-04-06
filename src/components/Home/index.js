@@ -76,20 +76,13 @@ const StyledTable = styled.div`
 `;
 
 const HomePage = () => {
-  // //random color generator ------->
-  // let COLORS = [];
-  // while (COLORS.length < 100) {
-  //   COLORS.push(`rgb(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)})`);
-  // }
 
-  // // random number generator
-  // function rand(frm, to) {
-  //   return ~~(Math.random() * (to - frm)) + frm;
-  // }
-  // //------------->
+  
+
   const [base, setBase]= useState()
   const [curCode, setCurCode]= useState()
-  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500 },{labels: 'EUR', amount: 250 }])
+  const [ratesOnDate, setRatesOnDate]= useState()
+  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500, ratesOnDate: 0.8532, date: '2020-01-03' },{labels: 'EUR', amount: 250,ratesOnDate: 0.8532, date: '2020-04-03' }])
   const [totalAmount, setTotalAmount] = useState(0)
 
   const myLabels = doughnut.map((cur)=> cur.labels)
@@ -106,7 +99,20 @@ const HomePage = () => {
     e.preventDefault()
     let labels = e.target[0].value.toUpperCase()
     let amount = parseInt(e.target[1].value)
-    setDoughnut([...doughnut, {labels,  amount }])
+    let date = e.target[2].value
+    // let ratesOnDate = res
+
+    console.log(labels)
+    console.log(amount)
+    console.log(date)
+    
+      fetch(`https://api.exchangerate.host/timeseries?symbols=${labels}&start_date=${date}&end_date=${date}&base=EUR`)
+      .then(res => res.json())
+      .then(data => {
+        let responseDateRate = data.rates[date][labels] 
+        setDoughnut([...doughnut, {labels,  amount, date, responseDateRate }])
+      } )
+        
   }
 
   const data = {
@@ -127,6 +133,7 @@ const HomePage = () => {
         <form onSubmit={addNewCurrency} className='dashboard-form'>
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
+          <input type="date" name="date"/>
           <button className="dashboard-add-btn">Add</button>
         </form>
         {/* <h4>savings</h4> */}
@@ -166,8 +173,6 @@ const HomePage = () => {
             }}
           />
         </div>
-        setBase
-        setCurCode
         <h3>Analyze from which currency?</h3>
         <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>EUR</button>
         <button style={{background: 'green'}} onClick={(e)=>setBase(e.target.innerText)}>USD</button>
