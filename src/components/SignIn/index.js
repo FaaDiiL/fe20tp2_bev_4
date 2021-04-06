@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
-import { SignUpForm } from "../SignUp";
-import { PasswordForgetForm } from "../PasswordForget";
-import { withFirebase } from "../Firebase";
-import * as ROUTES from "../../constants/routes";
-import {useState} from "react"; 
 import styled from 'styled-components'
+
+import * as ROUTES from "../../constants/routes";
+import { withFirebase } from "../Firebase";
+import { PasswordForgetForm } from "../PasswordForget";
+import { SignUpForm } from "../SignUp";
 
 const LogIn = styled.div`
 justify-content: center;
@@ -153,7 +154,7 @@ function forgotPassword() {
 setPageShown("forgotPassword")
 }
 
-
+//Show different components on menu clicks
 const pageShownComponent = () => {
 if (pageShown === "signIn") {
  
@@ -180,7 +181,7 @@ return(
             </SelectMenu>
    </Menu>
    <Show>
-   {pageShownComponent()}
+   {pageShownComponent()} 
    </Show>
    </PageContainer> 
    </LogIn>

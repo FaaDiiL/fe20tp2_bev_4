@@ -241,6 +241,7 @@ class UserListBase extends Component {
   componentDidMount() {
     this.setState({ loading: true });
 
+    //Listener to fetch users in database 
     this.props.firebase.users().on("value", (snapshot) => {
       const usersObject = snapshot.val();
 
