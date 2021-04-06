@@ -15,7 +15,7 @@ const Landing = () => {
   const [total, setTotal] = useState(null)
   const [currencyToggle, setCurrencyToggle] = useState(false)
 
-  const saveFetchedApiLS =  () =>{
+  const saveFetchedApiLS =  () =>{ //Fetches and stores data in LocalStorages each new day 
     const newDate = new Date().toISOString().split('T')[0] // format the time like: 2021-03-08
     if (localStorage.getItem(newDate)) {
       setRates(JSON.parse(localStorage.getItem(newDate)))
@@ -36,6 +36,7 @@ const Landing = () => {
     saveFetchedApiLS()
   }, [])
 
+  //Collects values from each input field and set them as states
   const handleSelect1 = (e) => {
     setSelect1(e.target.value)
   }
@@ -50,11 +51,11 @@ const Landing = () => {
 
   const handleConvert = (e) => {
     e.preventDefault()
-    setTotal(convertNr * rates[currencyCode])
+    setTotal(convertNr * rates[currencyCode]) //Calculates Amount of given currency to target currency
   }
 
-  // const lager = ''
 
+  //  Handle function that trigger every time the shift button is pressed
   function handleShift(e) {
     e.preventDefault()
 
@@ -72,6 +73,7 @@ const Landing = () => {
     }
   }
 
+  // Algorithm for blocking non-numerical characters 
   const blockInvalidChar = (e) =>
     ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault()
   return (
@@ -96,6 +98,7 @@ const Landing = () => {
               id='countries'
               name='currency'
             >
+            {/** Adding the base for SEK */ }
               {!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} name={`${curr} ${vall}`}>
@@ -117,6 +120,7 @@ const Landing = () => {
               value={currencyCode}
               
             >
+            {/** Adding all the currency codes as options for the select tag */ }
               {!!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} value={`${curr}`}>
@@ -136,6 +140,7 @@ const Landing = () => {
       </CurrencyContainer>
 
       <ConvertContainer>
+            {/** Shows the text for the converting session when the "convert" or "shift" button is pressed */ }
         {total && (
           <p>
             {!currencyToggle
