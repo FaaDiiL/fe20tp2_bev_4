@@ -140,7 +140,7 @@ export const GlobalStyleLF = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
-    ${'' /* background-color: grey; */}
+    ${"" /* background-color: grey; */}
 
     margin: 0 auto;
     margin-top: 50px;
