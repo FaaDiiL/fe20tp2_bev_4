@@ -1,13 +1,10 @@
-// import axios from "axios";
-// import { Line } from "react";
 import { Line } from "react-chartjs-2";
-
-// import styled from "styled-components";
 
 import { rates } from "../../constants/rates";
 
 const Chart = () => {
-  // const [apiBase, setApiBase] = useState("&base=EUR");
+
+  //BEGINNING
   const ratesData = rates[0].rates;
 
   const chartData = {
@@ -19,10 +16,12 @@ const Chart = () => {
       chartData.labels.push(x)
       chartData.values.push(Object.values(y)[0])
     }
-  })
+  }) // END
+  // filters the api to only get the date that ends with 01. 
+  //The first day of the month and pushes them to chartData to be used by the Chart
 
 
-  const rateData = {
+  const rateData = {  // necessary data to set up the chart from Chart.js
     labels: chartData.labels,
     datasets: [
       {
@@ -30,10 +29,10 @@ const Chart = () => {
         backgroundColor: "#ecbcfd5b",
         borderColor: "#571d85",
         borderWidth: 2,
-        data: chartData.values
+        data: chartData.values 
       },
     ],
-  };
+  }; // CHART.JS docs for more info about the syntax 
 
   return (
     <div>

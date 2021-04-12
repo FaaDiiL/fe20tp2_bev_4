@@ -36,7 +36,7 @@ function DeleteAccount () {
             // Try deleting the user from the user list
             user.delete()
 
-            // If succesful, also delete the post of the user in the realtime database
+            // If successful, also delete the post of the user in the realtime database
             let userRef = app.database().ref(`users/${user.uid}`);
             userRef.remove()
         }

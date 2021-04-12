@@ -20,7 +20,8 @@ import SignUpPage from '../SignUp'
 const App = () => (
   <Router>
     <AuthUserContext.Consumer>
-      {(authUser) =>
+      {
+        (authUser) =>
         authUser ? (
           authUser.bank === 'LF' ? (
             <GlobalStyleLF />

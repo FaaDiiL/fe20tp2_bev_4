@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-/* import { Line } from "react"; */
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
-
-/* import { rates } from "../../constants/rates"; */
 
 const StyledChart = styled.div`
   margin-top: 30px;
@@ -20,7 +17,6 @@ const Chart = ({curCode,base}) => {
     fetch(URL)
       .then(res => res.json())
       .then(data => setRates(data.rates))
-      
   },[base, curCode])
 
   const ratesData = Object.entries(rates);
