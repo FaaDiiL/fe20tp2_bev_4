@@ -275,7 +275,7 @@ class Index extends Component {
                       <li>
                         <SignOutButton />
                       </li>
-                  {() => this.setState({currentBank: authUser.bank})}
+                 
                     </ul>
                   ): (
                     <ul
