@@ -75,41 +75,42 @@ const StyledTable = styled.div`
 `;
 
 const HomePage = () => {
+  const [base, setBase] = useState();
+  const [curCode, setCurCode] = useState();
+  const [doughnut, setDoughnut] = useState([
+    { labels: "USD", amount: 500, ratesOnDate: 0.8532, date: "2020-01-03" },
+    { labels: "EUR", amount: 250, ratesOnDate: 0.8532, date: "2020-04-03" },
+  ]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
-  
+  const myLabels = doughnut.map((cur) => cur.labels);
+  const myAmount = doughnut.map((cur) => cur.amount);
 
-  const [base, setBase]= useState()
-  const [curCode, setCurCode]= useState()
-  const [doughnut, setDoughnut] = useState([{labels: 'USD', amount: 500, ratesOnDate: 0.8532, date: '2020-01-03' },{labels: 'EUR', amount: 250,ratesOnDate: 0.8532, date: '2020-04-03' }])
-  const [totalAmount, setTotalAmount] = useState(0)
-
-  const myLabels = doughnut.map((cur)=> cur.labels)
-  const myAmount = doughnut.map((cur)=> cur.amount)
-  
-  useEffect(()=>{
-    const newTotalAmount = doughnut.map((cur) => cur.amount)
+  useEffect(() => {
+    const newTotalAmount = doughnut.map((cur) => cur.amount);
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let fullTotal = newTotalAmount.reduce(reducer)
-    setTotalAmount(fullTotal)
-  },[doughnut])
+    let fullTotal = newTotalAmount.reduce(reducer);
+    setTotalAmount(fullTotal);
+  }, [doughnut]);
 
-  function addNewCurrency(e){
-    e.preventDefault()
-    let labels = e.target[0].value.toUpperCase()
-    let amount = parseInt(e.target[1].value)
-    let date = e.target[2].value
+  function addNewCurrency(e) {
+    e.preventDefault();
+    let labels = e.target[0].value.toUpperCase();
+    let amount = parseInt(e.target[1].value);
+    let date = e.target[2].value;
 
-    console.log(labels)
-    console.log(amount)
-    console.log(date)
-    
-      fetch(`https://api.exchangerate.host/timeseries?symbols=${labels}&start_date=${date}&end_date=${date}&base=EUR`)
-      .then(res => res.json())
-      .then(data => {
-        let responseDateRate = data.rates[date][labels] 
-        setDoughnut([...doughnut, {labels,  amount, date, responseDateRate }])
-      } )
-        
+    console.log(labels);
+    console.log(amount);
+    console.log(date);
+
+    fetch(
+      `https://api.exchangerate.host/timeseries?symbols=${labels}&start_date=${date}&end_date=${date}&base=EUR`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        let responseDateRate = data.rates[date][labels];
+        setDoughnut([...doughnut, { labels, amount, date, responseDateRate }]);
+      });
   }
 
   const data = {
@@ -127,44 +128,40 @@ const HomePage = () => {
   return (
     <StyledDashBody>
       <StyledTable>
-        <form onSubmit={addNewCurrency} className='dashboard-form'> {/* Form for savings in different currencies */}
+        <form onSubmit={addNewCurrency} className="dashboard-form">
+          {" "}
+          {/* Form for savings in different currencies */}
           <input type="text" name="currencyCode" placeholder="Currency" />
           <input type="number" name="amount" placeholder="Amount" />
-          <input type="date" name="date"/>
+          <input type="date" name="date" />
           <button className="dashboard-add-btn">Add</button>
         </form>
         <ul>
-          <li> {/* Shows the savings in a list */}
+          <li>
+            {" "}
+            {/* Shows the savings in a list */}
             <span className="first">Savings</span>
             <span className="first" style={{ textAlign: "right" }}>
               {" "}
               Total: {totalAmount}{" "}
             </span>
           </li>
-<<<<<<< HEAD
-          {doughnut.map((cur, index) => (
-            <li key={index}>
-              <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
-              <span>31020kr</span>
-              <span className="up">12%</span>
-            </li>
-          ))}
-=======
           {
             // This is the structure for every item in the list of savings
-            doughnut.map((cur,index) =>(
+            doughnut.map((cur, index) => (
               <li key={index}>
                 <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
                 <span>31020kr</span>
                 <span className="up">12%</span>
-              </li> 
+              </li>
             ))
           }
->>>>>>> b98ef4812411fdcfb620da711ae5383e8372cb1c
         </ul>
       </StyledTable>
       <StyledDash>
-        <div className="donutWrapper"> {/* The Doughnut */}
+        <div className="donutWrapper">
+          {" "}
+          {/* The Doughnut */}
           <Doughnut
             data={data}
             width={200}
@@ -182,10 +179,6 @@ const HomePage = () => {
             }}
           />
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> b98ef4812411fdcfb620da711ae5383e8372cb1c
         <h3>Analyze from which currency?</h3>
         <button
           style={{ background: "green" }}
