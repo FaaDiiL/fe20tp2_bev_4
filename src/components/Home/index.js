@@ -98,7 +98,7 @@ const HomePage = () => {
     let colors = [];
 
     for (let i = 0; i < length; i++) {
-      colors.push(pallet[i % pallet.lenght]);
+      colors.push(pallet[i % pallet.length]);
     }
     return colors;
   }
@@ -123,134 +123,42 @@ const HomePage = () => {
   };
 
   return (
-    <StyledDashBody>
-      <StyledTable>
-        <Form setDoughnut={setDoughnut} doughnut={doughnut} />
-        <Table
-          doughnut={doughnut}
-          totalAmount={totalAmount}
-          setTotalAmount={setTotalAmount}
-        />
-      </StyledTable>
-      <StyledDash>
-        <div className="donutWrapper">
-          {" "}
-          {/* The Doughnut */}
-          <Doughnut
-            data={data}
-            width={200}
-            height={150}
-            options={{
-              title: {
-                display: true,
-                text: "My Savings",
-                fontSize: 14,
-              },
-              legend: {
-                display: true,
-                position: "top",
-              },
-            }}
+    <>
+      <StyledDashBody>
+        <StyledTable>
+          <Form setDoughnut={setDoughnut} doughnut={doughnut} />
+          <Table
+            doughnut={doughnut}
+            totalAmount={totalAmount}
+            setTotalAmount={setTotalAmount}
           />
-        </div>
-        <h3>Analyze from which currency?</h3>
-        <button
-          style={{ background: "green" }}
-          onClick={(e) => setBase(e.target.innerText)}
-        >
-          EUR
-        </button>
-        <button
-          style={{ background: "green" }}
-          onClick={(e) => setBase(e.target.innerText)}
-        >
-          USD
-        </button>
-        <button
-          style={{ background: "green" }}
-          onClick={(e) => setBase(e.target.innerText)}
-        >
-          SEK
-        </button>
-        <br />
-        <br />
-        <br />
-        <h3>Analyze to which currency?</h3>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          GBP
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          CAD
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          AUD
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          AED
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          TRY
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          CLP
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          RUB
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          JPY
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          JPY
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          CZK
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          NOK
-        </button>
-        <button
-          style={{ background: "blue" }}
-          onClick={(e) => setCurCode(e.target.innerText)}
-        >
-          DKK
-        </button>
-        <Chart curCode={curCode} base={base} />
-      </StyledDash>
-    </StyledDashBody>
+        </StyledTable>
+        <StyledDash>
+          <div className="donutWrapper">
+            {" "}
+            {/* The Doughnut */}
+            <Doughnut
+              data={data}
+              width={200}
+              height={150}
+              options={{
+                title: {
+                  display: true,
+                  text: "My Savings",
+                  fontSize: 14,
+                },
+                legend: {
+                  display: true,
+                  position: "top",
+                },
+              }}
+            />
+          </div>
+
+          <Chart curCode={curCode} base={base} />
+        </StyledDash>
+      </StyledDashBody>
+    </>
   );
 };
 

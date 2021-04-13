@@ -1,60 +1,61 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
 
- const PageContainer = styled.div`
-display: flex;
-align-items: center; 
-flex-direction: column;
-
-h1 { 
-margin-top: 100px;
-margin-bottom: 50px;
-display: block;
-}
-
-p{
-  margin-bottom: 50px;
-}
-
-form {
+const PageContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-}
 
-input, select {
-  padding: 5px 15px 5px 5px;
-  margin: 5px;
-  margin-bottom: 10px;
-}
+  h1 {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: block;
+  }
 
-button {
-  display: inline-block;
-  padding: 5px;
-}
+  p {
+    margin-bottom: 50px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input,
+  select {
+    padding: 5px 15px 5px 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    display: inline-block;
+    padding: 5px;
+  }
 `;
- 
+
 const DIV = styled.div`
-display: flex;
-justify-content: center; 
-align-items: center;
-flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-h3{
-  display: block;
-margin-bottom: 15px;
-}
+  h3 {
+    display: block;
+    margin-bottom: 15px;
+  }
 `;
 
- const SignUpPage = () => (
+const SignUpPage = () => (
   <PageContainer>
     <SignUpForm />
   </PageContainer>
-); 
+);
 
 const INITIAL_STATE = {
   username: "",
@@ -62,7 +63,7 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   isAdmin: false,
-  bank: '',
+  bank: "",
   error: null,
 };
 
@@ -74,7 +75,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, isAdmin , bank} = this.state;
+    const { username, email, passwordOne, isAdmin, bank } = this.state;
 
     const roles = {};
 
@@ -126,70 +127,76 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "" || 
+      username === "" ||
       bank === "";
 
     return (
       <DIV>
-      <h3>Create an account</h3>
-      <form onSubmit={this.onSubmit}>
-
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-
-
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="E-mail"
-        />
-
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <select name='bank' className='chooseBank' defaultValue="" onChange={this.onChange}>
-          <option value="" disabled>Select your Bank</option>
-          <option value='default'>No Bank</option>
-          <option value='SB'>Swedbank</option>
-          <option value='LF'>Länsförsäkringar</option>
-        </select>
-        <label>
-          Admin:
+        <h3>Create an account</h3>
+        <form onSubmit={this.onSubmit}>
           <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
           />
-        </label>
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
-        {error && <p>{error.message}</p>}
-      </form>
-   </DIV> );
+
+          <input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="E-mail"
+          />
+
+          <input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <select
+            name="bank"
+            className="chooseBank"
+            defaultValue=""
+            onChange={this.onChange}
+          >
+            <option value="" disabled>
+              Select your Bank
+            </option>
+            <option value="default">No Bank</option>
+            <option value="SB">Swedbank</option>
+            <option value="LF">Länsförsäkringar</option>
+          </select>
+          {/*           <label>
+            Admin:
+            <input
+              name="isAdmin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={this.onChangeCheckbox}
+            />
+          </label> */}
+          <button disabled={isInvalid} type="submit">
+            Sign Up
+          </button>
+          {error && <p>{error.message}</p>}
+        </form>
+      </DIV>
+    );
   }
 }
 
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
-export default SignUpPage; 
-export { SignUpForm};
+export default SignUpPage;
+export { SignUpForm };

@@ -21,6 +21,17 @@ const GlobalStyle = createGlobalStyle`
   button{
     background: var(--headerFontColor);
     color: white;
+    border: none;
+  }
+
+  .dashboard-add-btn{
+    color: var(--headerFontColor);
+    padding: 5px;
+    color: white;
+    border: none;
+    &:hover{
+      background-color:var(--headerFontColor);
+    }
   }
   select{
     color:black;
@@ -40,22 +51,41 @@ const GlobalStyle = createGlobalStyle`
   }
   .accountMenu{
     background: var(--headerFontColor);
-    
+  }    
     h1, h3, h4{
       color:white;
       &:hover:not(h4):not(h1) {
         cursor: pointer;
         background-color: var(--buttonHoverColor); 
       }
-    }
-  }
+    } 
+  
   .chooseBank{
       color: black;
     }
 .header{
-  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+  box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
+}
+
+.footer {  
+  box-shadow: 0px 0px 50px 20px var(--buttonHoverColor);
+}
+
+.contact-form {
+  background-color: var(--headerFontColor);
+}
+
+.contact-form-btn {
+  background-color: var(--buttonHoverColor);
+  &:hover{
+    background-color:var(--buttonHoverColor);
+  }
+
+.window-view-height{
+  height: 85vh;
 }
 `;
+
 // Swedbank
 export const GlobalStyleSB = createGlobalStyle`
   *{
@@ -82,11 +112,11 @@ export const GlobalStyleSB = createGlobalStyle`
   button{
     background: var(--buttonHoverColor);
     color: white;
+    border: none;
   }
   select{
     box-shadow: 1px 3px 5px #9e9e9e;
     color: black;
-
   }
   select option {
     color: black;
@@ -105,6 +135,7 @@ export const GlobalStyleSB = createGlobalStyle`
   }
   .accountMenu{
     background: var(--headerFontColor);
+  }
     
     h1, h3, h4{
       color:white;
@@ -112,24 +143,52 @@ export const GlobalStyleSB = createGlobalStyle`
         cursor: pointer;
         background-color: var(--buttonHoverColor); 
       }
-    }
+    } 
+    
     .chooseBank{
       color: black;
     }
   }
   .header{
-  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+    box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
+  }
+
+  ooter { 
+        
+   
+
+
+.dashboard-add-cur-btn { 
+  &:hover{
+    background-color:var(--headerFontColor);
+  }
 }
+
+  min-height: 85vh;
+  height: 85vh;
+}
+
 .dashboard-add-btn{
   color: var(--headerFontColor);
-  border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px;
   color: white;
   border: none;
   &:hover{
     background-color:var(--headerFontColor);
   }
 }
+
+.contact-form {
+  background-color: var(--headerFontColor);
+}
+.contact-form-btn {
+  background-color: var(--buttonHoverColor);
+  &:hover{
+    background-color:var(--buttonHoverColor);
+  }
+}
+
+
 `;
 // Länsförsäkringar
 
@@ -158,6 +217,7 @@ export const GlobalStyleLF = createGlobalStyle`
   button{
     background: var(--headerFontColor);
     color: white;
+    border: none;
   }
   select{
     color:black;
@@ -182,6 +242,12 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   .accountMenu{
     background: var(--headerFontColor);
+  }
+
+  .window-view-height{
+    height: 85vh;
+   
+  }
     
     h1, h3, h4{
       color:white;
@@ -195,8 +261,42 @@ export const GlobalStyleLF = createGlobalStyle`
       color: black;
     }
     .header{
-  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+      box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
+    }
+    
+    .footer { 
+      box-shadow: 0px 5px 50px 20px var(--buttonHoverColor);
+      
+    }
+
+
+.dashboard-add-btn{
+  color: var(--headerFontColor);
+  padding: 5px;
+  color: white;
+  border: none;
+  &:hover{
+    background-color:var(--headerFontColor);
+  }
 }
+
+.dashboard-add-cur-btn { 
+  &:hover{
+    background-color:var(--headerFontColor);
+  } 
+}
+
+  .contact-form {
+    background-color: var(--headerFontColor);
+  }
+
+  .contact-form-btn {
+    background-color: var(--buttonHoverColor);
+    &:hover{
+      background-color:var(--buttonHoverColor);
+    }
+  }
+ 
 `;
 
 export default GlobalStyle;
