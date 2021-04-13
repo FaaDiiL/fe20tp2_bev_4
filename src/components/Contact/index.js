@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { useState } from "react";
+import styled from "styled-components";
+
 import ContactForm from "./contactform";
 
 const ContactContainer = styled.div`
@@ -130,7 +131,7 @@ const Contact = () => {
   return (
     <>
       <ContactContainer>
-        <h1>Need anything? Contact us! </h1>
+        <h2>Need anything? Contact us! </h2>
         <FormContainer>
           {showForm ? (
             <ContactForm

@@ -6,10 +6,10 @@ export const StyledDashBody = styled.main`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   width: 100vw;
   margin: 0 auto;
-  margin-top: 100px;
 `;
 export const StyledDash = styled.div`
   display: flex;
@@ -104,5 +104,6 @@ export const StyledChart = styled.div`
   margin-top: 30px;
   width: 90%;
 `;
+
 
 // Finished Dashboard styles

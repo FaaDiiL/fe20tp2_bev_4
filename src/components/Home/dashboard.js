@@ -48,7 +48,7 @@ const Chart = ({ curCode, base }) => {
           title: {
             display: true,
             text: "Fluctuations over time",
-            fontSize: 14,
+            fontSize: 16,
           },
           legend: {
             display: true,

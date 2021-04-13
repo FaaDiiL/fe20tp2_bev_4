@@ -5,8 +5,12 @@ import { Doughnut } from "react-chartjs-2";
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
 import Form from "./form";
-import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
+import { StyledDash, StyledDashBody, StyledTable} from "./styles.js";
 import Table from "./table";
+
+
+
+
 
 const HomePage = () => {
   const [base, setBase] = useState();
@@ -72,8 +76,8 @@ const HomePage = () => {
             {/* The Doughnut */}
             <Doughnut
               data={data}
-              width={200}
-              height={150}
+              width={100}
+              height={50}
               options={{
                 title: {
                   display: true,
