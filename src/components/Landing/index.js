@@ -1,24 +1,31 @@
-import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
-import React, { useEffect, useState } from 'react'
+import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
+import React, { useEffect, useState } from "react";
 
-import Chart from './Chart'
-import { ConvertContainer, CurrencyContainer, FlexBoxContainer, StyledBody, StyledCont } from './style'
+import Chart from "./Chart";
+import {
+  ConvertContainer,
+  CurrencyContainer,
+  FlexBoxContainer,
+  StyledBody,
+  StyledCont,
+} from "./style";
 
 const Landing = () => {
   const API_URL =
-    'https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK'
+    "https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK";
 
-  const [rates, setRates] = useState([])
-  const [convertNr, setConvertNr] = useState(1)
-  const [select1, setSelect1] = useState('SEK')
-  const [currencyCode, setCurrencyCode] = useState('USD') // ex. USD, EUR
-  const [total, setTotal] = useState(null)
-  const [currencyToggle, setCurrencyToggle] = useState(false)
+  const [rates, setRates] = useState([]);
+  const [convertNr, setConvertNr] = useState(1);
+  const [select1, setSelect1] = useState("SEK");
+  const [currencyCode, setCurrencyCode] = useState("USD"); // ex. USD, EUR
+  const [total, setTotal] = useState(null);
+  const [currencyToggle, setCurrencyToggle] = useState(false);
 
-  const saveFetchedApiLS =  () =>{ //Fetches and stores data in LocalStorages each new day 
-    const newDate = new Date().toISOString().split('T')[0] // format the time like: 2021-03-08
+  const saveFetchedApiLS = () => {
+    //Fetches and stores data in LocalStorages each new day
+    const newDate = new Date().toISOString().split("T")[0]; // format the time like: 2021-03-08
     if (localStorage.getItem(newDate)) {
-      setRates(JSON.parse(localStorage.getItem(newDate)))
+      setRates(JSON.parse(localStorage.getItem(newDate)));
     } else {
       fetch(API_URL)
         .then((response) => response.json())
@@ -26,67 +33,67 @@ const Landing = () => {
           localStorage.setItem(
             `${newDate}`,
             JSON.stringify(data.conversion_rates)
-          )
-          setRates(data.conversion_rates)
-        })
+          );
+          setRates(data.conversion_rates);
+        });
     }
-  }
+  };
 
   useEffect(() => {
-    saveFetchedApiLS()
-  }, [])
+    saveFetchedApiLS();
+  }, []);
 
   //Collects values from each input field and set them as states
   const handleSelect1 = (e) => {
-    setSelect1(e.target.value)
-  }
+    setSelect1(e.target.value);
+  };
 
   const handleSelect2 = (e) => {
-    setCurrencyCode(e.target.value)
-  }
+    setCurrencyCode(e.target.value);
+  };
 
   const handleChange = (e) => {
-    setConvertNr(e.target.value)
-  }
+    setConvertNr(e.target.value);
+  };
 
   const handleConvert = (e) => {
-    e.preventDefault()
-    setTotal(convertNr * rates[currencyCode]) //Calculates Amount of given currency to target currency
-  }
-
+    e.preventDefault();
+    setTotal(convertNr * rates[currencyCode]); //Calculates Amount of given currency to target currency
+  };
 
   //  Handle function that trigger every time the shift button is pressed
   function handleShift(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    setCurrencyToggle(!currencyToggle)
+    setCurrencyToggle(!currencyToggle);
     if (currencyToggle) {
-      setCurrencyCode(select1)
-      setSelect1(currencyCode)
+      setCurrencyCode(select1);
+      setSelect1(currencyCode);
 
-      setTotal(convertNr * rates[select1])
+      setTotal(convertNr * rates[select1]);
     } else {
-      setSelect1(currencyCode)
-      setCurrencyCode(select1)
+      setSelect1(currencyCode);
+      setCurrencyCode(select1);
 
-      setTotal(convertNr / rates[currencyCode])
+      setTotal(convertNr / rates[currencyCode]);
     }
   }
 
-  // Algorithm for blocking non-numerical characters 
+  // Algorithm for blocking non-numerical characters
   const blockInvalidChar = (e) =>
-    ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault()
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   return (
     <StyledBody>
       <CurrencyContainer>
         <StyledCont>
-        <br /><br />
+          <br />
+          <br />
           <h2>Currency Converter</h2>
           <input
-            type='number'
-            name='number'
-            min='1'
-            step='1'
+            type="number"
+            name="number"
+            min="1"
+            step="1"
             placeholder={`${convertNr} Kr`}
             onKeyDown={blockInvalidChar}
             onChange={handleChange}
@@ -95,10 +102,10 @@ const Landing = () => {
             <select
               onChange={handleSelect1}
               value={select1}
-              id='countries'
-              name='currency'
+              id="countries"
+              name="currency"
             >
-            {/** Adding the base for SEK */ }
+              {/** Adding the base for SEK */}
               {!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} name={`${curr} ${vall}`}>
@@ -115,12 +122,11 @@ const Landing = () => {
             </button>
             <select
               onChange={handleSelect2}
-              name='selectContainer'
-              id='countries'
+              name="selectContainer"
+              id="countries"
               value={currencyCode}
-              
             >
-            {/** Adding all the currency codes as options for the select tag */ }
+              {/** Adding all the currency codes as options for the select tag */}
               {!!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} value={`${curr}`}>
@@ -133,14 +139,14 @@ const Landing = () => {
             </select>
           </FlexBoxContainer>
 
-          <button className='btn' onClick={handleConvert}>
+          <button className="btn" onClick={handleConvert}>
             convert
           </button>
         </StyledCont>
       </CurrencyContainer>
 
       <ConvertContainer>
-            {/** Shows the text for the converting session when the "convert" or "shift" button is pressed */ }
+        {/** Shows the text for the converting session when the "convert" or "shift" button is pressed */}
         {total && (
           <p>
             {!currencyToggle
@@ -155,7 +161,7 @@ const Landing = () => {
 
       <Chart />
     </StyledBody>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;
