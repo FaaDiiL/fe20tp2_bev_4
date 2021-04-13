@@ -32,7 +32,6 @@ const Container = styled.div`
     color: #333;
     z-index: 10;
     background-color: #fff;
-    /* box-shadow: 0 5px 20px -10px #571d85 #000; */
   }
 
   .header a {
@@ -42,7 +41,7 @@ const Container = styled.div`
   .header .navContainer {
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 15px;
     max-width: 1230px;
     margin: 0 auto;
   }
@@ -64,7 +63,6 @@ const Container = styled.div`
       padding-left: 15px;
       height: 25px;
     }
-    
   }
   .navToggle {
     display: block;
@@ -181,7 +179,6 @@ class Index extends Component {
     });
   }
 
-
   handleClick(e) {
     if (e.target.nodeName === "LI" || e.target.nodeName === "BUTTON") {
       this.setState({
@@ -189,54 +186,69 @@ class Index extends Component {
       });
     }
   }
-  
-  render() {
 
+  render() {
     return (
       <Container>
         <header className="header">
           <div className="navContainer">
             <div className={"logo"}>
-            <AuthUserContext.Consumer>
-            { 
-              authUser => 
-              authUser ?
-              authUser.bank === "LF"? (
-                <>
-                  <img src={logoBevLfImg} alt={"Site-logo"} className="logo-img" />
-                  <img src={logoLfImg} alt={"Site-logo"} className="bank-logo-img" /> 
-                </>
-              ):
-              authUser.bank === "SB"?(
-                <>
-                  <img src={logoBevSbImg} alt={"Site-logo"} className="logo-img" />
-                  <img src={logoSbImg} alt={"Site-logo"} className="bank-logo-img" />
-                </>
-              ):
-              (
-                  <>
-                    <img src={logoBevDeImg} alt={"Site-logo"} className="logo-img" />
-                    <span className="logo-text">BEV</span>
-                  </>
-                ):
-                (
-                  <>
-                    <img src={logoBevDeImg} alt={"Site-logo"} className="logo-img" />
-                    <span className="logo-text">BEV</span>
-                  </>
-                )
-            }
+              <AuthUserContext.Consumer>
+                {(authUser) =>
+                  authUser ? (
+                    authUser.bank === "LF" ? (
+                      <>
+                        <img
+                          src={logoBevLfImg}
+                          alt={"Site-logo"}
+                          className="logo-img"
+                        />
+                        <img
+                          src={logoLfImg}
+                          alt={"Site-logo"}
+                          className="bank-logo-img"
+                        />
+                      </>
+                    ) : authUser.bank === "SB" ? (
+                      <>
+                        <img
+                          src={logoBevSbImg}
+                          alt={"Site-logo"}
+                          className="logo-img"
+                        />
+                        <img
+                          src={logoSbImg}
+                          alt={"Site-logo"}
+                          className="bank-logo-img"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src={logoBevDeImg}
+                          alt={"Site-logo"}
+                          className="logo-img"
+                        />
+                        <span className="logo-text">BEV</span>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <img
+                        src={logoBevDeImg}
+                        alt={"Site-logo"}
+                        className="logo-img"
+                      />
+                      <span className="logo-text">BEV</span>
+                    </>
+                  )
+                }
               </AuthUserContext.Consumer>
             </div>
             <nav>
-            
               <AuthUserContext.Consumer>
-                {
-                     (authUser) =>   
-                     
-                     authUser ?
-                    (
-
+                {(authUser) =>
+                  authUser ? (
                     <ul
                       onClick={this.handleClick}
                       className="mainNav"
@@ -245,7 +257,6 @@ class Index extends Component {
                           ? { transform: "translateX(0)" }
                           : null
                       }
-                      
                     >
                       <Link to={ROUTES.LANDING}>
                         <li>Landing</li>
@@ -274,9 +285,8 @@ class Index extends Component {
                       <li>
                         <SignOutButton />
                       </li>
-                 
                     </ul>
-                  ): (
+                  ) : (
                     <ul
                       onClick={this.handleClick}
                       className="mainNav"
@@ -306,7 +316,6 @@ class Index extends Component {
                     </ul>
                   )
                 }
-                
               </AuthUserContext.Consumer>
             </nav>
             <button
