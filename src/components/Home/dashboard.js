@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 
@@ -7,17 +7,16 @@ const StyledChart = styled.div`
   width: 90%;
 `;
 
-const Chart = ({curCode,base}) => {
-  console.log(curCode)
-  const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}`
+const Chart = ({ curCode, base }) => {
+  const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}`;
 
-  const [rates, setRates] = useState({})
-  
-  useEffect (()=> {
+  const [rates, setRates] = useState({});
+
+  useEffect(() => {
     fetch(URL)
-      .then(res => res.json())
-      .then(data => setRates(data.rates))
-  },[base, curCode])
+      .then((res) => res.json())
+      .then((data) => setRates(data.rates));
+  }, [base, curCode]);
 
   const ratesData = Object.entries(rates);
 
@@ -30,9 +29,6 @@ const Chart = ({curCode,base}) => {
       rateOfDate.push(ratesData[i][1][curCode]);
     }
   }
-
-  console.log(dates)
-  console.log(rateOfDate)
 
   const rateData = {
     labels: dates,
