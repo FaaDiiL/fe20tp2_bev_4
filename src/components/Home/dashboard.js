@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import styled from "styled-components";
-
-const StyledChart = styled.div`
-  margin-top: 30px;
-  width: 90%;
-`;
+import { StyledChart } from "./styles.js";
 
 const Chart = ({ curCode, base }) => {
   const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}`;
