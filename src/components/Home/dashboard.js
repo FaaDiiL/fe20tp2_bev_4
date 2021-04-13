@@ -9,14 +9,14 @@ const StyledChart = styled.div`
 
 const Chart = ({curCode,base}) => {
   console.log(curCode)
-  const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}`
+  const URL = `https://api.exchangerate.host/timeseries?symbols=${curCode}&start_date=2020-01-01&end_date=2020-07-01&base=${base}&places=2&amount=100`
 
   const [rates, setRates] = useState({})
   
-  useEffect (()=> {
-    fetch(URL)
-      .then(res => res.json())
-      .then(data => setRates(data.rates))
+  useEffect ( async ()=> {
+    const res = await fetch(URL)
+      const data = await res.json()
+      setRates(await data.rates)
   },[base, curCode])
 
   const ratesData = Object.entries(rates);
