@@ -28,7 +28,7 @@ const BankContainer = styled.div`
   }
 `
 
-function Bank({ firebase }) {
+const  Bank = ({ firebase }) => {
   
   async function updateBank(e) {
     e.preventDefault()
@@ -38,9 +38,9 @@ function Bank({ firebase }) {
       e.target[0].value === 'SB' ||
       e.target[0].value === 'default'
     ) {
-      // firebase.updateCurrentUserBank(e.target[0].value)
-      let test = await firebase.updateCurrentUserBank()
-      console.log(test)
+      firebase.updateCurrentUserBank(e.target[0].value)
+      // let test = await firebase.updateCurrentUserBank()
+      // console.log(test)
     }
   }
 

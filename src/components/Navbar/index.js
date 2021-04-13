@@ -96,7 +96,6 @@ const Container = styled.div`
     margin-bottom: 4px;
     background-color: #333;
     border-radius: 5px;
-    /* transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09); */
   }
   .navToggle.open span {
     background: #333;
