@@ -29,7 +29,8 @@ export const StyledTable = styled.div`
   flex-direction: column;
   align-items: center;
 
-  input {
+  input,
+  select {
     width: 100%;
     padding: 12px 8px;
     border: none;

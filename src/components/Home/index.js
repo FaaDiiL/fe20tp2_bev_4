@@ -16,10 +16,11 @@ const HomePage = () => {
       ratesOnDate: 0.8532,
       baseTotal: 4700,
       date: "2021-01-03",
+      currPerfomancePercentage: "15%",
+      currPerfomanceAmount: "142kr",
     },
   ]);
   const [totalAmount, setTotalAmount] = useState([]);
-  const [totalInBaseCurr, setTotalInBaseCurr] = useState(0);
 
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);

@@ -3,7 +3,15 @@ import { Line } from "react-chartjs-2";
 
 function Table({ doughnut, totalAmount, setTotalAmount }) {
   const [graph, setGraph] = useState(null);
+  const [percentButton, setPercentButton] = useState(false);
   // const [duplicates, setDuplicates] = useState([]);
+
+  const handleSwitch = () => {
+    setPercentButton(!percentButton);
+  };
+  console.log(percentButton);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     let newTotalAmount = doughnut.map((cur) => cur.baseTotal);
@@ -110,12 +118,18 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
   return (
     <ul>
       <li>
-        {" "}
         {/* Shows the savings in a list */}
         <span className="first">Savings</span>
         <span className="first" style={{ textAlign: "right" }}>
-          {" "}
           Total: {(Math.round(totalAmount * 100) / 100).toFixed(2)} kr
+        </span>
+      </li>
+      <li>
+        <span className="first"></span>
+        <span className="first" style={{ textAlign: "right" }}>
+          <button onClick={handleSwitch} style={{ padding: "5px" }}>
+            % / kr
+          </button>
         </span>
       </li>
       {
@@ -124,7 +138,11 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
           <li onClick={() => showLineChart(cur.labels, index)} key={index}>
             <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
             <span>{Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr</span>
-            <span className="up">12%</span>
+            <span className="up">
+              {percentButton
+                ? cur.currPerfomancePercentage + "%"
+                : cur.currPerfomanceAmount + "kr"}
+            </span>
             {graph && graph[index] && (
               <Line
                 data={graph[index]}
