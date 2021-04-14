@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
-    margin-top: 50px;
+    margin-top: 150px;
   }
   :root {
     --headerFontColor: #571d85;
@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
     border-bottom: 3px solid var(--headerFontColor)
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -69,11 +70,11 @@ const GlobalStyle = createGlobalStyle`
       color: black;
     }
 .header{
-  box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
+  box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
 }
 
-.footer {  
-  box-shadow: 0px 0px 50px 20px var(--buttonHoverColor);
+.footer { 
+  box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
 }
 
 .contact-form {
@@ -87,7 +88,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
 .window-view-height{
-  height: 85vh;
+ min-height: 75vh;
 }
 `;
 
@@ -101,9 +102,7 @@ export const GlobalStyleSB = createGlobalStyle`
 
   body{
     margin: 0 auto;
-    margin-top: 50px;
-    width: 80%;
-    max-width: 1200px;
+    margin-top: 150px;
   }
 
   :root {
@@ -127,6 +126,7 @@ export const GlobalStyleSB = createGlobalStyle`
     color: black;
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -155,12 +155,12 @@ export const GlobalStyleSB = createGlobalStyle`
     }
   }
   .header{
-    box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
+    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
   }
 
-  ooter { 
-        
-   
+  .footer { 
+      box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
+  }
 
 
 .dashboard-add-cur-btn { 
@@ -169,9 +169,6 @@ export const GlobalStyleSB = createGlobalStyle`
   }
 }
 
-  min-height: 85vh;
-  height: 85vh;
-}
 
 .dashboard-add-btn{
   color: var(--headerFontColor);
@@ -193,10 +190,12 @@ export const GlobalStyleSB = createGlobalStyle`
   }
 }
 
-
+.window-view-height{
+ min-height: 65vh;
+}
 `;
-// Länsförsäkringar
 
+// Länsförsäkringar
 export const GlobalStyleLF = createGlobalStyle`
   *{
     margin:0;
@@ -204,12 +203,8 @@ export const GlobalStyleLF = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
-    ${"" /* background-color: grey; */}
-
     margin: 0 auto;
-    margin-top: 50px;
-    width: 80%;
-    max-width: 1200px;
+    margin-top: 150px;
   }
     :root {
     --headerFontColor: #005aa0;
@@ -233,6 +228,7 @@ export const GlobalStyleLF = createGlobalStyle`
 
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -249,7 +245,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 
   .window-view-height{
-    height: 85vh;
+    height: 65vh;
    
   }
     
@@ -265,14 +261,13 @@ export const GlobalStyleLF = createGlobalStyle`
       color: black;
     }
     .header{
-      box-shadow: 0 5px 50px 20px var(--buttonHoverColor);
-    }
-    
-    .footer { 
-      box-shadow: 0px 5px 50px 20px var(--buttonHoverColor);
-      
+      box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
     }
 
+    .footer { 
+      box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
+  }
+    
 
 .dashboard-add-btn{
   color: var(--headerFontColor);
@@ -284,7 +279,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 }
 
-.dashboard-add-cur-btn { 
+.dashboard-add-cur-btn {  
   &:hover{
     background-color:var(--headerFontColor);
   } 
@@ -300,7 +295,9 @@ export const GlobalStyleLF = createGlobalStyle`
       background-color:var(--buttonHoverColor);
     }
   }
- 
+  .window-view-height{
+    min-height: 65vh;
+   }
 `;
 
 export default GlobalStyle;

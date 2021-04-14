@@ -19,6 +19,7 @@ const StyledContainer = styled.div`
   }
 
   p {
+    width: 70%;
     margin-top: 40px;
     line-height: 1.5;
   }
@@ -30,30 +31,7 @@ function About() {
       <StyledContainer>
         <h2>About BEV</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          pharetra posuere leo, sed luctus est volutpat sed. Aliquam in turpis
-          non libero efficitur vulputate cursus nec nisi. Fusce mattis, augue at
-          faucibus malesuada, leo quam fermentum orci, vehicula volutpat dui
-          orci a nunc. Sed accumsan quis neque a aliquet. Quisque efficitur, leo
-          ut euismod tempus, ante lacus volutpat purus, a suscipit lectus velit
-          eu lectus. Suspendisse eu dolor eu eros placerat dictum et bibendum
-          risus. Nulla rutrum turpis tortor. Donec sapien erat, auctor non
-          efficitur ac, dictum sit amet massa. Pellentesque tincidunt urna quis
-          porta rhoncus. Sed vitae quam velit. Vivamus nec molestie neque, vel
-          vestibulum ligula. Curabitur tristique, libero ultricies facilisis
-          semper, ligula tellus mollis arcu, id ultrices magna erat et odio.
-          Curabitur ligula elit, vestibulum sit amet maximus at, fermentum id
-          nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia curae; Maecenas fermentum erat sed leo scelerisque
-          venenatis. Nam posuere efficitur porttitor. Ut egestas libero sit amet
-          sapien feugiat, placerat ultrices eros facilisis. Vivamus dolor nibh,
-          scelerisque sed tellus ut, rutrum egestas massa. Suspendisse ipsum
-          elit, maximus sit amet eleifend eget, placerat ut lorem. Morbi at
-          lacus faucibus, placerat lectus sed, viverra metus. Donec dapibus ante
-          in purus iaculis pretium. Suspendisse eu mauris vitae risus finibus
-          tempus et non orci. Suspendisse potenti. Pellentesque eget ultrices
-          urna, quis pellentesque eros. Pellentesque convallis diam in dignissim
-          eleifend. Aenean luctus bibendum diam.
+        We are a currency management application, where you can create an account and convert currencies, store currency data in graphs and keep track of the different currency market fluctuations.
         </p>
       </StyledContainer>
     </>

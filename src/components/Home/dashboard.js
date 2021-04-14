@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+
 import { StyledChart } from "./styles.js";
 
 const Chart = ({ curCode, base }) => {
@@ -8,10 +9,10 @@ const Chart = ({ curCode, base }) => {
   const [rates, setRates] = useState({});
 
   useEffect(() => {
-    fetch(URL)
+    fetch(`${URL}`)
       .then((res) => res.json())
       .then((data) => setRates(data.rates));
-  }, [base, curCode]);
+  }, [base, curCode, URL]);
 
   const ratesData = Object.entries(rates);
 
@@ -30,8 +31,8 @@ const Chart = ({ curCode, base }) => {
     datasets: [
       {
         label: `${base} / ${curCode}`,
-        backgroundColor: "#ecbcfd5b",
-        borderColor: "#571d85",
+        backgroundColor: "rgba(245, 150, 20, 0.5)",
+                borderColor: "#003F5C",
         borderWidth: 2,
         data: rateOfDate,
       },
@@ -48,7 +49,7 @@ const Chart = ({ curCode, base }) => {
           title: {
             display: true,
             text: "Fluctuations over time",
-            fontSize: 14,
+            fontSize: 16,
           },
           legend: {
             display: true,

@@ -1,6 +1,5 @@
-import { Line } from "react-chartjs-2";
-
 import { rates } from "../../constants/rates";
+import { Line } from "react-chartjs-2";
 
 const Chart = () => {
 
@@ -26,8 +25,8 @@ const Chart = () => {
     datasets: [
       {
         label: "SEK / USD",
-        backgroundColor: "#ecbcfd5b",
-        borderColor: "#571d85",
+        backgroundColor: "rgba(245, 150, 20, 0.5)",
+        borderColor: "#003F5C",
         borderWidth: 2,
         data: chartData.values 
       },

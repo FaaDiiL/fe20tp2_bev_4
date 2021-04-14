@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
+import { Box, Grid } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { Line } from 'react-chartjs-2'
 
 function Table({ doughnut, totalAmount, setTotalAmount }) {
-  const [graph, setGraph] = useState(null);
+  const [graph, setGraph] = useState(null)
   // const [duplicates, setDuplicates] = useState([]);
 
   useEffect(() => {
-    let newTotalAmount = doughnut.map((cur) => cur.baseTotal);
-    let addedTotal = newTotalAmount.reduce((a, b) => a + b);
-    setTotalAmount(addedTotal);
+    let newTotalAmount = doughnut.map((cur) => cur.baseTotal)
+    let addedTotal = newTotalAmount.reduce((a, b) => a + b)
+    setTotalAmount(addedTotal)
 
     // USD: [
     //   {
@@ -60,94 +61,105 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
     }); */
 
     // console.log(duplicates);
-  }, [doughnut, setTotalAmount]);
+  }, [doughnut, setTotalAmount])
 
   function showLineChart(label, index) {
-    console.log({ label });
-    let today = new Date().toISOString().substr(0, 10);
-    let sixMonths = new Date();
-    sixMonths.setMonth(new Date().getMonth() - 6);
+    console.log({ label })
+    let today = new Date().toISOString().substr(0, 10)
+    let sixMonths = new Date()
+    sixMonths.setMonth(new Date().getMonth() - 6)
 
-    sixMonths = sixMonths.toISOString().substr(0, 10);
-    console.log(today, sixMonths);
+    sixMonths = sixMonths.toISOString().substr(0, 10)
+    console.log(today, sixMonths)
     if (graph && graph[index]) {
-      setGraph();
+      setGraph()
     } else {
       fetch(
         `https://api.exchangerate.host/timeseries?symbols=${label}&start_date=${sixMonths}&end_date=${today}&base=SEK`
       )
         .then((data) => data.json())
         .then((data) => {
-          let graphData = [];
-          let graphLabels = [];
-          let iteration = 0;
+          let graphData = []
+          let graphLabels = []
+          let iteration = 0
           Object.entries(data.rates).forEach(([key, value]) => {
+            // First day in month use: key.endsWith("01")
             if (iteration % 10 === 0) {
-              graphLabels.push(key);
-              graphData.push(value[label]);
+              graphLabels.push(key)
+              graphData.push(value[label])
             }
-            iteration++;
-          });
-          let graphDataSet = [];
+            iteration++
+          })
+          let graphDataSet = []
           graphDataSet[index] = {
             labels: graphLabels,
             datasets: [
               {
                 label: `SEK / ${label}`,
-                backgroundColor: "#ecbcfd5b",
-                borderColor: "#571d85",
+                backgroundColor: 'rgba(245, 150, 20, 0.5)',
+                borderColor: '#003F5C',
                 borderWidth: 2,
                 data: graphData,
               },
             ],
-          };
-          console.log({ graphDataSet });
-          setGraph(graphDataSet);
-        });
+          }
+          console.log({ graphDataSet })
+          setGraph(graphDataSet)
+        })
     }
   }
 
   return (
-    <ul>
-      <li>
-        {" "}
-        {/* Shows the savings in a list */}
-        <span className="first">Savings</span>
-        <span className="first" style={{ textAlign: "right" }}>
-          {" "}
-          Total: {(Math.round(totalAmount * 100) / 100).toFixed(2)} kr
-        </span>
-      </li>
-      {
-        // This is the structure for every item in the list of savings
-        doughnut.map((cur, index) => (
-          <li onClick={() => showLineChart(cur.labels, index)} key={index}>
-            <span className="first"> {`${cur.labels} ${cur.amount}`}</span>
-            <span>{Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr</span>
-            <span className="up">12%</span>
-            {graph && graph[index] && (
-              <Line
-                data={graph[index]}
-                width={600}
-                height={400}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Fluctuations over time",
-                    fontSize: 14,
-                  },
-                  legend: {
-                    display: true,
-                    position: "top",
-                  },
-                }}
-              />
-            )}
-          </li>
-        ))
-      }
-    </ul>
-  );
+    <Grid container>
+      <ul>
+        <li>
+          <span className='first'>Savings</span>
+          <span className='first' style={{ textAlign: 'right' }}>
+            Total: {(Math.round(totalAmount * 100) / 100).toFixed(2)} kr
+          </span>
+        </li>
+
+        {
+          // This is the structure for every item in the list of savings
+          doughnut.map((cur, index) => (
+            <li onClick={() => showLineChart(cur.labels, index)} key={index}>
+              <Box display='flex' flexDirection='column' justifyContent='space-between' width='100%'  >
+                <Grid item xs={12} sm={12} md={12} xl={12}>
+                  <Box display='flex' justify='space-between'>
+                  <span>
+                    {`${cur.labels} ${cur.amount}`}
+                  </span>
+                  <span style={{textAlign: 'center'}}>
+                    {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
+                  </span>
+                  <span className='up'>12%</span>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} xl={12} minHeight='100'>
+                  {graph && graph[index] && (
+                    <Line
+                      data={graph[index]}
+                      options={{
+                        title: {
+                          display: true,
+                          text: 'Fluctuations over time',
+                          fontSize: 14,
+                        },
+                        legend: {
+                          display: true,
+                          position: 'top',
+                        },
+                      }}
+                    />
+                  )}
+                </Grid>
+              </Box>
+            </li>
+          ))
+        }
+      </ul>
+    </Grid>
+  )
 }
 
-export default Table;
+export default Table

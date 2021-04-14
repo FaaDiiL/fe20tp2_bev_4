@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
-import { Button, Arrow } from "./styles.js";
+
+import { Arrow, Button } from "./styles.js";
 
 const Form = ({ setDoughnut, doughnut }) => {
-  const [latestRates, setLatestRates] = useState();
+  // const [latestRates, setLatestRates] = useState();
   const [defaultDate, setDefaultDate] = useState(
     new Date().toISOString().substr(0, 10)
   );
@@ -50,7 +51,7 @@ const Form = ({ setDoughnut, doughnut }) => {
   return (
     <Collapsible
       trigger={
-        <Button onClick={handleRotate} className="dashboard-add-cur-btn">
+        <Button onClick={handleRotate} className="dashboard-add-cur-btn" style={{width: '100%'}}>
           Add Currency
           <Arrow className={arrowRotate ? "active" : ""} />
         </Button>
