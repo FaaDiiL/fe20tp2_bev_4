@@ -275,7 +275,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 }
 
-.dashboard-add-cur-btn { 
+.dashboard-add-cur-btn {  
   &:hover{
     background-color:var(--headerFontColor);
   } 

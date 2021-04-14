@@ -51,7 +51,7 @@ const Form = ({ setDoughnut, doughnut }) => {
   return (
     <Collapsible
       trigger={
-        <Button onClick={handleRotate} className="dashboard-add-cur-btn">
+        <Button onClick={handleRotate} className="dashboard-add-cur-btn" style={{width: '100%'}}>
           Add Currency
           <Arrow className={arrowRotate ? "active" : ""} />
         </Button>

@@ -56,7 +56,7 @@ export const StyledTable = styled.div`
     border-bottom: 1px solid #d4d0dc;
   }
   span {
-    width: 25%;
+    width: 100%;
   }
 
   .first {

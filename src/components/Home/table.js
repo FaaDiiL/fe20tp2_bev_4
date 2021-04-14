@@ -123,14 +123,13 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
           // This is the structure for every item in the list of savings
           doughnut.map((cur, index) => (
             <li onClick={() => showLineChart(cur.labels, index)} key={index}>
-              <Box display='flex' flexDirection='column' justifyContent='space-between' width='100%' >
+              <Box display='flex' flexDirection='column' justifyContent='space-between' width='100%'  >
                 <Grid item xs={12} sm={12} md={12} xl={12}>
                   <Box display='flex' justify='space-between'>
-                  <span className='first'>
-                    {' '}
+                  <span>
                     {`${cur.labels} ${cur.amount}`}
                   </span>
-                  <span>
+                  <span style={{textAlign: 'center'}}>
                     {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
                   </span>
                   <span className='up'>12%</span>
