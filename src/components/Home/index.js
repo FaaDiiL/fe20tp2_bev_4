@@ -1,79 +1,10 @@
 import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import styled from "styled-components";
+import { StyledDashBody, StyledDash, StyledTable } from "./styles.js";
 import Form from "./form";
 import Table from "./table";
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
-import { getByPlaceholderText } from "@testing-library/dom";
-
-const StyledDashBody = styled.main`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100vw;
-  margin: 0 auto;
-  margin-top: 100px;
-`;
-const StyledDash = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0px 5px;
-
-  .donutWrapper {
-    width: 100%;
-  }
-`;
-
-const StyledTable = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    width: 100%;
-    padding: 12px 8px;
-    border: none;
-    outline: none;
-    display: flex;
-    margin-bottom: 15px;
-  }
-
-  ul {
-    width: 100%;
-    list-style: none;
-    align-self: flex-start;
-    text-align: left;
-    margin: 40px 0px 40px 0px;
-  }
-
-  li {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 15px 5px;
-    border-bottom: 1px solid #d4d0dc;
-  }
-  span {
-    width: 25%;
-  }
-
-  .first {
-    width: 50%;
-  }
-  .up {
-    color: limegreen;
-    text-align: right;
-  }
-  .down {
-    color: red;
-    text-align: right;
-  }
-`;
 
 const HomePage = () => {
   const [base, setBase] = useState();

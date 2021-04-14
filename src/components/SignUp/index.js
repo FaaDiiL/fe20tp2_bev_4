@@ -16,7 +16,6 @@ const PageContainer = styled.div`
     margin-bottom: 50px;
     display: block;
   }
-
   p {
     margin-bottom: 50px;
   }

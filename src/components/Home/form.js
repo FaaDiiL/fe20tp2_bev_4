@@ -1,30 +1,6 @@
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
-import styled from "styled-components";
-import { BiDownArrow } from "react-icons/bi";
-
-const Button = styled.button`
-  padding: 10px 17px 10px 10px;
-  border: none;
-  margin-bottom: 5px;
-  position: relative;
-
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
-const Arrow = styled(BiDownArrow)`
-  position: absolute;
-  color: white;
-  padding: 1.5%;
-  transform: scale(1);
-  margin: 1%;
-  &.active {
-    transform: rotate(180deg);
-  }
-`;
+import { Button, Arrow } from "./styles.js";
 
 const Form = ({ setDoughnut, doughnut }) => {
   const [latestRates, setLatestRates] = useState();
@@ -77,9 +53,6 @@ const Form = ({ setDoughnut, doughnut }) => {
         <Button onClick={handleRotate} className="dashboard-add-cur-btn">
           Add Currency
           <Arrow className={arrowRotate ? "active" : ""} />
-          {/*     <IconContext.Provider value={{ padding: "10px", size: "17px" }}>
-            <BiIcons.BiDownArrow />
-      </IconContext.Provider> */}
         </Button>
       }
     >
