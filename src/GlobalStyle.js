@@ -35,7 +35,8 @@ const GlobalStyle = createGlobalStyle`
   }
   select{
     color:black;
-    box-shadow: 1px 3px 5px #9e9e9e;
+    /* box-shadow: 1px 3px 5px #9e9e9e; */
+    border-bottom: 3px solid var(--headerFontColor)
   }
   .dashboard-form input {
     color: black;

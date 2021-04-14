@@ -131,7 +131,7 @@ class SignUpFormBase extends Component {
       bank === "";
 
     return (
-      <DIV>
+      <PageContainer>
         <h3>Create an account</h3>
         <form onSubmit={this.onSubmit}>
           <input
@@ -191,7 +191,7 @@ class SignUpFormBase extends Component {
           </button>
           {error && <p>{error.message}</p>}
         </form>
-      </DIV>
+      </PageContainer>
     );
   }
 }
