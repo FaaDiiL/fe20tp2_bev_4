@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
-import { Button, Arrow } from "./styles.js";
+
+import { Arrow, Button } from "./styles.js";
 
 const Form = ({ setDoughnut, doughnut }) => {
-  const [latestRates, setLatestRates] = useState();
+  // const [latestRates, setLatestRates] = useState();
   const [defaultDate, setDefaultDate] = useState(
     new Date().toISOString().substr(0, 10)
   );

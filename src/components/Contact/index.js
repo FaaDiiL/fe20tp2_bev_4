@@ -1,7 +1,6 @@
+import ContactForm from "./contactform";
 import { useState } from "react";
 import styled from "styled-components";
-
-import ContactForm from "./contactform";
 
 const ContactContainer = styled.div`
   display: flex;

@@ -1,16 +1,16 @@
-import styled from "styled-components";
 import { BiDownArrow } from "react-icons/bi";
+import styled from "styled-components";
 
 // index styles
 export const StyledDashBody = styled.main`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 100vw;
   margin: 0 auto;
 `;
+
 export const StyledDash = styled.div`
   display: flex;
   flex-direction: row;
@@ -19,7 +19,9 @@ export const StyledDash = styled.div`
   padding: 0px 5px;
 
   .donutWrapper {
-    width: 100%;
+    margin: 0 auto;
+width: 100%;
+margin-bottom: 100px;
   }
 `;
 
@@ -61,7 +63,7 @@ export const StyledTable = styled.div`
     width: 50%;
   }
   .up {
-    color: limegreen;
+    color: limeGreen;
     text-align: right;
   }
   .down {
@@ -78,6 +80,8 @@ export const Button = styled.button`
   border: none;
   margin-bottom: 5px;
   position: relative;
+  margin: 0 auto;
+  text-align: center;
 
   &:hover {
     cursor: pointer;
@@ -101,8 +105,9 @@ export const Arrow = styled(BiDownArrow)`
 // Dashboard styles
 
 export const StyledChart = styled.div`
-  margin-top: 30px;
-  width: 90%;
+  margin-top: 100px;
+  width: 75%;
+  margin: 0 auto;
 `;
 
 

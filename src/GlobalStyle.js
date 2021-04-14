@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: 1px 3px 5px #9e9e9e;
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -82,7 +83,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
 .window-view-height{
-  height: 85vh;
+ min-height: 75vh;
 }
 `;
 
@@ -120,6 +121,7 @@ export const GlobalStyleSB = createGlobalStyle`
     color: black;
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -182,6 +184,10 @@ export const GlobalStyleSB = createGlobalStyle`
     background-color:var(--buttonHoverColor);
   }
 }
+
+.window-view-height{
+ min-height: 65vh;
+}
 `;
 
 // Länsförsäkringar
@@ -218,6 +224,7 @@ export const GlobalStyleLF = createGlobalStyle`
 
   }
   .dashboard-form input {
+    margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
@@ -234,7 +241,7 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 
   .window-view-height{
-    height: 85vh;
+    height: 65vh;
    
   }
     
@@ -284,7 +291,9 @@ export const GlobalStyleLF = createGlobalStyle`
       background-color:var(--buttonHoverColor);
     }
   }
- 
+  .window-view-height{
+    min-height: 65vh;
+   }
 `;
 
 export default GlobalStyle;
