@@ -1,39 +1,40 @@
 // import { useState } from '@testing-library/dom'
-import React, { useState } from 'react'
-import { Doughnut } from 'react-chartjs-2'
+import React, { useState } from "react";
+import { Doughnut } from "react-chartjs-2";
 
-import { withAuthorization } from '../Session'
-import Chart from './dashboard'
-import Form from './form'
-import { StyledDash, StyledDashBody, StyledTable } from './styles.js'
-import Table from './table'
+import { withAuthorization } from "../Session";
+import Chart from "./dashboard";
+import Form from "./form";
+import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
+import Table from "./table";
 
 const HomePage = () => {
   const [doughnut, setDoughnut] = useState([
     {
-      labels: 'USD',
+      labels: "USD",
       amount: 500,
       ratesOnDate: 0.8532,
       baseTotal: 4700,
-      date: '2021-01-03',
+      date: "2021-01-03",
+      currPerfomancePercentage: "15%",
+      currPerfomanceAmount: "142kr",
     },
-  ])
-  const [totalAmount, setTotalAmount] = useState([])
-  // const [totalInBaseCurr, setTotalInBaseCurr] = useState(0)
+  ]);
+  const [totalAmount, setTotalAmount] = useState([]);
 
-  const myLabels = doughnut.map((cur) => cur.labels)
-  const myAmount = doughnut.map((cur) => cur.amount)
+  const myLabels = doughnut.map((cur) => cur.labels);
+  const myAmount = doughnut.map((cur) => cur.amount);
 
   function getColorsSB(length) {
-    let pallet = ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
-    let colors = []
+    let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
+    let colors = [];
 
     for (let i = 0; i < length; i++) {
-      colors.push(pallet[i % pallet.length])
+      colors.push(pallet[i % pallet.length]);
     }
-    return colors
+    return colors;
   }
-  console.log(getColorsSB())
+  console.log(getColorsSB());
 
   const data = {
     labels: myLabels,
@@ -41,17 +42,17 @@ const HomePage = () => {
       {
         data: myAmount,
         backgroundColor: [
-          '#003f5c',
-          '#58508d',
-          '#bc5090',
-          '#ff6361',
-          '#ffa600',
+          "#003f5c",
+          "#58508d",
+          "#bc5090",
+          "#ff6361",
+          "#ffa600",
         ],
         // ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600", "#FF6384", "#36A2EB", "#FFCE56"]
         // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
     ],
-  }
+  };
 
   return (
     <StyledDashBody>
@@ -66,7 +67,7 @@ const HomePage = () => {
       </StyledTable>
 
       <StyledDash>
-        <div className='donutWrapper'>
+        <div className="donutWrapper">
           {/* The Doughnut */}
           <Doughnut
             data={data}
@@ -75,12 +76,12 @@ const HomePage = () => {
             options={{
               title: {
                 display: true,
-                text: 'My Savings',
+                text: "My Savings",
                 fontSize: 14,
               },
               legend: {
                 display: true,
-                position: 'top',
+                position: "top",
               },
             }}
           />
@@ -89,9 +90,9 @@ const HomePage = () => {
         <Chart />
       </StyledDash>
     </StyledDashBody>
-  )
-}
+  );
+};
 
-const condition = (authUser) => !!authUser
+const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(HomePage)
+export default withAuthorization(condition)(HomePage);

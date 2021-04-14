@@ -58,17 +58,17 @@ const GlobalStyle = createGlobalStyle`
   .accountMenu{
     background: var(--headerFontColor);
   }    
-    h1, h3, h4{
-      color:white;
-      &:hover:not(h4):not(h1) {
-        cursor: pointer;
-        background-color: var(--buttonHoverColor); 
-      }
-    } 
-  
-  .chooseBank{
-      color: black;
+  h1, h3, h4{
+    color:white;
+    &:hover:not(h4):not(h1) {
+      cursor: pointer;
+      background-color: var(--buttonHoverColor); 
     }
+  } 
+  
+.chooseBank{
+    color: black;
+  }
 .header{
   box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
 }
@@ -86,7 +86,7 @@ const GlobalStyle = createGlobalStyle`
   &:hover{
     background-color:var(--buttonHoverColor);
   }
-
+}
 .window-view-height{
  min-height: 75vh;
 }
@@ -118,18 +118,22 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
     border: none;
   }
-  select{
-    box-shadow: 1px 3px 5px #9e9e9e;
-    color: black;
-  }
+
   select option {
     color: black;
   }
+
   .dashboard-form input {
     margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+.dashboard-form select {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -153,7 +157,6 @@ export const GlobalStyleSB = createGlobalStyle`
     .chooseBank{
       color: black;
     }
-  }
   .header{
     box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
   }
@@ -168,7 +171,6 @@ export const GlobalStyleSB = createGlobalStyle`
     background-color:var(--headerFontColor);
   }
 }
-
 
 .dashboard-add-btn{
   color: var(--headerFontColor);
@@ -218,10 +220,10 @@ export const GlobalStyleLF = createGlobalStyle`
     color: white;
     border: none;
   }
-  select{
+  /* select{
     color:black;
-    box-shadow: 1px 3px 5px #9e9e9e;
-  }
+    margin-bottom: 3px solid var(--headerFontColor);
+  } */
   select option {
     background: white;
     color: black;
@@ -232,6 +234,12 @@ export const GlobalStyleLF = createGlobalStyle`
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+.dashboard-form select {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -256,7 +264,7 @@ export const GlobalStyleLF = createGlobalStyle`
         background-color: var(--buttonHoverColor); 
       }
     }
-  }
+  
   .chooseBank{
       color: black;
     }
