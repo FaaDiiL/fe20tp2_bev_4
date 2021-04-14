@@ -1,3 +1,4 @@
+import { Box, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
@@ -90,6 +91,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
           let graphLabels = [];
           let iteration = 0;
           Object.entries(data.rates).forEach(([key, value]) => {
+            // First day in month use: key.endsWith("01")
             if (iteration % 10 === 0) {
               graphLabels.push(key);
               graphData.push(value[label]);
@@ -102,8 +104,8 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
             datasets: [
               {
                 label: `SEK / ${label}`,
-                backgroundColor: "#ecbcfd5b",
-                borderColor: "#571d85",
+                backgroundColor: "rgba(245, 150, 20, 0.5)",
+                borderColor: "#003F5C",
                 borderWidth: 2,
                 data: graphData,
               },

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { useState } from "react";
 import ContactForm from "./contactform";
+import { useState } from "react";
+import styled from "styled-components";
 
 const ContactContainer = styled.div`
   display: flex;
@@ -130,7 +130,7 @@ const Contact = () => {
   return (
     <>
       <ContactContainer>
-        <h1>Need anything? Contact us! </h1>
+        <h2>Need anything? Contact us! </h2>
         <FormContainer>
           {showForm ? (
             <ContactForm

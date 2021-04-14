@@ -63,6 +63,16 @@ class Firebase {
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
   users = () => this.db.ref("users");
+  getCurrentUser = async () => {
+    const myUserBank = await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get()
+    const response = await myUserBank()
+    return response
+
+  }
+  updateCurrentUserBank = (bank) => this.db.ref(`users/ ${this.auth.currentUser.uid}`).update({bank: `${bank}`})
+
+    
+  
 }
 
 export default Firebase;

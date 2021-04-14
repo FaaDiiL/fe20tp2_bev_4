@@ -38,17 +38,17 @@ const PageContainer = styled.div`
   }
 `;
 
-const DIV = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+// const DIV = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
 
-  h3 {
-    display: block;
-    margin-bottom: 15px;
-  }
-`;
+//   h3 {
+//     display: block;
+//     margin-bottom: 15px;
+//   }
+// `;
 
 const SignUpPage = () => (
   <PageContainer>
@@ -117,7 +117,7 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      isAdmin,
+      // isAdmin,
       bank,
       error,
     } = this.state;

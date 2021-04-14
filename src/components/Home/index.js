@@ -1,14 +1,14 @@
+// import { useState } from '@testing-library/dom'
 import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { StyledDashBody, StyledDash, StyledTable } from "./styles.js";
-import Form from "./form";
-import Table from "./table";
+
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
+import Form from "./form";
+import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
+import Table from "./table";
 
 const HomePage = () => {
-  const [base, setBase] = useState();
-  const [curCode, setCurCode] = useState();
   const [doughnut, setDoughnut] = useState([
     {
       labels: "USD",
@@ -55,42 +55,41 @@ const HomePage = () => {
   };
 
   return (
-    <>
-      <StyledDashBody>
-        <StyledTable>
-          <Form setDoughnut={setDoughnut} doughnut={doughnut} />
-          <Table
-            doughnut={doughnut}
-            totalAmount={totalAmount}
-            setTotalAmount={setTotalAmount}
-          />
-        </StyledTable>
-        <StyledDash>
-          <div className="donutWrapper">
-            {" "}
-            {/* The Doughnut */}
-            <Doughnut
-              data={data}
-              width={200}
-              height={150}
-              options={{
-                title: {
-                  display: true,
-                  text: "My Savings",
-                  fontSize: 14,
-                },
-                legend: {
-                  display: true,
-                  position: "top",
-                },
-              }}
-            />
-          </div>
+    <StyledDashBody>
+      <StyledTable>
+        <Form setDoughnut={setDoughnut} doughnut={doughnut} />
 
-          <Chart curCode={curCode} base={base} />
-        </StyledDash>
-      </StyledDashBody>
-    </>
+        <Table
+          doughnut={doughnut}
+          totalAmount={totalAmount}
+          setTotalAmount={setTotalAmount}
+        />
+      </StyledTable>
+
+      <StyledDash>
+        <div className="donutWrapper">
+          {/* The Doughnut */}
+          <Doughnut
+            data={data}
+            width={100}
+            height={50}
+            options={{
+              title: {
+                display: true,
+                text: "My Savings",
+                fontSize: 14,
+              },
+              legend: {
+                display: true,
+                position: "top",
+              },
+            }}
+          />
+        </div>
+
+        <Chart />
+      </StyledDash>
+    </StyledDashBody>
   );
 };
 
