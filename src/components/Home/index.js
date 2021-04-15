@@ -1,5 +1,5 @@
 // import { useState } from '@testing-library/dom'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 
 import { withAuthorization } from "../Session";
@@ -7,8 +7,9 @@ import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
+import { withFirebase } from '../Firebase'
 
-const HomePage = () => {
+const HomePage = ({ firebase }) => {
   const [doughnut, setDoughnut] = useState([
     {
       labels: "USD",
@@ -19,9 +20,24 @@ const HomePage = () => {
       currPerfomancePercentage: "15",
       currPerfomanceAmount: "142",
     },
+    {
+      labels: "USD",
+      amount: 500,
+      ratesOnDate: 0.8532,
+      baseTotal: 4700,
+      date: "2021-01-03",
+      currPerfomancePercentage: "15",
+      currPerfomanceAmount: "142",
+    },
   ]);
-  const [totalAmount, setTotalAmount] = useState([]);
+  useEffect(() => {
+  firebase.pushDataToDatabase(doughnut)
+  }, [firebase, doughnut])
 
+  useEffect(()=>{
+    firebase.getDataFromDatabase()
+  },[firebase])
+  const [totalAmount, setTotalAmount] = useState([]);
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);
 
@@ -91,4 +107,4 @@ const HomePage = () => {
 
 const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(HomePage);
+export default withAuthorization(condition)(withFirebase(HomePage));

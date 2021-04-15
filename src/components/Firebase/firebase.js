@@ -64,7 +64,7 @@ class Firebase {
   user = (uid) => this.db.ref(`users/${uid}`);
   users = () => this.db.ref("users");
   getCurrentUser = async () => {
-    const myUserBank = await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get()
+    const myUserBank = await this.db.ref(`users/${this.auth.currentUser.uid}`).get()
     const response = await myUserBank()
     return response
 
@@ -87,6 +87,20 @@ class Firebase {
         "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
       );
     }
+  }
+  // Adding new to Database
+
+  pushDataToDatabase = async(savings) => {
+    let convertToJSON = JSON.stringify(savings)
+    this.db.ref(`users/${this.auth.X}`).update({savings: `${convertToJSON}`})
+  }
+
+  getDataFromDatabase = async () => {
+    // let parseJSON = JSON.parse(await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get())
+    const myUserBank = await this.db.ref(`users/${this.auth.currentUser.uid}`).get()
+    console.log(myUserBank)
+    
+    // this.db.ref(`users/${this.auth.currentUser.uid}`).update({savings: `${parseJSON}`})
   }
   
 }
