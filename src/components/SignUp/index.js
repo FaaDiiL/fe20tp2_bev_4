@@ -1,51 +1,57 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
-import { withFirebase } from "../Firebase";
-import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
-
-import styled from 'styled-components'
+import * as ROUTES from "../../constants/routes";
+import { withFirebase } from "../Firebase";
 
 const PageContainer = styled.div`
-display: flex;
-align-items: center; 
-flex-direction: column;
-
-h1 { 
-margin-top: 100px;
-margin-bottom: 50px;
-display: block;
-
-}
-
-p{
-  margin-bottom: 50px;
-}
-
-form { 
   display: flex;
+  align-items: center;
   flex-direction: column;
-}
 
+  h1 {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: block;
+  }
+  p {
+    margin-bottom: 50px;
+  }
 
-input, select {
-  padding: 5px 15px 5px 5px;
-  margin: 5px;
-margin-bottom: 10px;
-}
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
-button {
-  display: inline-block;
-  padding: 5px;
-}
+  input,
+  select {
+    padding: 5px 15px 5px 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
 
+  button {
+    display: inline-block;
+    padding: 5px;
+  }
 `;
 
+// const DIV = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+
+//   h3 {
+//     display: block;
+//     margin-bottom: 15px;
+//   }
+// `;
 
 const SignUpPage = () => (
   <PageContainer>
-    <h1>Create an account</h1>
     <SignUpForm />
   </PageContainer>
 );
@@ -56,6 +62,7 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   isAdmin: false,
+  bank: "",
   error: null,
 };
 
@@ -67,7 +74,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, isAdmin } = this.state;
+    const { username, email, passwordOne, isAdmin, bank } = this.state;
 
     const roles = {};
 
@@ -83,6 +90,7 @@ class SignUpFormBase extends Component {
           username,
           email,
           roles,
+          bank,
         });
       })
       .then(() => {
@@ -109,7 +117,8 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      isAdmin,
+      // isAdmin,
+      bank,
       error,
     } = this.state;
 
@@ -117,70 +126,76 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "";
+      username === "" ||
+      bank === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="E-mail"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <select name='bank' className='chooseBank'>
-          <option value="" disabled selected>Select your Bank</option>
-          <option>Swedbank</option>
-          <option>Länsförsäkringar</option>
-        </select>
-        <label>
-          Admin:
+      <PageContainer>
+        <h3>Create an account</h3>
+        <form onSubmit={this.onSubmit}>
           <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
           />
-        </label>
 
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
-        {error && <p>{error.message}</p>}
-      </form>
+          <input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="E-mail"
+          />
+
+          <input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <select
+            name="bank"
+            className="chooseBank"
+            defaultValue=""
+            onChange={this.onChange}
+          >
+            <option value="" disabled>
+              Select your Bank
+            </option>
+            <option value="default">No Bank</option>
+            <option value="SB">Swedbank</option>
+            <option value="LF">Länsförsäkringar</option>
+          </select>
+          {/*           <label>
+            Admin:
+            <input
+              name="isAdmin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={this.onChangeCheckbox}
+            />
+          </label> */}
+          <button disabled={isInvalid} type="submit">
+            Sign Up
+          </button>
+          {error && <p>{error.message}</p>}
+        </form>
+      </PageContainer>
     );
   }
 }
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
-);
-
-/* const SignUpForm = withRouter(withFirebase(SignUpFormBase)); */
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
 export default SignUpPage;
-export { SignUpForm, SignUpLink };
+export { SignUpForm };

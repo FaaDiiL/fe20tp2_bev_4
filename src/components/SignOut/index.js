@@ -1,34 +1,31 @@
 import React from "react";
+import styled from "styled-components";
 
 import { withFirebase } from "../Firebase";
 
-import styled from 'styled-components'; 
-
-const Div = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
-background-color: #571D85;
-padding: 10px 5px 10px 5px;
-outline: none;
-border: none;
-color: white;
-margin-top: 150px;
+  padding: 10px 5px 10px 5px;
+  outline: none;
+  border: none;
+  margin-top: 150px;
 
-&:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 const SignOutButton = ({ firebase }) => (
-  <Div>
-  <Button type="button" onClick={firebase.doSignOut}>
-    Sign Out
-  </Button>
-  </Div>
-  );
+  <Container>
+    <Button type="button" onClick={firebase.doSignOut}>
+      Sign Out
+    </Button>
+  </Container>
+);
 export default withFirebase(SignOutButton);

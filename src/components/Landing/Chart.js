@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import axios from "axios";
 import { rates } from "../../constants/rates";
-import { StayCurrentLandscapeOutlined } from "@material-ui/icons";
-import styled from "styled-components";
+import { Line } from "react-chartjs-2";
 
 const Chart = () => {
-  const [apiBase, setApiBase] = useState("&base=EUR");
 
-  const ratesData = Object.entries(rates[0].rates);
+  //BEGINNING
+  const ratesData = rates[0].rates;
 
-  let dates = [];
-  let rateOfDate = [];
-
-  for (let i = 0; i < ratesData.length; i++) {
-    if (ratesData[i][0].endsWith("01")) {
-      dates.push(ratesData[i][0]);
-      rateOfDate.push(ratesData[i][1].USD);
-    }
+  const chartData = {
+    labels:[],
+    values:[]
   }
+  Object.entries(ratesData).forEach(([x,y]) =>{
+    if(x.endsWith("01")){
+      chartData.labels.push(x)
+      chartData.values.push(Object.values(y)[0])
+    }
+  }) // END
+  // filters the api to only get the date that ends with 01. 
+  //The first day of the month and pushes them to chartData to be used by the Chart
 
-  const rateData = {
-    labels: dates,
+
+  const rateData = {  // necessary data to set up the chart from Chart.js
+    labels: chartData.labels,
     datasets: [
       {
         label: "SEK / USD",
-        backgroundColor: "#ecbcfd5b",
-        borderColor: "#571d85",
+        backgroundColor: "rgba(245, 150, 20, 0.5)",
+        borderColor: "#003F5C",
         borderWidth: 2,
-        data: rateOfDate,
+        data: chartData.values 
       },
     ],
-  };
+  }; // CHART.JS docs for more info about the syntax 
 
   return (
     <div>
@@ -53,6 +53,7 @@ const Chart = () => {
       />
     </div>
   );
+
 };
 
 export default Chart;

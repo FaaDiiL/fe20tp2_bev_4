@@ -1,16 +1,16 @@
 import app from "firebase/app";
+
 import "firebase/auth";
 import "firebase/database";
 
-
 var config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
+  apiKey: "AIzaSyDWcMs5a_HcHqqDqHTiWZtsP_35CQ2F-I4",
+  authDomain: "fe20tp2-bev-4.firebaseapp.com",
+  databaseURL: "https://fe20tp2-bev-4-default-rtdb.firebaseio.com",
+  projectId: "fe20tp2-bev-4",
+  storageBucket: "fe20tp2-bev-4.appspot.com",
+  messagingSenderId: "180893030057",
+  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8"
 }
 
 
@@ -37,32 +37,58 @@ class Firebase {
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>
-    this.auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
+  this.auth.onAuthStateChanged(authUser => {
+    if (authUser) {
         this.user(authUser.uid)
-          .once("value")
-          .then((snapshot) => {
-            const dbUser = snapshot.val();
-            // default empty roles
-            if (!dbUser.roles) {
-              dbUser.roles = {};
-            }
-            // merge auth and db user
-            authUser = {
-              uid: authUser.uid,
-              email: authUser.email,
-              ...dbUser,
-            };
-            next(authUser);
-          });
-      } else {
+            .once('value')
+            .then(snapshot => {
+                const dbUser = snapshot.val();
+                // default empty roles
+                if (!dbUser.roles) {
+                    dbUser.roles = {};
+                }
+                // merge auth and db user
+                authUser = {
+                    uid: authUser.uid,
+                    email: authUser.email,
+                    ...dbUser,
+                };
+                next(authUser);
+            });
+    } else {
         fallback();
-      }
-    });
+    }
+});
 
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
   users = () => this.db.ref("users");
+  getCurrentUser = async () => {
+    const myUserBank = await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get()
+    const response = await myUserBank()
+    return response
+
+  }
+  updateCurrentUserBank = (bank) => {
+    this.db.ref(`users/${this.auth.currentUser.uid}`).update({bank: `${bank}`})
+  }
+  // *** Function to delete current user ***
+  deleteCurrentUser = async () => {    
+    try {
+      // Try deleting the user from the user list and localStorage
+      this.auth.currentUser.delete()
+      // If successful, also delete the post of the user in the realtime database
+      let userRef = this.db.ref(`users/${this.auth.currentUser.uid}`);
+      userRef.remove();
+      window.localStorage.clear()
+      await this.auth.signOut();
+    } catch (error) {
+      alert(
+        "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
+      );
+    }
+  }
+  
 }
 
 export default Firebase;

@@ -2,15 +2,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import React, { useEffect, useState } from "react";
 
 import Chart from "./Chart";
-
-import {
-  StyledBody,
-  StyledCont,
-  FlexBoxContainer,
-  CurrencyContainer,
-  ConvertContainer,
-  GraphContainer,
-} from "./style";
+import { ConvertContainer, CurrencyContainer, FlexBoxContainer, Labels, StyledBody, StyledCont } from "./style";
 
 const Landing = () => {
   const API_URL =
@@ -18,14 +10,13 @@ const Landing = () => {
 
   const [rates, setRates] = useState([]);
   const [convertNr, setConvertNr] = useState(1);
-  const [convertCur, setConvertCur] = useState(1);
   const [select1, setSelect1] = useState("SEK");
   const [currencyCode, setCurrencyCode] = useState("USD"); // ex. USD, EUR
   const [total, setTotal] = useState(null);
   const [currencyToggle, setCurrencyToggle] = useState(false);
-  const [valueToggle, setValueToggle] = useState(false);
 
-  useEffect(() => {
+  const saveFetchedApiLS = () => {
+    //Fetches and stores data in LocalStorages each new day
     const newDate = new Date().toISOString().split("T")[0]; // format the time like: 2021-03-08
     if (localStorage.getItem(newDate)) {
       setRates(JSON.parse(localStorage.getItem(newDate)));
@@ -40,8 +31,13 @@ const Landing = () => {
           setRates(data.conversion_rates);
         });
     }
+  };
+
+  useEffect(() => {
+    saveFetchedApiLS();
   }, []);
 
+  //Collects values from each input field and set them as states
   const handleSelect1 = (e) => {
     setSelect1(e.target.value);
   };
@@ -56,11 +52,10 @@ const Landing = () => {
 
   const handleConvert = (e) => {
     e.preventDefault();
-    setTotal(convertNr * rates[currencyCode]);
+    setTotal(convertNr * rates[currencyCode]); //Calculates Amount of given currency to target currency
   };
 
-  // const lager = ''
-
+  //  Handle function that trigger every time the shift button is pressed
   function handleShift(e) {
     e.preventDefault();
 
@@ -78,15 +73,16 @@ const Landing = () => {
     }
   }
 
+  // Algorithm for blocking non-numerical characters
   const blockInvalidChar = (e) =>
     ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   return (
     <StyledBody>
-      <h1>Dashboard</h1>
-
       <CurrencyContainer>
         <StyledCont>
           <h2>Currency Converter</h2>
+
+          <label htmlFor="number" className="text-currency-converter">Enter an amount to convert</label>
           <input
             type="number"
             name="number"
@@ -96,13 +92,19 @@ const Landing = () => {
             onKeyDown={blockInvalidChar}
             onChange={handleChange}
           />
+<Labels>
+<span className="text-currency-converter">From:</span>
+<span className="text-currency-converter">To:</span>
+</Labels>
           <FlexBoxContainer>
+         
             <select
               onChange={handleSelect1}
               value={select1}
               id="countries"
               name="currency"
             >
+              {/** Adding the base for SEK */}
               {!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} name={`${curr} ${vall}`}>
@@ -114,15 +116,18 @@ const Landing = () => {
               )}
             </select>
 
-            <button onClick={handleShift}>
+            <button className="curr-conv-arrow-btn" onClick={handleShift}>
               <CompareArrowsIcon />
             </button>
+
+
             <select
               onChange={handleSelect2}
-              className="selectContainer"
+              name="selectContainer"
               id="countries"
               value={currencyCode}
             >
+              {/** Adding all the currency codes as options for the select tag */}
               {!!rates ? (
                 Object.entries(rates).map(([curr, vall]) => (
                   <option key={curr} value={`${curr}`}>
@@ -142,16 +147,16 @@ const Landing = () => {
       </CurrencyContainer>
 
       <ConvertContainer>
+        {/** Shows the text for the converting session when the "convert" or "shift" button is pressed */}
         {total && (
-          <h3>
+          <p>
             {!currencyToggle
-              ? `${convertNr} ${select1} = ${
-                  Math.round(total * 100) / 100
-                } ${currencyCode}`
+              ? `${convertNr} ${select1} = 
+                ${Math.round(total * 100) / 100} ${currencyCode}`
               : `${convertNr} ${select1} = ${
                   Math.round(total * 100) / 100
                 } ${currencyCode}`}
-          </h3>
+          </p>
         )}
       </ConvertContainer>
 

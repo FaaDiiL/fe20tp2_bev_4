@@ -1,12 +1,8 @@
 import styled from 'styled-components';
+import { Switch, Route, Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
-const Container = styled.div`
-display: flex;
-justify-content: center; 
-align-items: center; 
-margin-top: 100px; 
 
-`;
 
 const Title = styled.h2`
 color: black; 
@@ -17,27 +13,37 @@ color: white;
 `;
 
 const InfoBox = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
 min-height: 250px;
 padding: 10px 50px 10px 50px;
 border-radius: 6px;
 width: 100%;
 background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128));
 
-p{
-    text-align: center;
-    color: white;
-}
 `;
 
 
 const Error = () => {
     return (
-        <Container>
+        <>
+        <Switch>
+        <Route exact path={ROUTES.LANDING} />
+      </Switch>
+
             <InfoBox>
                 <Title>You did something wrong. Page does not exist! </Title>
-                <p>Try again!</p>
+                <Link
+                  to={{
+                    pathname: `${ROUTES.LANDING}`,
+                  }}
+                > 
+                  Take me back
+                </Link>
             </InfoBox>
-        </Container>
+        </>
     );
 }
 
