@@ -8,6 +8,7 @@ import {
   FlexBoxContainer,
   StyledBody,
   StyledCont,
+  Labels,
 } from "./style";
 
 const Landing = () => {
@@ -86,9 +87,9 @@ const Landing = () => {
     <StyledBody>
       <CurrencyContainer>
         <StyledCont>
-          <br />
-          <br />
           <h2>Currency Converter</h2>
+
+          <label for="number" className="text-currency-converter">Enter an amount to convert</label>
           <input
             type="number"
             name="number"
@@ -98,7 +99,12 @@ const Landing = () => {
             onKeyDown={blockInvalidChar}
             onChange={handleChange}
           />
+<Labels>
+<span className="text-currency-converter">From:</span>
+<span className="text-currency-converter">To:</span>
+</Labels>
           <FlexBoxContainer>
+         
             <select
               onChange={handleSelect1}
               value={select1}
@@ -117,9 +123,11 @@ const Landing = () => {
               )}
             </select>
 
-            <button onClick={handleShift}>
+            <button className="curr-conv-arrow-btn" onClick={handleShift}>
               <CompareArrowsIcon />
             </button>
+
+
             <select
               onChange={handleSelect2}
               name="selectContainer"

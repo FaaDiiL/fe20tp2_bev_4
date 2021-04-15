@@ -43,6 +43,20 @@ const GlobalStyle = createGlobalStyle`
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+  .text-currency-converter{ 
+background-color: var(--headerFontColor);
+color: white;
+  }
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+
+    &:hover { 
+     color: var(--buttonHoverColor) ; 
+    }
+  }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -117,6 +131,15 @@ export const GlobalStyleSB = createGlobalStyle`
     background: var(--buttonHoverColor);
     color: white;
     border: none;
+    
+  }
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+
+    &:hover { 
+     color: var(--buttonHoverColor) ; 
+    }
   }
 
   select option {
@@ -133,6 +156,11 @@ export const GlobalStyleSB = createGlobalStyle`
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+  .text-currency-converter{ 
+    background-color: var(--headerFontColor);
+    color: white;
+      }
 
   .mainNav li{
     &:hover  {
@@ -165,6 +193,7 @@ export const GlobalStyleSB = createGlobalStyle`
       box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
   }
 
+ 
 
 .dashboard-add-cur-btn { 
   &:hover{
@@ -239,6 +268,20 @@ export const GlobalStyleLF = createGlobalStyle`
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+
+    &:hover { 
+     color: var(--buttonHoverColor) ; 
+    }
+  }
+
+  .text-currency-converter{ 
+    background-color: var(--headerFontColor);
+    color: white;
+      }
 
   .mainNav li{
     &:hover  {
