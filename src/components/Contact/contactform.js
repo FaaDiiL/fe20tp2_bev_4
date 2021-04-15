@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import FormError from "./formerror";
 
 const FormContainer = styled.div`
@@ -66,10 +67,10 @@ const Form = styled.form`
   border-radius: 6px;
 
   @media (max-width: 500px) {
-    width: 200px;
+    width: 85%;
   }
   @media (max-width: 320px) {
-    width: 150px;
+    width: 85%;
   }
 `;
 

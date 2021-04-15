@@ -1,13 +1,14 @@
-import ContactForm from "./contactform";
 import { useState } from "react";
 import styled from "styled-components";
 
+import ContactForm from "./contactform";
+
 const ContactContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  flex-direction: column;
 
   h1 {
     margin: 0 auto;
@@ -16,6 +17,7 @@ const ContactContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
+width: 100%;
   margin-top: 50px;
   justify-content: center;
   align-items: center;
