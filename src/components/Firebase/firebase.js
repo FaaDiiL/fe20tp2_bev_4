@@ -37,28 +37,28 @@ class Firebase {
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>
-    this.auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
+  this.auth.onAuthStateChanged(authUser => {
+    if (authUser) {
         this.user(authUser.uid)
-          .once("value")
-          .then((snapshot) => {
-            const dbUser = snapshot.val();
-            // default empty roles
-            if (!dbUser.roles) {
-              dbUser.roles = {};
-            }
-            // merge auth and db user
-            authUser = {
-              uid: authUser.uid,
-              email: authUser.email,
-              ...dbUser,
-            };
-            next(authUser);
-          });
-      } else {
+            .once('value')
+            .then(snapshot => {
+                const dbUser = snapshot.val();
+                // default empty roles
+                if (!dbUser.roles) {
+                    dbUser.roles = {};
+                }
+                // merge auth and db user
+                authUser = {
+                    uid: authUser.uid,
+                    email: authUser.email,
+                    ...dbUser,
+                };
+                next(authUser);
+            });
+    } else {
         fallback();
-      }
-    });
+    }
+});
 
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
@@ -69,9 +69,25 @@ class Firebase {
     return response
 
   }
-  updateCurrentUserBank = (bank) => this.db.ref(`users/ ${this.auth.currentUser.uid}`).update({bank: `${bank}`})
-
-    
+  updateCurrentUserBank = (bank) => {
+    this.db.ref(`users/${this.auth.currentUser.uid}`).update({bank: `${bank}`})
+  }
+  // *** Function to delete current user ***
+  deleteCurrentUser = async () => {    
+    try {
+      // Try deleting the user from the user list and localStorage
+      this.auth.currentUser.delete()
+      // If successful, also delete the post of the user in the realtime database
+      let userRef = this.db.ref(`users/${this.auth.currentUser.uid}`);
+      userRef.remove();
+      window.localStorage.clear()
+      await this.auth.signOut();
+    } catch (error) {
+      alert(
+        "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
+      );
+    }
+  }
   
 }
 

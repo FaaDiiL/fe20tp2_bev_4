@@ -1,9 +1,7 @@
 import styled from "styled-components";
+
+import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../Session";
-import "firebase/auth";
-import "firebase/database";
-import firebase from "firebase";
-import app from "firebase/app";
 
 const Container = styled.div`
   display: flex;
@@ -23,30 +21,16 @@ const Container = styled.div`
   }
 `;
 
-function DeleteAccount() {
-  function Delete() {
-    let user = firebase.auth().currentUser;
-
-    try {
-      // Try deleting the user from the user list
-      user.delete();
-
-      // If successful, also delete the post of the user in the realtime database
-      let userRef = app.database().ref(`users/${user.uid}`);
-      userRef.remove();
-    } catch (error) {
-      alert(
-        "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
-      );
-    }
-  }
-
+function DeleteAccount({firebase}) {
+  
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
         <Container>
           <h2>Delete Account</h2>
-          <button onClick={Delete}>Delete account</button>
+          <form onSubmit={firebase.deleteCurrentUser} >
+            <button>Delete account</button>
+          </form>
         </Container>
       )}
     </AuthUserContext.Consumer>
@@ -55,4 +39,4 @@ function DeleteAccount() {
 
 const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(DeleteAccount);
+export default withAuthorization(condition)(withFirebase(DeleteAccount));

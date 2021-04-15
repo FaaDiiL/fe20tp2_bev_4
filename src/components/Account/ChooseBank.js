@@ -30,15 +30,16 @@ const BankContainer = styled.div`
 `
 
 const Bank = ({ firebase }) => {
-  async function updateBank(e) {
-    e.preventDefault()
+   
+  const updateBank = (e) => {
     // const curUser = await firebase.currentUser(e.)
+    const selectedBank= e.target[0].value
     if (
-      (e.target[0].value.length > 0 && e.target[0].value === 'LF') ||
-      e.target[0].value === 'SB' ||
-      e.target[0].value === 'default'
+      (selectedBank.length > 0 && selectedBank === 'LF') ||
+      selectedBank === 'SB' ||
+      selectedBank === 'default'
     ) {
-      firebase.updateCurrentUserBank(e.target[0].value)
+      firebase.updateCurrentUserBank(selectedBank)
       // let test = await firebase.updateCurrentUserBank()
     }
   }
