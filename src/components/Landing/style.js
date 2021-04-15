@@ -6,10 +6,10 @@ export const StyledBody = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  label { 
+  
+  label {
     font-size: 10px;
-        font-size: 10px;
+    font-size: 10px;
     color: white;
     padding: 10px 90px 10px 90px;
   }
@@ -86,12 +86,12 @@ flex-direction: row;
 position: relative;
 justify-content: space-evenly;
 
-span { 
+span {
   margin: 10px 48px 0px 48px;
-font-size: 10px;
-color: white;
-padding: 10px 30px 10px 30px;
-
+  font-size: 10px;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  }
 `;
 
 export const FlexBoxContainer = styled.form`

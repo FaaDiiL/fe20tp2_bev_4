@@ -5,12 +5,10 @@ import { Line } from "react-chartjs-2";
 function Table({ doughnut, totalAmount, setTotalAmount }) {
   const [graph, setGraph] = useState(null);
   const [percentButton, setPercentButton] = useState(false);
-  // const [duplicates, setDuplicates] = useState([]);
 
   const handleSwitch = () => {
     setPercentButton(!percentButton);
   };
-  console.log(percentButton);
 
   useEffect(() => {}, []);
 
@@ -18,67 +16,14 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
     let newTotalAmount = doughnut.map((cur) => cur.baseTotal);
     let addedTotal = newTotalAmount.reduce((a, b) => a + b);
     setTotalAmount(addedTotal);
-
-    // USD: [
-    //   {
-    //     amount: 213,
-    //     date: 213,
-    //     id: 213,
-    //   },
-    //   {
-    //     amount: 213,
-    //     date: 213,
-    //     id: 213,
-    //   },
-    //   {
-    //     amount: 213,
-    //     date: 213,
-    //     id: 213,
-    //   },
-    // ];
-
-    // doughnut.map((cur) => {
-    //   // if (!duplicates.includes(cur.labels)) {
-    //   let label = cur.labels;
-    //   let amount = cur.amount;
-    //   let date = cur.date;
-    //   let id = cur.id;
-    //   let responseDateRate = cur.responseDateRate;
-    //   setDuplicates([...duplicates, { amount, date, id, responseDateRate }]);
-    //   // }
-    //   console.log("Duplicates = ", duplicates);
-    //   console.log("Donut= ", doughnut);
-    // });
-    //
-
-    // var defaultsettings = {
-    //   ajaxsettings: { ak1: "v1", ak2: "v2" },
-    //   uisettings: { ui1: "v1", ui22: "v2" },
-    // };
-    // .reduce((acc, curr) => {
-    //   console.log(acc.date);
-    //   console.log(curr.date);
-
-    //   return acc;
-    // });
-
-    /* doughnut.map((cur) => {
-      if (cur.labels > 1) {
-        setDuplicates([(cur.labels: { ID: cur.id, Date: cur.date })]);
-      }
-    }); */
-
-    // console.log(duplicates);
   }, [doughnut, setTotalAmount]);
 
   function showLineChart(label, index) {
-    console.log({ label });
     let today = new Date().toISOString().substr(0, 10);
     let sixMonths = new Date();
     sixMonths.setMonth(new Date().getMonth() - 6);
 
     sixMonths = sixMonths.toISOString().substr(0, 10);
-    console.log(today, sixMonths);
     if (graph && graph[index]) {
       setGraph();
     } else {
@@ -91,7 +36,6 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
           let graphLabels = [];
           let iteration = 0;
           Object.entries(data.rates).forEach(([key, value]) => {
-            // First day in month use: key.endsWith("01")
             if (iteration % 10 === 0) {
               graphLabels.push(key);
               graphData.push(value[label]);
@@ -111,7 +55,6 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
               },
             ],
           };
-          console.log({ graphDataSet });
           setGraph(graphDataSet);
         });
     }
@@ -151,7 +94,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                     <span style={{ textAlign: "center" }}>
                       {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
                     </span>
-                    <span className={Math.sign(cur.currPerfomanceAmount) ==('-1')? 'down': 'up'}>
+                    <span className={Math.sign(cur.currPerfomanceAmount) ===(-1)? 'down': 'up'}>
                       {percentButton
                         ? cur.currPerfomancePercentage + "%"
                         : parseInt(cur.currPerfomanceAmount).toFixed(2) + "kr"}
@@ -162,7 +105,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                 <div>
                   {graph && graph[index] && (
                     <Line
-                    height={250}
+                      height={250}
                       data={graph[index]}
                       options={{
                         

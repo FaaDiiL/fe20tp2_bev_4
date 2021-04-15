@@ -24,7 +24,6 @@ const Form = ({ setDoughnut, doughnut }) => {
   const handleKeyDown = (e) => {
     ["-", "+", "e", "E"].includes(e.key) && e.preventDefault();
   };
-  console.log("latest Rates ", latestRates);
 
   function addNewCurrency(e) {
     e.preventDefault();
@@ -52,11 +51,8 @@ const Form = ({ setDoughnut, doughnut }) => {
         let currPerfomancePercentage =
           ((baseTotal - baseTotalToday) / baseTotal) * 100; //percentage
         let currPerfomanceAmount = baseTotalToday - baseTotal; //amount
-        console.log("prisutvecklingen ", currPerfomancePercentage, "%");
-        console.log("prisutvecklingen ", currPerfomanceAmount, "kr");
 
         let id = Date.now();
-        console.log("Todays ", todaysRate);
         setDoughnut([
           ...doughnut,
           {

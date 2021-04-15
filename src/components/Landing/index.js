@@ -2,14 +2,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import React, { useEffect, useState } from "react";
 
 import Chart from "./Chart";
-import {
-  ConvertContainer,
-  CurrencyContainer,
-  FlexBoxContainer,
-  StyledBody,
-  StyledCont,
-  Labels,
-} from "./style";
+import { ConvertContainer, CurrencyContainer, FlexBoxContainer, Labels, StyledBody, StyledCont } from "./style";
 
 const Landing = () => {
   const API_URL =
@@ -89,7 +82,7 @@ const Landing = () => {
         <StyledCont>
           <h2>Currency Converter</h2>
 
-          <label for="number" className="text-currency-converter">Enter an amount to convert</label>
+          <label htmlFor="number" className="text-currency-converter">Enter an amount to convert</label>
           <input
             type="number"
             name="number"

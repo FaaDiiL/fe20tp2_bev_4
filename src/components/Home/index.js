@@ -16,8 +16,8 @@ const HomePage = () => {
       ratesOnDate: 0.8532,
       baseTotal: 4700,
       date: "2021-01-03",
-      currPerfomancePercentage: "15%",
-      currPerfomanceAmount: "142kr",
+      currPerfomancePercentage: "15",
+      currPerfomanceAmount: "142",
     },
   ]);
   const [totalAmount, setTotalAmount] = useState([]);
@@ -25,16 +25,15 @@ const HomePage = () => {
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);
 
-  function getColorsSB(length) {
-    let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
-    let colors = [];
+  // function getColorsSB(length) {
+  //   let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
+  //   let colors = [];
 
-    for (let i = 0; i < length; i++) {
-      colors.push(pallet[i % pallet.length]);
-    }
-    return colors;
-  }
-  console.log(getColorsSB());
+  //   for (let i = 0; i < length; i++) {
+  //     colors.push(pallet[i % pallet.length]);
+  //   }
+  //   return colors;
+  // }
 
   const data = {
     labels: myLabels,
@@ -48,8 +47,6 @@ const HomePage = () => {
           "#ff6361",
           "#ffa600",
         ],
-        // ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600", "#FF6384", "#36A2EB", "#FFCE56"]
-        // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
     ],
   };
@@ -68,7 +65,6 @@ const HomePage = () => {
 
       <StyledDash>
         <div className="donutWrapper">
-          {/* The Doughnut */}
           <Doughnut
             data={data}
             width={100}
