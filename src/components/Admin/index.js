@@ -18,7 +18,6 @@ const Header = styled.div`
   margin: 0 auto;
 
   h1 {
-    color: #571d85;
     font-size: 40px;
     margin: 0 auto;
     padding: 15px;
@@ -141,27 +140,23 @@ const Menu = styled.div`
   height: 400px;
 
   span {
-    color: white;
     font-size: 12px;
     display: block;
     padding: 0px 10px 5px 20px;
   }
 
   h3 {
-    color: white;
     padding: 20px;
   }
 
   h1 {
     display: block;
-    color: white;
     letter-spacing: 1.5px;
     padding: 20px;
   }
 
   h4 {
     margin-bottom: 30px;
-    color: white;
     padding: 5px 20px 20px 20px;
   }
 

@@ -136,8 +136,10 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} xl={12} minHeight='100'>
+                  <Box  width={350}>
                   {graph && graph[index] && (
                     <Line
+                      height={300}
                       data={graph[index]}
                       options={{
                         title: {
@@ -152,6 +154,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                       }}
                     />
                   )}
+                  </Box>
                 </Grid>
               </Box>
             </li>
