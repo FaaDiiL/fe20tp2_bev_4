@@ -135,7 +135,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                   <span className='up'>12%</span>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={12} md={12} xl={12} minHeight='100'>
+                <Grid item xs={12} sm={12} md={12} xl={12} justify='center' alignItems='center' >
                   <Box  width={350}>
                   {graph && graph[index] && (
                     <Line
@@ -144,7 +144,6 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                       options={{
                         title: {
                           display: true,
-                          text: 'Fluctuations over time',
                           fontSize: 14,
                         },
                         legend: {
