@@ -34,7 +34,6 @@ const Bank = ({ firebase }) => {
   const updateBank = (e) => {
     // const curUser = await firebase.currentUser(e.)
     const selectedBank= e.target[0].value
-    console.log(`selectedBank: ${selectedBank} value: ${e.target[0].value}`)
     if (
       (selectedBank.length > 0 && selectedBank === 'LF') ||
       selectedBank === 'SB' ||
