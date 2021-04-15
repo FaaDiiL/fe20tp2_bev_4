@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Collapsible from "react-collapsible";
 
 import { Arrow, Button } from "./styles.js";

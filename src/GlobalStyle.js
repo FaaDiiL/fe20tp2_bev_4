@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
+    min-width: 325px;
     margin-top: 150px;
   }
   :root {

@@ -151,23 +151,21 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                     <span style={{ textAlign: "center" }}>
                       {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
                     </span>
-                    <span className="up">
+                    <span className={Math.sign(cur.currPerfomanceAmount) ==('-1')? 'down': 'up'}>
                       {percentButton
                         ? cur.currPerfomancePercentage + "%"
-                        : cur.currPerfomanceAmount + "kr"}
+                        : parseInt(cur.currPerfomanceAmount).toFixed(2) + "kr"}
                     </span>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={12} md={12} xl={12} minHeight="100">
+                <Grid item xs={12} sm={8} md={6} xl={3}>
+                <div>
                   {graph && graph[index] && (
                     <Line
+                    height={250}
                       data={graph[index]}
                       options={{
-                        title: {
-                          display: true,
-                          text: "Fluctuations over time",
-                          fontSize: 14,
-                        },
+                        
                         legend: {
                           display: true,
                           position: "top",
@@ -175,6 +173,7 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
                       }}
                     />
                   )}
+                </div>
                 </Grid>
               </Box>
             </li>
