@@ -1,15 +1,15 @@
-// import { useState } from '@testing-library/dom'
+// import { useEffect, useState } from '@testing-library/dom'
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 
+import { FirebaseContext, withFirebase } from '../Firebase'
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
-import { withFirebase } from '../Firebase'
 
-const HomePage = ({ firebase }) => {
+const HomePage = ({ firebase, authUser }) => {
   const [doughnut, setDoughnut] = useState([
     {
       labels: "USD",
@@ -20,27 +20,17 @@ const HomePage = ({ firebase }) => {
       currPerfomancePercentage: "15",
       currPerfomanceAmount: "142",
     },
-    {
-      labels: "USD",
-      amount: 500,
-      ratesOnDate: 0.8532,
-      baseTotal: 4700,
-      date: "2021-01-03",
-      currPerfomancePercentage: "15",
-      currPerfomanceAmount: "142",
-    },
   ]);
-  useEffect(() => {
-  firebase.pushDataToDatabase(doughnut)
-  }, [firebase, doughnut])
 
-  useEffect(()=>{
-    firebase.getDataFromDatabase()
-  },[firebase])
+  
   const [totalAmount, setTotalAmount] = useState([]);
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);
-
+  
+  function updateSavings(){
+    console.log(firebase.getDataFromDatabase())
+  }
+  
   // function getColorsSB(length) {
   //   let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
   //   let colors = [];
@@ -58,9 +48,12 @@ const HomePage = ({ firebase }) => {
         data: myAmount,
         backgroundColor: [
           "#003f5c",
-          "#58508d",
-          "#bc5090",
-          "#ff6361",
+          "#2f4b7c",
+          "#665191",
+          "#a05195",
+          "#d45087",
+          "#f95d6a",
+          "#ff7c43",
           "#ffa600",
         ],
       },
@@ -70,6 +63,7 @@ const HomePage = ({ firebase }) => {
   return (
     <StyledDashBody>
       <StyledTable>
+      <button onClick={updateSavings}>Update</button>
         <Form setDoughnut={setDoughnut} doughnut={doughnut} />
 
         <Table
