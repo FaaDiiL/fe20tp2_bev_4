@@ -10,7 +10,7 @@ import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
 
 const HomePage = ({ firebase }) => {
-  const [doughnut, setDoughnut] = useState([
+  const [doughnut, setDoughnut] = useState(JSON.parse(localStorage.getItem('authUser')).savings? JSON.parse(localStorage.getItem('authUser')).savings : [
     {
       labels: "USD",
       amount: 500,
@@ -28,9 +28,10 @@ const HomePage = ({ firebase }) => {
   const myAmount = doughnut.map((cur) => cur.amount);
   const [tempDatabaseSavings, setTempDatabaseSavings] = useState([]);
   
-  useEffect(()=>{
-    gettingDatabaseSavings()
-  },[])
+
+
+
+
 
   // useEffect(()=>{
   //   if(tempDatabaseSavings.length > 1){
@@ -38,9 +39,9 @@ const HomePage = ({ firebase }) => {
   // }
   // },[setTempDatabaseSavings])
 
-  function gettingDatabaseSavings(){
-    firebase && firebase.auth.X !== undefined && firebase.getDataFromDatabase(firebase.auth.X,setDoughnut) !== null && firebase.getDataFromDatabase(firebase.auth.X, setDoughnut)
-  }
+  // function gettingDatabaseSavings(){
+  //   firebase && firebase.auth.X !== undefined && firebase.getDataFromDatabase(firebase.auth.X,setDoughnut, setTempDatabaseSavings, doughnut) !== null && firebase.getDataFromDatabase(firebase.auth.X, setDoughnut, setTempDatabaseSavings, doughnut)
+  // }
   // function getColorsSB(length) {
   //   let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
   //   let colors = [];
