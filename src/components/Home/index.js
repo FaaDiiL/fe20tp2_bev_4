@@ -8,7 +8,6 @@ import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
-import { withFirebase } from "../Firebase";
 import Chat from "../Chat";
 
 const HomePage = ({ firebase }) => {
