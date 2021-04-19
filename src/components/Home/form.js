@@ -71,7 +71,7 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
         ]);
 
         // Addding the savings to Database
-        firebase.pushDataToDatabase({savings:[
+        firebase.pushDataToDatabase([{savings:[
           ...doughnut,
           {
             labels,
@@ -84,7 +84,7 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
             currPerfomanceAmount,
             baseTotalToday,
           },
-        ]})
+        ]}])
 
         
       });
