@@ -10,9 +10,8 @@ var config = {
   projectId: "fe20tp2-bev-4",
   storageBucket: "fe20tp2-bev-4.appspot.com",
   messagingSenderId: "180893030057",
-  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8"
-}
-
+  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8",
+};
 
 // Initialize Firebase
 class Firebase {
@@ -37,72 +36,85 @@ class Firebase {
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>
-  this.auth.onAuthStateChanged(authUser => {
-    if (authUser) {
+    this.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         this.user(authUser.uid)
-            .once('value')
-            .then(snapshot => {
-                const dbUser = snapshot.val();
-                // default empty roles
-                if (!dbUser.roles) {
-                    dbUser.roles = {};
-                }
-                // merge auth and db user
-                authUser = {
-                    uid: authUser.uid,
-                    email: authUser.email,
-                    ...dbUser,
-                };
-                next(authUser);
-            });
-    } else {
+          .once("value")
+          .then((snapshot) => {
+            const dbUser = snapshot.val();
+            // default empty roles
+            if (!dbUser.roles) {
+              dbUser.roles = {};
+            }
+            // merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser,
+            };
+            next(authUser);
+          });
+      } else {
         fallback();
-    }
-});
+      }
+    });
 
   // *** User API ***
-  user = (uid) => this.db.ref(`users/${uid}`);
-  users = () => this.db.ref("users");
-  getCurrentUser = async () => {
-    const myUserBank = await this.db.ref(`users/${this.auth.currentUser.uid}`).get()
-    const response = await myUserBank()
-    return response
 
-  }
+  user = (uid) => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref("users");
+
+  // *** Message API ***
+
+  message = (uid) => this.db.ref(`messages/${uid}`);
+
+  messages = () => this.db.ref("messages");
+
+  getCurrentUser = async () => {
+    const myUserBank = await this.db
+      .ref(`users/${this.auth.currentUser.uid}`)
+      .get();
+    const response = await myUserBank();
+    return response;
+  };
   updateCurrentUserBank = (bank) => {
-    this.db.ref(`users/${this.auth.currentUser.uid}`).update({bank: `${bank}`})
-  }
+    this.db
+      .ref(`users/${this.auth.currentUser.uid}`)
+      .update({ bank: `${bank}` });
+  };
   // *** Function to delete current user ***
-  deleteCurrentUser = async () => {    
+  deleteCurrentUser = async () => {
     try {
       // Try deleting the user from the user list and localStorage
-      this.auth.currentUser.delete()
+      this.auth.currentUser.delete();
       // If successful, also delete the post of the user in the realtime database
       let userRef = this.db.ref(`users/${this.auth.currentUser.uid}`);
       userRef.remove();
-      window.localStorage.clear()
+      window.localStorage.clear();
       await this.auth.signOut();
     } catch (error) {
       alert(
         "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
       );
     }
-  }
+  };
   // Adding new to Database
 
-  pushDataToDatabase = async(savings) => {
-    let convertToJSON = JSON.stringify(savings)
-    this.db.ref(`users/${this.auth.X}`).update({savings: `${convertToJSON}`})
-  }
+  pushDataToDatabase = async (savings) => {
+    let convertToJSON = JSON.stringify(savings);
+    this.db.ref(`users/${this.auth.X}`).update({ savings: `${convertToJSON}` });
+  };
 
-  getDataFromDatabase = async () => {
-    // let parseJSON = JSON.parse(await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get())
-    const myUserBank = await this.db.ref(`users/${this.auth.currentUser.uid}`).get()
-    console.log(myUserBank)
-    
-    // this.db.ref(`users/${this.auth.currentUser.uid}`).update({savings: `${parseJSON}`})
-  }
-  
+  // getDataFromDatabase = async () => {
+  //   // let parseJSON = JSON.parse(await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get())
+  //   const myUserBank = await this.db
+  //     .ref(`users/${this.auth.currentUser.uid}`)
+  //     .get();
+  //   console.log(myUserBank);
+
+  //   // this.db.ref(`users/${this.auth.currentUser.uid}`).update({savings: `${parseJSON}`})
+  // };
 }
 
 export default Firebase;

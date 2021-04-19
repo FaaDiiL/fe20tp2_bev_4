@@ -7,7 +7,8 @@ import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
-import { withFirebase } from '../Firebase'
+import { withFirebase } from "../Firebase";
+import Chat from "../Chat";
 
 const HomePage = ({ firebase }) => {
   const [doughnut, setDoughnut] = useState([
@@ -31,12 +32,13 @@ const HomePage = ({ firebase }) => {
     },
   ]);
   useEffect(() => {
-  firebase.pushDataToDatabase(doughnut)
-  }, [firebase, doughnut])
+    firebase.pushDataToDatabase(doughnut);
+  }, [firebase, doughnut]);
 
-  useEffect(()=>{
-    firebase.getDataFromDatabase()
-  },[firebase])
+  // useEffect(() => {
+  //   firebase.getDataFromDatabase();
+  // }, [firebase]);
+
   const [totalAmount, setTotalAmount] = useState([]);
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);
@@ -100,6 +102,7 @@ const HomePage = ({ firebase }) => {
         </div>
 
         <Chart />
+        <Chat />
       </StyledDash>
     </StyledDashBody>
   );

@@ -225,6 +225,13 @@ export const GlobalStyleSB = createGlobalStyle`
 .window-view-height{
  min-height: 65vh;
 }
+
+.sent .username {
+    background: var(--headerFontColor);
+  }
+  .received .username {
+    background:  #571d85;
+  }
 `;
 
 // Länsförsäkringar
@@ -342,6 +349,13 @@ export const GlobalStyleLF = createGlobalStyle`
 .window-view-height{
  min-height: 65vh;
 }
-`
+
+.sent .username {
+    background: var(--headerFontColor);
+  }
+  .received .username {
+    background:  #571d85;
+  }
+`;
 
 export default GlobalStyle;
