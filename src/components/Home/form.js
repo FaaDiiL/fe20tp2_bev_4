@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Collapsible from "react-collapsible";
 
+import { withFirebase } from "../Firebase"
 import { Arrow, Button } from "./styles.js";
 
-const Form = ({ setDoughnut, doughnut }) => {
+const Form = ({ setDoughnut, doughnut, firebase }) => {
   const [latestRates, setLatestRates] = useState([]);
-  const [defaultDate, setDefaultDate] = useState(
-    new Date().toISOString().substr(0, 10)
-  );
+  const defaultDate  =  new Date().toISOString().substr(0, 10)
   const [arrowRotate, setArrowRotate] = useState(false);
 
   const handleRotate = () => {
     setArrowRotate(!arrowRotate);
   };
 
+  
   useEffect(() => {
     const newDate = new Date().toISOString().split("T")[0];
     if (localStorage.getItem(newDate)) {
@@ -21,16 +21,18 @@ const Form = ({ setDoughnut, doughnut }) => {
     }
   }, []);
 
+ 
+  
   const handleKeyDown = (e) => {
     ["-", "+", "e", "E"].includes(e.key) && e.preventDefault();
   };
-
+  
+    
   function addNewCurrency(e) {
     e.preventDefault();
     let labels = e.target[0].value.toUpperCase();
     let amount = parseInt(e.target[1].value);
     let date = e.target[2].value;
-    setDefaultDate(date);
     //to show most recent value of the a currency ----->
 
     //------------>
@@ -67,6 +69,24 @@ const Form = ({ setDoughnut, doughnut }) => {
             baseTotalToday,
           },
         ]);
+
+        // Addding the savings to Database
+        firebase.pushDataToDatabase({savings:[
+          ...doughnut,
+          {
+            labels,
+            amount,
+            date,
+            responseDateRate,
+            baseTotal,
+            id,
+            currPerfomancePercentage,
+            currPerfomanceAmount,
+            baseTotalToday,
+          },
+        ]})
+
+        
       });
   }
 
@@ -103,4 +123,4 @@ const Form = ({ setDoughnut, doughnut }) => {
   );
 };
 
-export default Form;
+export default withFirebase(Form);
