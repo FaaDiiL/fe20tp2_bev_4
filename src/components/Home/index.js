@@ -1,15 +1,18 @@
-// import { useEffect, useState } from '@testing-library/dom'
-import React, { useState, useEffect } from "react";
+// import { useContext, useEffect, useState } from '@testing-library/dom'
+import React, { useState, useEffect, useContext } from "react";
 import { Doughnut } from "react-chartjs-2";
 
 import { withFirebase } from '../Firebase'
-import { withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
 import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
 
 const HomePage = ({ firebase }) => {
+  const authUser = useContext(AuthUserContext);
+  console.log(authUser)
+  const [firebaseData, setFirebaseData] = useState([]);
   const [doughnut, setDoughnut] = useState(JSON.parse(localStorage.getItem('authUser')).savings? JSON.parse(localStorage.getItem('authUser')).savings : [
     {
       labels: "USD",
@@ -24,14 +27,26 @@ const HomePage = ({ firebase }) => {
 
   
   const [totalAmount, setTotalAmount] = useState([]);
-  const myLabels = doughnut.map((cur) => cur.labels);
-  const myAmount = doughnut.map((cur) => cur.amount);
+  
   const [tempDatabaseSavings, setTempDatabaseSavings] = useState([]);
   
 
+  useEffect(() => {
+    if(authUser) {
+    firebase.user(authUser.uid).child('savings').on("value", (snapshot) => {
+      const savingsObject = snapshot.val();
+      if (savingsObject) {
+        // om ID? se admin :) /K
+      setFirebaseData(savingsObject)
+    }
+    });
+  }
+  }, []);
 
 
-
+const editSavings = (dataObj) => {
+  firebase.user(authUser.uid).child('savings').update(dataObj) 
+}
 
   // useEffect(()=>{
   //   if(tempDatabaseSavings.length > 1){
@@ -51,13 +66,32 @@ const HomePage = ({ firebase }) => {
   //   }
   //   return colors;
   // }
-
+  const myLabels = firebaseData.map((cur) => cur.labels);
+  const myAmount = firebaseData.map((cur) => cur.amount);
+  console.log(myLabels)
+  console.log(myAmount)
   const data = {
     labels: myLabels,
     datasets: [
       {
-        data: myAmount,
+        data: [...myAmount],
         backgroundColor: [
+          "#003f5c",
+          "#2f4b7c",
+          "#665191",
+          "#a05195",
+          "#d45087",
+          "#f95d6a",
+          "#ff7c43",
+          "#ffa600",
+          "#003f5c",
+          "#2f4b7c",
+          "#665191",
+          "#a05195",
+          "#d45087",
+          "#f95d6a",
+          "#ff7c43",
+          "#ffa600",
           "#003f5c",
           "#2f4b7c",
           "#665191",
@@ -70,16 +104,16 @@ const HomePage = ({ firebase }) => {
       },
     ],
   };
-
-  return (
+  console.log(data)
+  return firebaseData.length > 0 ? (
     <StyledDashBody>
       <StyledTable>
       {/* <button onClick={updateSavings}>Update</button> */}
-        <Form setDoughnut={setDoughnut} doughnut={doughnut} />
+        <Form setDoughnut={editSavings} doughnut={firebaseData} />
 
         <Table
-          doughnut={doughnut}
-          setDoughnut={setDoughnut}
+          doughnut={firebaseData}
+          setDoughnut={editSavings}
           totalAmount={totalAmount}
           setTotalAmount={setTotalAmount}
           firebase={firebase}
@@ -106,8 +140,15 @@ const HomePage = ({ firebase }) => {
           />
         </div>
 
-        <Chart />
+       {/*  <Chart /> */}
       </StyledDash>
+    </StyledDashBody>
+  ) : (
+    <StyledDashBody>
+      <StyledTable>
+      {/* <button onClick={updateSavings}>Update</button> */}
+        <Form setDoughnut={editSavings} doughnut={firebaseData} />
+        </StyledTable>
     </StyledDashBody>
   );
 };
