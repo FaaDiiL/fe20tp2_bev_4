@@ -95,16 +95,9 @@ class Firebase {
     }
   }
 
-  getDataFromDatabase = async () => {
-    // let parseJSON = JSON.parse(await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get())
-    const myUserBank = await this.db.ref(`users/${this.auth.currentUser.uid}`)
-      myUserBank.on('value', snapshot => {
-        return snapshot.exportVal().savings 
-      })
-      
-    
-    
-    // this.db.ref(`users/${this.auth.currentUser.uid}`).update({savings: `${parseJSON}`})
+  getDataFromDatabase = (id, setDoughnut) => {
+    let localCurrentUser = JSON.parse(localStorage.getItem('authUser'))
+    setDoughnut(localCurrentUser.savings)
   }
   
 }

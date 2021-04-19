@@ -2,7 +2,7 @@ import { Box, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-function Table({ doughnut, totalAmount, setTotalAmount }) {
+function Table({ doughnut, setDoughnut, totalAmount, setTotalAmount, firebase }) {
   const [graph, setGraph] = useState(null);
   const [percentButton, setPercentButton] = useState(false);
 
@@ -10,13 +10,60 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
     setPercentButton(!percentButton);
   };
 
-  useEffect(() => {}, []);
 
   useEffect(() => {
     let newTotalAmount = doughnut.map((cur) => cur.baseTotal);
     let addedTotal = newTotalAmount.reduce((a, b) => a + b);
     setTotalAmount(addedTotal);
-  }, [doughnut, setTotalAmount]);
+    showTable()
+  }, [doughnut,setTotalAmount]);
+
+
+
+  function showTable(){
+      // This is the structure for every item in the list of savings
+      return doughnut.map((cur, index) => (
+        <li onClick={() => showLineChart(cur.labels, index)} key={index}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            width="100%"
+          >
+            <Grid item xs={12} sm={12} md={12} xl={12}>
+              <Box display="flex" justify="space-between">
+                <span>{`${cur.labels} ${cur.amount}`}</span>
+                <span style={{ textAlign: "center" }}>
+                  {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
+                </span>
+                <span className={Math.sign(cur.currPerfomanceAmount) ===(-1)? 'down': 'up'}>
+                  {percentButton
+                    ? cur.currPerfomancePercentage + "%"
+                    : parseInt(cur.currPerfomanceAmount).toFixed(2) + "kr"}
+                </span>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={8} md={6} xl={3}>
+            <div>
+              {graph && graph[index] && (
+                <Line
+                  height={250}
+                  data={graph[index]}
+                  options={{
+                    
+                    legend: {
+                      display: true,
+                      position: "top",
+                    },
+                  }}
+                />
+              )}
+            </div>
+            </Grid>
+          </Box>
+        </li>
+      ))
+  }
 
   function showLineChart(label, index) {
     let today = new Date().toISOString().substr(0, 10);
@@ -77,51 +124,8 @@ function Table({ doughnut, totalAmount, setTotalAmount }) {
             </button>
           </span>
         </li>
-
-        {
-          // This is the structure for every item in the list of savings
-          doughnut.map((cur, index) => (
-            <li onClick={() => showLineChart(cur.labels, index)} key={index}>
-              <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="space-between"
-                width="100%"
-              >
-                <Grid item xs={12} sm={12} md={12} xl={12}>
-                  <Box display="flex" justify="space-between">
-                    <span>{`${cur.labels} ${cur.amount}`}</span>
-                    <span style={{ textAlign: "center" }}>
-                      {Math.round((cur.baseTotal * 100) / 100).toFixed(2)} kr
-                    </span>
-                    <span className={Math.sign(cur.currPerfomanceAmount) ===(-1)? 'down': 'up'}>
-                      {percentButton
-                        ? cur.currPerfomancePercentage + "%"
-                        : parseInt(cur.currPerfomanceAmount).toFixed(2) + "kr"}
-                    </span>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={6} xl={3}>
-                <div>
-                  {graph && graph[index] && (
-                    <Line
-                      height={250}
-                      data={graph[index]}
-                      options={{
-                        
-                        legend: {
-                          display: true,
-                          position: "top",
-                        },
-                      }}
-                    />
-                  )}
-                </div>
-                </Grid>
-              </Box>
-            </li>
-          ))
-        }
+          {showTable()}
+        
       </ul>
     </Grid>
   );

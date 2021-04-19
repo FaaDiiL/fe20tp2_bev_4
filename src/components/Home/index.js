@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 
-import { FirebaseContext, withFirebase } from '../Firebase'
+import { withFirebase } from '../Firebase'
 import { withAuthorization } from "../Session";
 import Chart from "./dashboard";
 import Form from "./form";
 import { StyledDash, StyledDashBody, StyledTable } from "./styles.js";
 import Table from "./table";
 
-const HomePage = ({ firebase, authUser }) => {
+const HomePage = ({ firebase }) => {
   const [doughnut, setDoughnut] = useState([
     {
       labels: "USD",
@@ -26,11 +26,21 @@ const HomePage = ({ firebase, authUser }) => {
   const [totalAmount, setTotalAmount] = useState([]);
   const myLabels = doughnut.map((cur) => cur.labels);
   const myAmount = doughnut.map((cur) => cur.amount);
+  const [tempDatabaseSavings, setTempDatabaseSavings] = useState([]);
   
-  function updateSavings(){
-    console.log(firebase.getDataFromDatabase())
+  useEffect(()=>{
+    gettingDatabaseSavings()
+  },[])
+
+  // useEffect(()=>{
+  //   if(tempDatabaseSavings.length > 1){
+  //   setDoughnut(tempDatabaseSavings)
+  // }
+  // },[setTempDatabaseSavings])
+
+  function gettingDatabaseSavings(){
+    firebase && firebase.auth.X !== undefined && firebase.getDataFromDatabase(firebase.auth.X,setDoughnut) !== null && firebase.getDataFromDatabase(firebase.auth.X, setDoughnut)
   }
-  
   // function getColorsSB(length) {
   //   let pallet = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
   //   let colors = [];
@@ -63,13 +73,15 @@ const HomePage = ({ firebase, authUser }) => {
   return (
     <StyledDashBody>
       <StyledTable>
-      <button onClick={updateSavings}>Update</button>
+      {/* <button onClick={updateSavings}>Update</button> */}
         <Form setDoughnut={setDoughnut} doughnut={doughnut} />
 
         <Table
           doughnut={doughnut}
+          setDoughnut={setDoughnut}
           totalAmount={totalAmount}
           setTotalAmount={setTotalAmount}
+          firebase={firebase}
         />
       </StyledTable>
 

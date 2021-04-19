@@ -6,9 +6,7 @@ import { Arrow, Button } from "./styles.js";
 
 const Form = ({ setDoughnut, doughnut, firebase }) => {
   const [latestRates, setLatestRates] = useState([]);
-  const [defaultDate, setDefaultDate] = useState(
-    new Date().toISOString().substr(0, 10)
-  );
+  const defaultDate  =  new Date().toISOString().substr(0, 10)
   const [arrowRotate, setArrowRotate] = useState(false);
 
   const handleRotate = () => {
@@ -28,10 +26,6 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
   const handleKeyDown = (e) => {
     ["-", "+", "e", "E"].includes(e.key) && e.preventDefault();
   };
-  
-  function saveToDatabase(){
-    firebase.pushDataToDatabase(doughnut)
-  }
   
     
   function addNewCurrency(e) {
