@@ -38,8 +38,8 @@ function Table({ doughnut, setDoughnut, totalAmount, setTotalAmount, firebase })
                 </span>
                 <span className={Math.sign(cur.currPerfomanceAmount) ===(-1)? 'down': 'up'}>
                   {percentButton
-                    ? cur.currPerfomancePercentage + "%"
-                    : parseInt(cur.currPerfomanceAmount).toFixed(2) + "kr"}
+                    ? cur.currPerfomancePercentage.toFixed(2) + "%"
+                    : parseInt(cur.currPerfomanceAmount) + "kr"}
                 </span>
               </Box>
             </Grid>

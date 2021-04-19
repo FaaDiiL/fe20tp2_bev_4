@@ -11,7 +11,6 @@ import Table from "./table";
 
 const HomePage = ({ firebase }) => {
   const authUser = useContext(AuthUserContext);
-  console.log(authUser)
   const [firebaseData, setFirebaseData] = useState([]);
   const [doughnut, setDoughnut] = useState(JSON.parse(localStorage.getItem('authUser')).savings? JSON.parse(localStorage.getItem('authUser')).savings : [
     {
@@ -68,8 +67,6 @@ const editSavings = (dataObj) => {
   // }
   const myLabels = firebaseData.map((cur) => cur.labels);
   const myAmount = firebaseData.map((cur) => cur.amount);
-  console.log(myLabels)
-  console.log(myAmount)
   const data = {
     labels: myLabels,
     datasets: [
@@ -104,7 +101,6 @@ const editSavings = (dataObj) => {
       },
     ],
   };
-  console.log(data)
   return firebaseData.length > 0 ? (
     <StyledDashBody>
       <StyledTable>

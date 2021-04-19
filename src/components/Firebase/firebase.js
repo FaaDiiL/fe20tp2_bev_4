@@ -99,8 +99,6 @@ class Firebase {
     let localCurrentUser = JSON.parse(localStorage.getItem('authUser')).savings
     setDoughnut(localCurrentUser)
     setTempDatabaseSavings(localCurrentUser)
-    console.log('localStorage from Firebase', localCurrentUser)
-    console.log('doughnut from Firebase',doughnut)
   }
   
 }
