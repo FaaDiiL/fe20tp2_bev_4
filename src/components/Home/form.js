@@ -70,21 +70,21 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
           },
         ]);
 
-        // Addding the savings to Database
-        firebase.pushDataToDatabase([{savings:[
-          ...doughnut,
-          {
-            labels,
-            amount,
-            date,
-            responseDateRate,
-            baseTotal,
-            id,
-            currPerfomancePercentage,
-            currPerfomanceAmount,
-            baseTotalToday,
-          },
-        ]}])
+        // // Addding the savings to Database
+        // firebase.pushDataToDatabase([{savings:[
+        //   ...doughnut,
+        //   {
+        //     labels,
+        //     amount,
+        //     date,
+        //     responseDateRate,
+        //     baseTotal,
+        //     id,
+        //     currPerfomancePercentage,
+        //     currPerfomanceAmount,
+        //     baseTotalToday,
+        //   },
+        // ]}])
 
         
       });
