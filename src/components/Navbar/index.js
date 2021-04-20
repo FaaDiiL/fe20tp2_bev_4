@@ -51,11 +51,12 @@ class Index extends Component {
                   authUser ? (
                     authUser.bank === 'LF' ? (
                       <>
+                      <Link to={ROUTES.LANDING}>
                         <img
                           src={logoBevLfImg}
                           alt={'Site-logo'}
                           className='logo-img'
-                        />
+                        /></Link>
                         <img
                           src={logoLfImg}
                           alt={'Site-logo'}
@@ -64,6 +65,7 @@ class Index extends Component {
                       </>
                     ) : authUser.bank === 'SB' ? (
                       <>
+                        <Link to={ROUTES.LANDING}>
                         <img
                           src={logoBevSbImg}
                           alt={'Site-logo'}
@@ -73,26 +75,29 @@ class Index extends Component {
                           src={logoSbImg}
                           alt={'Site-logo'}
                           className='bank-logo-img'
-                        />
+                        /></Link>
                       </>
                     ) : (
                       <>
+                        <Link to={ROUTES.LANDING}>
                         <img
                           src={logoBevDeImg}
                           alt={'Site-logo'}
                           className='logo-img'
-                        />
+                        /></Link>
                         <span className='logo-text'>BEV</span>
                       </>
                     )
                   ) : (
                     <>
-                      <img
-                        src={logoBevDeImg}
-                        alt={'Site-logo'}
-                        className='logo-img'
-                      />
+                    <Link to={ROUTES.LANDING}>
+                        <img
+                          src={logoBevDeImg}
+                          alt={'Site-logo'}
+                          className='logo-img'
+                        />
                       <span className='logo-text'>BEV</span>
+                      </Link>
                     </>
                   )
                 }
