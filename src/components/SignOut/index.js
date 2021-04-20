@@ -13,7 +13,7 @@ const Button = styled.button`
   padding: 10px 5px 10px 5px;
   outline: none;
   border: none;
-  margin-top: 150px;
+  margin-top: 5vh;
 
   &:hover {
     cursor: pointer;

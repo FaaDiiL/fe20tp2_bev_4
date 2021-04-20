@@ -2,9 +2,16 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import React, { useEffect, useState } from "react";
 
 import Chart from "./Chart";
-import { ConvertContainer, CurrencyContainer, FlexBoxContainer, Labels, StyledBody, StyledCont } from "./style";
+import {
+  ConvertContainer,
+  CurrencyContainer,
+  FlexBoxContainer,
+  Labels,
+  StyledBody,
+  StyledCont,
+} from "./style";
 
-const Landing = () => {
+const Landing = (props) => {
   const API_URL =
     "https://v6.exchangerate-api.com/v6/bd393756f95d150b66b63a5e/latest/SEK";
 
@@ -14,10 +21,11 @@ const Landing = () => {
   const [currencyCode, setCurrencyCode] = useState("USD"); // ex. USD, EUR
   const [total, setTotal] = useState(null);
   const [currencyToggle, setCurrencyToggle] = useState(false);
+  const newDate = new Date(); // format the time like: 2021-03-08
 
   const saveFetchedApiLS = () => {
-    //Fetches and stores data in LocalStorages each new day
     const newDate = new Date().toISOString().split("T")[0]; // format the time like: 2021-03-08
+    //Fetches and stores data in LocalStorages each new day
     if (localStorage.getItem(newDate)) {
       setRates(JSON.parse(localStorage.getItem(newDate)));
     } else {
@@ -82,7 +90,9 @@ const Landing = () => {
         <StyledCont>
           <h2>Currency Converter</h2>
 
-          <label htmlFor="number" className="text-currency-converter">Enter an amount to convert</label>
+          <label htmlFor="number" className="text-currency-converter">
+            Enter an amount to convert
+          </label>
           <input
             type="number"
             name="number"
@@ -92,12 +102,11 @@ const Landing = () => {
             onKeyDown={blockInvalidChar}
             onChange={handleChange}
           />
-<Labels>
-<span className="text-currency-converter">From:</span>
-<span className="text-currency-converter">To:</span>
-</Labels>
+          <Labels>
+            <span className="text-currency-converter">From:</span>
+            <span className="text-currency-converter">To:</span>
+          </Labels>
           <FlexBoxContainer>
-         
             <select
               onChange={handleSelect1}
               value={select1}
@@ -119,7 +128,6 @@ const Landing = () => {
             <button className="curr-conv-arrow-btn" onClick={handleShift}>
               <CompareArrowsIcon />
             </button>
-
 
             <select
               onChange={handleSelect2}
@@ -160,7 +168,12 @@ const Landing = () => {
         )}
       </ConvertContainer>
 
-      <Chart />
+      <Chart
+        rates={rates}
+        selct1={select1}
+        currencyCode={currencyCode}
+        todaysDate={newDate}
+      />
     </StyledBody>
   );
 };

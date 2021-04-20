@@ -4,7 +4,7 @@ import "@fontsource/audiowide";
 export const Container = styled.div`
   li {
     list-style: none;
-    padding: 50px 0px 0px 20px;
+    padding: 3vh 40px;
 
     &:hover  {
       color: #571d85;
@@ -60,7 +60,6 @@ export const Container = styled.div`
     padding: 8px 8px;
     margin: 10px -8px 10px 0px;
     outline: none;
-    /* cursor: pointer; */
     z-index: 5;
   }
   .navToggle.open span:first-child {
@@ -98,7 +97,7 @@ export const Container = styled.div`
     width: 250px;
     height: 100vh;
     background-color: #f4f4f4;
-    padding: 58px 15px;
+    padding: 10vh 15px;
     z-index: 3;
     transform: translateX(100%);
     transition: transform 0.25s ease;
@@ -141,7 +140,7 @@ export const StyledSignIn = styled.li`
     outline: none;
     border: none;
     color: white;
-    margin-top: 150px;
+    margin-top: 10vh;
 
     &:hover {
       cursor: pointer;

@@ -102,6 +102,11 @@ const GlobalStyle = createGlobalStyle`
     background-color:var(--buttonHoverColor);
   }
 }
+
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
+
 .window-view-height{
  min-height: 75vh;
 }
@@ -220,6 +225,10 @@ export const GlobalStyleSB = createGlobalStyle`
   &:hover{
     background-color:var(--buttonHoverColor);
   }
+}
+
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
 }
 
 .window-view-height{
@@ -344,6 +353,10 @@ export const GlobalStyleLF = createGlobalStyle`
   &:hover{
     background-color:var(--buttonHoverColor);
   }
+}
+
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
 }
 
 .window-view-height{

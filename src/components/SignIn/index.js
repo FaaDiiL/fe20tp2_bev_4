@@ -47,7 +47,6 @@ const PageContainer = styled.div`
 
 const Menu = styled.div`
   padding-bottom: 50px;
-  /* background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128)); */
   width: 210px;
   height: 400px;
 
@@ -89,12 +88,9 @@ const Menu = styled.div`
 const SelectMenu = styled.div`
   h3 {
     padding: 25px;
-    /* color: white; */
 
     &:hover {
       cursor: pointer;
-
-      /* background-color: rgb(96, 57, 128); */
     }
   }
   @media (max-width: 375px) {

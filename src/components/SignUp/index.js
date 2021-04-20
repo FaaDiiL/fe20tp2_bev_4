@@ -38,18 +38,6 @@ const PageContainer = styled.div`
   }
 `;
 
-// const DIV = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-
-//   h3 {
-//     display: block;
-//     margin-bottom: 15px;
-//   }
-// `;
-
 const SignUpPage = () => (
   <PageContainer>
     <SignUpForm />

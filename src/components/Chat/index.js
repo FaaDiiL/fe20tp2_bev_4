@@ -1,22 +1,42 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef, useState } from "react";
 import { withAuthorization, AuthUserContext } from "../Session";
 import { withFirebase } from "../Firebase";
 import Firebase from "firebase";
 import { StyledDiv } from "./style";
 import Settings from "./SettingsButton";
 import CancelIcon from "@material-ui/icons/Cancel";
+import InsertCommentIcon from "@material-ui/icons/InsertComment";
 
 const Chat = () => {
+  const [minimize, setMinimize] = useState(false);
+
+  const handleMinimize = () => {
+    setMinimize(!minimize);
+    console.log(minimize);
+  };
+
   return (
     <StyledDiv>
-      <div className="innerWrapper">
-        <div className="header">
-          <h1>Chat</h1>
-          <CancelIcon />
-        </div>
+      {minimize ? (
+        <div className="innerWrapper">
+          <div className="header">
+            <h1>Chat</h1>
+            <div>
+              <CancelIcon onClick={handleMinimize} />
+            </div>
+          </div>
 
-        <Messages />
-      </div>
+          <Messages />
+        </div>
+      ) : (
+        <div className="icon" onClick={handleMinimize}>
+          <InsertCommentIcon
+            style={{ fontSize: 40, color: "white" }}
+            onClick={handleMinimize}
+            className={!minimize && "closed"}
+          />
+        </div>
+      )}
     </StyledDiv>
   );
 };
@@ -52,6 +72,17 @@ class MessagesBase extends Component {
     this.scrollPoint = createRef();
   }
 
+  componentDidUpdate(prevState) {
+    if (prevState.messages != this.state.messages) {
+      if (this.state.messages.length > 5) {
+        this.scrollPoint.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.props.firebase.messages().off();
   }
@@ -71,12 +102,6 @@ class MessagesBase extends Component {
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
     });
     this.setState({ text: "" });
-
-    this.scrollPoint.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
   };
 
   onEditMessage = (message, text) => {
@@ -193,9 +218,13 @@ class MessageItem extends Component {
         {authUser.uid === message.userId && (
           <span>
             {editMode ? (
-              <span className="buttons">
-                <button onClick={this.onSaveEditText}>Save</button>
-                <button onClick={this.onToggleEditMode}>Reset</button>
+              <span>
+                <button className="editbtn" onClick={this.onSaveEditText}>
+                  Save
+                </button>
+                <button className="editbtn" onClick={this.onToggleEditMode}>
+                  Reset
+                </button>
               </span>
             ) : (
               <Settings
