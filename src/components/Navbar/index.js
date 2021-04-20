@@ -51,12 +51,13 @@ class Index extends Component {
                   authUser ? (
                     authUser.bank === 'LF' ? (
                       <>
-                      <Link to={ROUTES.LANDING}>
-                        <img
-                          src={logoBevLfImg}
-                          alt={'Site-logo'}
-                          className='logo-img'
-                        /></Link>
+                        <Link to={ROUTES.LANDING}>
+                          <img
+                            src={logoBevLfImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                        </Link>
                         <img
                           src={logoLfImg}
                           alt={'Site-logo'}
@@ -66,37 +67,39 @@ class Index extends Component {
                     ) : authUser.bank === 'SB' ? (
                       <>
                         <Link to={ROUTES.LANDING}>
-                        <img
-                          src={logoBevSbImg}
-                          alt={'Site-logo'}
-                          className='logo-img'
-                        />
-                        <img
-                          src={logoSbImg}
-                          alt={'Site-logo'}
-                          className='bank-logo-img'
-                        /></Link>
+                          <img
+                            src={logoBevSbImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                          <img
+                            src={logoSbImg}
+                            alt={'Site-logo'}
+                            className='bank-logo-img'
+                          />
+                        </Link>
                       </>
                     ) : (
                       <>
                         <Link to={ROUTES.LANDING}>
-                        <img
-                          src={logoBevDeImg}
-                          alt={'Site-logo'}
-                          className='logo-img'
-                        /></Link>
+                          <img
+                            src={logoBevDeImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                        </Link>
                         <span className='logo-text'>BEV</span>
                       </>
                     )
                   ) : (
                     <>
-                    <Link to={ROUTES.LANDING}>
+                      <Link to={ROUTES.LANDING}>
                         <img
                           src={logoBevDeImg}
                           alt={'Site-logo'}
                           className='logo-img'
                         />
-                      <span className='logo-text'>BEV</span>
+                        <span className='logo-text'>BEV</span>
                       </Link>
                     </>
                   )
@@ -181,24 +184,35 @@ class Index extends Component {
                 {(authUser) =>
                   authUser ? (
                     <>
-                      <Avatar
-                        title={`${authUser.username}`}
-                        size='35'
-                        md5Email={`${MD5(authUser.email)}`}
-                        value={`${authUser.username.substring(0, 2)}`}
-                        round
-                      />
-                      <p style={{marginLeft: "10px" }}>
-                        {authUser.username
-                          .split(/\s/).length > 1 ? authUser.username
-                          .split(/\s/,[1])
-                          .reduce(
-                            (response, word) => (response += word.slice(0, word.length)),
-                            ''
-                          )
-                          .toUpperCase()
-                          : authUser.username.length<10&&authUser.username.toUpperCase()}
-                      </p>
+                      <Link to={ROUTES.ACCOUNT} >
+                        <Box
+                          display='flex'
+                          flexDirection='row'
+                          alignItems='center'
+                          p={1}
+                        >
+                          <Avatar
+                            title={`${authUser.username}`}
+                            size='35'
+                            md5Email={`${MD5(authUser.email)}`}
+                            value={`${authUser.username.substring(0, 2)}`}
+                            round
+                          />
+                          <p style={{ marginLeft: '10px' }}>
+                            {authUser.username.split(/\s/).length > 1
+                              ? authUser.username
+                                  .split(/\s/, [1])
+                                  .reduce(
+                                    (response, word) =>
+                                      (response += word.slice(0, word.length)),
+                                    ''
+                                  )
+                                  .toUpperCase()
+                              : authUser.username.length < 10 &&
+                                authUser.username.toUpperCase()}
+                          </p>
+                        </Box>
+                      </Link>
                     </>
                   ) : (
                     <Link to={ROUTES.SIGN_IN}>Sign In</Link>
