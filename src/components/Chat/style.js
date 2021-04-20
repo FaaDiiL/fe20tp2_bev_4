@@ -7,8 +7,8 @@ export const StyledDiv = styled.div`
     position: fixed;
     bottom: 30px;
     left: calc(100% - 120px);
-    padding: 15px 18px;
-    margin-top: 18px;
+    /* padding: 15px 18px; */
+    /* margin-top: 18px; */
     cursor: pointer;
     border-radius: 50px;
     background: darkblue;
@@ -16,6 +16,11 @@ export const StyledDiv = styled.div`
     & > {
       transform: translateX(5px);
     }
+  }
+  .icon > {
+    position: absolute;
+    top: 10px;
+    
   }
 
   .innerWrapper {

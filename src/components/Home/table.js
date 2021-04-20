@@ -4,10 +4,8 @@ import { Line } from "react-chartjs-2";
 
 function Table({
   doughnut,
-  setDoughnut,
   totalAmount,
   setTotalAmount,
-  firebase,
 }) {
   const [graph, setGraph] = useState(null);
   const [percentButton, setPercentButton] = useState(false);

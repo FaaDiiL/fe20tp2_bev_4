@@ -119,7 +119,7 @@ class SignUpFormBase extends Component {
 
     return (
       <PageContainer>
-        <h3>Create an account</h3>
+        <h2>Create an account</h2>
         <form onSubmit={this.onSubmit}>
           <input
             name="username"
