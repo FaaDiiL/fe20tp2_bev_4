@@ -99,18 +99,12 @@ class Firebase {
       );
     }
   };
-  // Adding new to Database
-  pushDataToDatabase = (savings) => {
-    if (this.auth.currentUser.uid !== undefined) {
-      this.db.ref(`users/${this.auth.X}`).update(savings);
-    }
-  };
 
-  getDataFromDatabase = (id, setDoughnut, setTempDatabaseSavings, doughnut) => {
-    let localCurrentUser = JSON.parse(localStorage.getItem("authUser")).savings;
-    setDoughnut(localCurrentUser);
-    setTempDatabaseSavings(localCurrentUser);
-  };
+  // getDataFromDatabase = (id, setDoughnut, setTempDatabaseSavings, doughnut) => {
+  //   let localCurrentUser = JSON.parse(localStorage.getItem("authUser")).savings;
+  //   setDoughnut(localCurrentUser);
+  //   setTempDatabaseSavings(localCurrentUser);
+  // };
 }
 
 export default Firebase;
