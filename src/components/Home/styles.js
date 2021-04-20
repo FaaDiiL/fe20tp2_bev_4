@@ -20,8 +20,8 @@ export const StyledDash = styled.div`
 
   .donutWrapper {
     margin: 0 auto;
-width: 100%;
-margin-bottom: 100px;
+    width: 100%;
+    margin-bottom: 100px;
   }
 `;
 
@@ -31,7 +31,8 @@ export const StyledTable = styled.div`
   flex-direction: column;
   align-items: center;
 
-  input {
+  input,
+  select {
     width: 100%;
     padding: 12px 8px;
     border: none;
@@ -109,6 +110,5 @@ export const StyledChart = styled.div`
   width: 75%;
   margin: 0 auto;
 `;
-
 
 // Finished Dashboard styles

@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+import React, { Component } from 'react'
+import { useState } from 'react'
+import GoogleButton from 'react-google-button'
+import { withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import styled from 'styled-components'
 
-import * as ROUTES from "../../constants/routes";
-import { withFirebase } from "../Firebase";
-import { PasswordForgetForm } from "../PasswordForget";
-import { SignUpForm } from "../SignUp";
+import * as ROUTES from '../../constants/routes'
+import { withFirebase } from '../Firebase'
+import { PasswordForgetForm } from '../PasswordForget'
+import { SignUpForm } from '../SignUp'
 
 const LogIn = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-`;
+`
 
 const PageContainer = styled.div`
   margin-top: 100px;
@@ -43,11 +44,10 @@ const PageContainer = styled.div`
     padding: 5px;
     margin: 0 auto;
   }
-`;
+`
 
 const Menu = styled.div`
   padding-bottom: 50px;
-  /* background-image: linear-gradient(rgba(109, 84, 129, 0.829), rgb(96, 57, 128)); */
   width: 210px;
   height: 400px;
 
@@ -84,17 +84,14 @@ const Menu = styled.div`
       padding: 4px;
     }
   }
-`;
+`
 
 const SelectMenu = styled.div`
   h3 {
     padding: 25px;
-    /* color: white; */
 
     &:hover {
       cursor: pointer;
-
-      /* background-color: rgb(96, 57, 128); */
     }
   }
   @media (max-width: 375px) {
@@ -107,7 +104,7 @@ const SelectMenu = styled.div`
       font-size: 10px;
     }
   }
-`;
+`
 
 const Show = styled.div`
   display: flex;
@@ -130,42 +127,43 @@ const Show = styled.div`
     padding: 10px;
     margin: 0px 15px 15px 15px;
   }
-`;
+`
 
 function SignInPage() {
   <Switch>
     <Route exact path={ROUTES.SIGN_IN} component={SignInForm} />
-  </Switch>;
+    <Route exact path={ROUTES.SIGN_IN} component={SignInGoogle} />
+  </Switch>
 
-  const [pageShown, setPageShown] = useState("signIn");
+  const [pageShown, setPageShown] = useState('signIn')
 
   function signIn() {
-    setPageShown("signIn");
+    setPageShown('signIn')
   }
 
   function signUp() {
-    setPageShown("signUp");
+    setPageShown('signUp')
   }
 
   function forgotPassword() {
-    setPageShown("forgotPassword");
+    setPageShown('forgotPassword')
   }
 
   //Show different components on menu clicks
   const pageShownComponent = () => {
-    if (pageShown === "signIn") {
-      return <SignInForm />;
-    } else if (pageShown === "signUp") {
-      return <SignUpForm />;
-    } else if (pageShown === "forgotPassword") {
-      return <PasswordForgetForm />;
+    if (pageShown === 'signIn') {
+      return <SignInForm />
+    }else if (pageShown === 'signUp') {
+      return <SignUpForm />
+    } else if (pageShown === 'forgotPassword') {
+      return <PasswordForgetForm />
     }
-  };
+  }
 
   return (
     <LogIn>
-      <PageContainer className="borderColor">
-        <Menu className="accountMenu">
+      <PageContainer className='borderColor'>
+        <Menu className='accountMenu'>
           <h1>Welcome!</h1>
           <SelectMenu>
             <h3 onClick={signIn}>Sign in</h3>
@@ -176,81 +174,135 @@ function SignInPage() {
         <Show>{pageShownComponent()}</Show>
       </PageContainer>
     </LogIn>
-  );
+  )
 }
 
 const INITIAL_STATE = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
   error: null,
-};
+}
 
 class SignInFormBase extends Component {
   constructor(props) {
-    super(props);
-    this.state = { ...INITIAL_STATE };
+    super(props)
+    this.state = { ...INITIAL_STATE }
   }
 
   onSubmit = (event) => {
-    const { email, password } = this.state;
+    const { email, password } = this.state
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.setState({ ...INITIAL_STATE })
+        this.props.history.push(ROUTES.LANDING)
       })
 
       .catch((error) => {
-        this.setState({ error });
-      });
+        this.setState({ error })
+      })
 
-    event.preventDefault();
-  };
+    event.preventDefault()
+  }
 
   onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   render() {
-    const { email, password, error } = this.state;
-    const isInvalid = password === "" || email === "";
+    const { email, password, error } = this.state
+    const isInvalid = password === '' || email === ''
 
     return (
+      <div>
+              
+              
+
       <form onSubmit={this.onSubmit}>
+
+        
         <label>
           E-mail
           <input
-            name="email"
+            name='email'
             value={email}
             onChange={this.onChange}
-            type="text"
-            placeholder="E-mail..."
+            type='text'
+            placeholder='E-mail...'
           />
         </label>
 
         <label>
           Password
           <input
-            name="password"
+            name='password'
             value={password}
             onChange={this.onChange}
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
           />
         </label>
 
-        <button disabled={isInvalid} type="submit">
+        <button disabled={isInvalid} type='submit'>
           Sign In
         </button>
-
         {error && <p>{error.message}</p>}
       </form>
-    );
+      
+  
+      <div style={{width: '100%'}}>
+      <br />
+      <span style={{textAlign: 'center', width: '100%'}}>OR</span>
+      <br />
+      <hr />
+      <br />
+      <SignInGoogle />
+      </div>
+      </div>
+    )
   }
 }
 
-const SignInForm = withRouter(withFirebase(SignInFormBase));
+class SignInGoogleBase extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { error: null }
+  }
+  onSubmit = (event) => {
+    this.props.firebase
+      .doSignInWithGoogle()
+      .then((socialAuthUser) => {
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
+          username: socialAuthUser.user.displayName,
+          email: socialAuthUser.user.email,
+          roles: {},
+        })
+      })
+      .then((socialAuthUser) => {
+        this.setState({ error: null })
+        this.props.history.push(ROUTES.HOME)
+      })
+      .catch((error) => {
+        this.setState({ error })
+      })
+    event.preventDefault()
+  }
+  render() {
+    const { error } = this.state
+    return (
+      <form onSubmit={this.onSubmit}>
+      <button style={{backgroundColor: 'transparent'}} type="submit"><GoogleButton /></button>
+     
+        {error && <p>{error.message}</p>}
+      </form>
+    )
+  }
+}
 
-export default SignInPage;
-export { SignInForm };
+const SignInForm = withRouter(withFirebase(SignInFormBase))
+const SignInGoogle = withRouter(withFirebase(SignInGoogleBase))
+
+export default SignInPage
+export { SignInForm, SignInGoogle }

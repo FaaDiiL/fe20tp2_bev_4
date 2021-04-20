@@ -1,245 +1,106 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Box } from '@material-ui/core'
+import { MD5 } from 'crypto-js'
+import React, { Component } from 'react'
+import Avatar from 'react-avatar'
+import { Link } from 'react-router-dom'
 
-import * as ROLES from "../../constants/roles";
-import * as ROUTES from "../../constants/routes";
-import logoLfImg from "../../img/lf.png";
-import logoBevDeImg from "../../img/owl.svg";
-import logoBevLfImg from "../../img/owlLf.svg";
-import logoBevSbImg from "../../img/owlSb.svg";
-import logoSbImg from "../../img/swedbank.png";
-import { AuthUserContext } from "../Session";
-import SignOutButton from "../SignOut";
-
-import "@fontsource/audiowide";
-
-const Container = styled.div`
-  li {
-    list-style: none;
-    padding: 50px 0px 0px 20px;
-
-    &:hover  {
-      color: #571d85;
-    }
-  }
-
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    color: #333;
-    z-index: 10;
-    background-color: #fff;
-  }
-
-  .header a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .header .navContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    max-width: 1230px;
-    margin: 0 auto;
-  }
-  .logo {
-    margin: auto 0;
-    /* for the bev text next to the logo */
-    .logo-text {
-      font-family: "Audiowide";
-      font-size: 25px;
-      color: #571d85;
-      letter-spacing: 5px;
-    }
-    /* for the bev owl image */
-    .logo-img {
-      height: 38px;
-    }
-    /* for the bank-logo image */
-    .bank-logo-img {
-      padding-left: 15px;
-      height: 25px;
-    }
-  }
-  .navToggle {
-    display: block;
-    background-color: transparent;
-    border: none;
-    height: 38px;
-    width: 38px;
-    padding: 8px 8px;
-    margin: 10px -8px 10px 0px;
-    outline: none;
-    /* cursor: pointer; */
-    z-index: 5;
-  }
-  .navToggle.open span:first-child {
-    transform: rotate(45deg) translate(4.4px, 4.4px);
-  }
-  .navToggle.open span:nth-child(2) {
-    width: 0%;
-    opacity: 0;
-  }
-  .navToggle.open span:last-child {
-    transform: rotate(-45deg) translate(4.4px, -4.4px);
-  }
-  .navToggle span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 2px;
-    margin-bottom: 4px;
-    background-color: #333;
-    border-radius: 5px;
-  }
-  .navToggle.open span {
-    background: #333;
-  }
-
-  .navToggle span:last-child {
-    margin-bottom: 0;
-  }
-
-  .mainNav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: #f4f4f4;
-    padding: 58px 15px;
-    z-index: 3;
-    transform: translateX(100%);
-    transition: transform 0.25s ease;
-    overflow-y: auto;
-  }
-  .mainNav.open {
-    transform: translateX(0%);
-  }
-  .mainNav .mainNavLink {
-    display: block;
-    padding: 0.71875rem 0;
-    text-transform: capitalize;
-  }
-  .overlay {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    height: 0;
-    width: 0;
-    background-color: #08333333;
-    opacity: 0;
-    transition: opacity 1s ease 0.1s;
-  }
-  .overlay.open {
-    opacity: 3;
-    width: 100%;
-    height: 120%;
-  }
-`;
-const StyledSignIn = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: initial;
-
-  button {
-    background-color: #571d85;
-    padding: 10px 5px 10px 5px;
-    outline: none;
-    border: none;
-    color: white;
-    margin-top: 150px;
-
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-`;
+import * as ROLES from '../../constants/roles'
+import * as ROUTES from '../../constants/routes'
+import logoLfImg from '../../img/lf.png'
+import logoBevDeImg from '../../img/owl.svg'
+import logoBevLfImg from '../../img/owlLf.svg'
+import logoBevSbImg from '../../img/owlSb.svg'
+import logoSbImg from '../../img/swedbank.png'
+import { AuthUserContext } from '../Session'
+import SignOutButton from '../SignOut'
+import { Container, StyledSignIn } from './style'
 
 class Index extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       sideBar: false,
-    };
+    }
 
-    this.handleSidebar = this.handleSidebar.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSidebar = this.handleSidebar.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleSidebar() {
     this.setState({
       sideBar: !this.state.sideBar,
-    });
+    })
   }
 
   handleClick(e) {
-    if (e.target.nodeName === "LI" || e.target.nodeName === "BUTTON") {
+    if (e.target.nodeName === 'LI' || e.target.nodeName === 'BUTTON') {
       this.setState({
         sideBar: !this.state.sideBar,
-      });
+      })
     }
   }
 
   render() {
     return (
       <Container>
-        <header className="header">
-          <div className="navContainer">
-            <div className={"logo"}>
+        <header className='header'>
+          <div className='navContainer'>
+            <div className={'logo'}>
               <AuthUserContext.Consumer>
                 {(authUser) =>
                   authUser ? (
-                    authUser.bank === "LF" ? (
+                    authUser.bank === 'LF' ? (
                       <>
-                        <img
-                          src={logoBevLfImg}
-                          alt={"Site-logo"}
-                          className="logo-img"
-                        />
+                        <Link to={ROUTES.LANDING}>
+                          <img
+                            src={logoBevLfImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                        </Link>
                         <img
                           src={logoLfImg}
-                          alt={"Site-logo"}
-                          className="bank-logo-img"
+                          alt={'Site-logo'}
+                          className='bank-logo-img'
                         />
                       </>
-                    ) : authUser.bank === "SB" ? (
+                    ) : authUser.bank === 'SB' ? (
                       <>
-                        <img
-                          src={logoBevSbImg}
-                          alt={"Site-logo"}
-                          className="logo-img"
-                        />
-                        <img
-                          src={logoSbImg}
-                          alt={"Site-logo"}
-                          className="bank-logo-img"
-                        />
+                        <Link to={ROUTES.LANDING}>
+                          <img
+                            src={logoBevSbImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                          <img
+                            src={logoSbImg}
+                            alt={'Site-logo'}
+                            className='bank-logo-img'
+                          />
+                        </Link>
                       </>
                     ) : (
                       <>
-                        <img
-                          src={logoBevDeImg}
-                          alt={"Site-logo"}
-                          className="logo-img"
-                        />
-                        <span className="logo-text">BEV</span>
+                        <Link to={ROUTES.LANDING}>
+                          <img
+                            src={logoBevDeImg}
+                            alt={'Site-logo'}
+                            className='logo-img'
+                          />
+                        </Link>
+                        <span className='logo-text'>BEV</span>
                       </>
                     )
                   ) : (
                     <>
-                      <img
-                        src={logoBevDeImg}
-                        alt={"Site-logo"}
-                        className="logo-img"
-                      />
-                      <span className="logo-text">BEV</span>
+                      <Link to={ROUTES.LANDING}>
+                        <img
+                          src={logoBevDeImg}
+                          alt={'Site-logo'}
+                          className='logo-img'
+                        />
+                        <span className='logo-text'>BEV</span>
+                      </Link>
                     </>
                   )
                 }
@@ -251,10 +112,10 @@ class Index extends Component {
                   authUser ? (
                     <ul
                       onClick={this.handleClick}
-                      className="mainNav"
+                      className='mainNav'
                       style={
                         this.state.sideBar
-                          ? { transform: "translateX(0)" }
+                          ? { transform: 'translateX(0)' }
                           : null
                       }
                     >
@@ -289,10 +150,10 @@ class Index extends Component {
                   ) : (
                     <ul
                       onClick={this.handleClick}
-                      className="mainNav"
+                      className='mainNav'
                       style={
                         this.state.sideBar
-                          ? { transform: "translateX(0)" }
+                          ? { transform: 'translateX(0)' }
                           : null
                       }
                     >
@@ -318,24 +179,66 @@ class Index extends Component {
                 }
               </AuthUserContext.Consumer>
             </nav>
-            <button
-              onClick={this.handleSidebar}
-              className={`navToggle ${this.state.sideBar ? "open" : null}`}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
+            <Box display='flex' alignItems='center' p={1}>
+              <AuthUserContext.Consumer>
+                {(authUser) =>
+                  authUser ? (
+                    <>
+                      <Link to={ROUTES.ACCOUNT} >
+                        <Box
+                          display='flex'
+                          flexDirection='row'
+                          alignItems='center'
+                          p={1}
+                        >
+                          <Avatar
+                            title={`${authUser.username}`}
+                            size='35'
+                            md5Email={`${MD5(authUser.email)}`}
+                            value={`${authUser.username.substring(0, 2)}`}
+                            round
+                          />
+                          <p style={{ marginLeft: '10px' }}>
+                            {authUser.username.split(/\s/).length > 1
+                              ? authUser.username
+                                  .split(/\s/, [1])
+                                  .reduce(
+                                    (response, word) =>
+                                      (response += word.slice(0, word.length)),
+                                    ''
+                                  )
+                                  .toUpperCase()
+                              : authUser.username.length < 10 &&
+                                authUser.username.toUpperCase()}
+                          </p>
+                        </Box>
+                      </Link>
+                    </>
+                  ) : (
+                    <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+                  )
+                }
+              </AuthUserContext.Consumer>
+
+              <button
+                onClick={this.handleSidebar}
+                className={`navToggle ${this.state.sideBar ? 'open' : null}`}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+            </Box>
             <div
               onClick={this.handleSidebar.bind(this)}
-              className={`overlay ${this.state.sideBar ? "open" : ""}`}
+              className={`overlay ${this.state.sideBar ? 'open' : ''}`}
             />
           </div>
         </header>
-        <div className="wrapper"></div>
+        <div className='wrapper'></div>
       </Container>
-    );
+    )
   }
 }
 
-export default Index;
+export default Index

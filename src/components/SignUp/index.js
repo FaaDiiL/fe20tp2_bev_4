@@ -38,18 +38,6 @@ const PageContainer = styled.div`
   }
 `;
 
-// const DIV = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-
-//   h3 {
-//     display: block;
-//     margin-bottom: 15px;
-//   }
-// `;
-
 const SignUpPage = () => (
   <PageContainer>
     <SignUpForm />
@@ -131,7 +119,7 @@ class SignUpFormBase extends Component {
 
     return (
       <PageContainer>
-        <h3>Create an account</h3>
+        <h2>Create an account</h2>
         <form onSubmit={this.onSubmit}>
           <input
             name="username"

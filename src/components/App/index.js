@@ -36,6 +36,7 @@ const App = () => (
       }
     </AuthUserContext.Consumer>
     <Navbar />
+
     <div className="window-view-height">
       <Switch>
         <Route exact path={ROUTES.LANDING} component={LandingPage} />

@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
+    min-width: 325px;
     margin-top: 150px;
   }
   :root {
@@ -43,6 +44,20 @@ const GlobalStyle = createGlobalStyle`
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+  .text-currency-converter{ 
+    background-color: var(--headerFontColor);
+    color: white;
+  }
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+
+    &:hover {
+      color: var(--buttonHoverColor); 
+    }
+  }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -58,17 +73,17 @@ const GlobalStyle = createGlobalStyle`
   .accountMenu{
     background: var(--headerFontColor);
   }    
-    h1, h3, h4{
-      color:white;
-      &:hover:not(h4):not(h1) {
-        cursor: pointer;
-        background-color: var(--buttonHoverColor); 
-      }
-    } 
-  
-  .chooseBank{
-      color: black;
+  h1, h3, h4{
+    color:white;
+    &:hover:not(h4):not(h1) {
+      cursor: pointer;
+      background-color: var(--buttonHoverColor); 
     }
+  } 
+  
+.chooseBank{
+    color: black;
+  }
 .header{
   box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
 }
@@ -86,6 +101,11 @@ const GlobalStyle = createGlobalStyle`
   &:hover{
     background-color:var(--buttonHoverColor);
   }
+}
+
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
 
 .window-view-height{
  min-height: 75vh;
@@ -117,19 +137,37 @@ export const GlobalStyleSB = createGlobalStyle`
     background: var(--buttonHoverColor);
     color: white;
     border: none;
+    
   }
-  select{
-    box-shadow: 1px 3px 5px #9e9e9e;
-    color: black;
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+    
+    &:hover {
+      color: var(--buttonHoverColor) ; 
+    }
   }
+
   select option {
     color: black;
   }
+
   .dashboard-form input {
     margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+.dashboard-form select {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+
+  .text-currency-converter{ 
+    background-color: var(--headerFontColor);
+    color: white;
+      }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -153,7 +191,6 @@ export const GlobalStyleSB = createGlobalStyle`
     .chooseBank{
       color: black;
     }
-  }
   .header{
     box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
   }
@@ -162,13 +199,13 @@ export const GlobalStyleSB = createGlobalStyle`
       box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
   }
 
+ 
 
 .dashboard-add-cur-btn { 
   &:hover{
     background-color:var(--headerFontColor);
   }
 }
-
 
 .dashboard-add-btn{
   color: var(--headerFontColor);
@@ -190,9 +227,20 @@ export const GlobalStyleSB = createGlobalStyle`
   }
 }
 
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
+
 .window-view-height{
  min-height: 65vh;
 }
+
+.sent .username {
+    background: var(--headerFontColor);
+  }
+  .received .username {
+    background:  #571d85;
+  }
 `;
 
 // Länsförsäkringar
@@ -214,24 +262,40 @@ export const GlobalStyleLF = createGlobalStyle`
     color: var(--headerFontColor);
   }
   button{
-    background: var(--headerFontColor);
+    background: var(--buttonHoverColor);
     color: white;
     border: none;
+    
   }
-  select{
-    color:black;
-    box-shadow: 1px 3px 5px #9e9e9e;
+  .curr-conv-arrow-btn{ 
+    background: none;
+    color: var(--headerFontColor);
+    
+    &:hover {
+      color: var(--buttonHoverColor) ; 
+    }
   }
-  select option {
-    background: white;
-    color: black;
 
+  select option {
+    color: black;
   }
+
   .dashboard-form input {
     margin-top: 15px;
     color: black;
     border-bottom: 3px solid var(--headerFontColor); 
   }
+
+.dashboard-form select {
+    color: black;
+    border-bottom: 3px solid var(--headerFontColor); 
+  }
+
+  .text-currency-converter{ 
+    background-color: var(--headerFontColor);
+    color: white;
+      }
+
   .mainNav li{
     &:hover  {
       color: var(--headerFontColor);
@@ -243,11 +307,6 @@ export const GlobalStyleLF = createGlobalStyle`
   .accountMenu{
     background: var(--headerFontColor);
   }
-
-  .window-view-height{
-    height: 65vh;
-   
-  }
     
     h1, h3, h4{
       color:white;
@@ -255,19 +314,26 @@ export const GlobalStyleLF = createGlobalStyle`
         cursor: pointer;
         background-color: var(--buttonHoverColor); 
       }
-    }
-  }
-  .chooseBank{
+    } 
+    
+    .chooseBank{
       color: black;
     }
-    .header{
-      box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
-    }
+  .header{
+    box-shadow: 0 5px 20px -10px var(--buttonHoverColor);
+  }
 
-    .footer { 
+  .footer { 
       box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
   }
-    
+
+ 
+
+.dashboard-add-cur-btn { 
+  &:hover{
+    background-color:var(--headerFontColor);
+  }
+}
 
 .dashboard-add-btn{
   color: var(--headerFontColor);
@@ -279,25 +345,30 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 }
 
-.dashboard-add-cur-btn {  
+.contact-form {
+  background-color: var(--headerFontColor);
+}
+.contact-form-btn {
+  background-color: var(--buttonHoverColor);
   &:hover{
-    background-color:var(--headerFontColor);
-  } 
+    background-color:var(--buttonHoverColor);
+  }
 }
 
-  .contact-form {
-    background-color: var(--headerFontColor);
-  }
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
 
-  .contact-form-btn {
-    background-color: var(--buttonHoverColor);
-    &:hover{
-      background-color:var(--buttonHoverColor);
-    }
+.window-view-height{
+ min-height: 65vh;
+}
+
+.sent .username {
+    background: var(--headerFontColor);
   }
-  .window-view-height{
-    min-height: 65vh;
-   }
+  .received .username {
+    background:  #571d85;
+  }
 `;
 
 export default GlobalStyle;

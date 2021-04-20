@@ -1,73 +1,112 @@
-// import { useState } from '@testing-library/dom'
-import React, { useState } from 'react'
+// import { useContext, useEffect, useState } from '@testing-library/dom'
+import React, { useState, useEffect, useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 
-import { withAuthorization } from '../Session'
+import Chat from '../Chat'
+import { withFirebase } from '../Firebase'
+import { AuthUserContext, withAuthorization } from '../Session'
 import Chart from './dashboard'
 import Form from './form'
 import { StyledDash, StyledDashBody, StyledTable } from './styles.js'
 import Table from './table'
 
-const HomePage = () => {
-  const [doughnut, setDoughnut] = useState([
-    {
-      labels: 'USD',
-      amount: 500,
-      ratesOnDate: 0.8532,
-      baseTotal: 4700,
-      date: '2021-01-03',
-    },
-  ])
+const HomePage = ({ firebase }) => {
+  const authUser = useContext(AuthUserContext)
+  const [firebaseData, setFirebaseData] = useState([])
+  const [doughnut, setDoughnut] = useState(
+    JSON.parse(localStorage.getItem('authUser')).savings
+      ? JSON.parse(localStorage.getItem('authUser')).savings
+      : [
+          {
+            labels: 'USD',
+            amount: 500,
+            ratesOnDate: 0.8532,
+            baseTotal: 4700,
+            date: '2021-01-03',
+            currPerfomancePercentage: '15',
+            currPerfomanceAmount: '142',
+          },
+        ]
+  )
+
   const [totalAmount, setTotalAmount] = useState([])
-  // const [totalInBaseCurr, setTotalInBaseCurr] = useState(0)
 
-  const myLabels = doughnut.map((cur) => cur.labels)
-  const myAmount = doughnut.map((cur) => cur.amount)
-
-  function getColorsSB(length) {
-    let pallet = ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
-    let colors = []
-
-    for (let i = 0; i < length; i++) {
-      colors.push(pallet[i % pallet.length])
+  useEffect(() => {
+    if (authUser) {
+      firebase
+        .user(authUser.uid)
+        .child('savings')
+        .on('value', (snapshot) => {
+          const savingsObject = snapshot.val()
+          if (savingsObject) {
+            // om ID? se admin :) /K
+            setFirebaseData(savingsObject)
+          }
+        })
     }
-    return colors
-  }
-  console.log(getColorsSB())
+  }, [firebase, authUser])
 
+  const editSavings = (dataObj) => {
+    firebase.user(authUser.uid).child('savings').update(dataObj)
+  }
+  const myLabels = firebaseData.map((cur) => cur.labels)
+  const myAmount = firebaseData.map((cur) => cur.amount)
   const data = {
     labels: myLabels,
     datasets: [
       {
-        data: myAmount,
+        data: [...myAmount],
         backgroundColor: [
           '#003f5c',
-          '#58508d',
-          '#bc5090',
-          '#ff6361',
+          '#2f4b7c',
+          '#665191',
+          '#a05195',
+          '#d45087',
+          '#f95d6a',
+          '#ff7c43',
+          '#ffa600',
+          '#003f5c',
+          '#2f4b7c',
+          '#665191',
+          '#a05195',
+          '#d45087',
+          '#f95d6a',
+          '#ff7c43',
+          '#ffa600',
+          '#003f5c',
+          '#2f4b7c',
+          '#665191',
+          '#a05195',
+          '#d45087',
+          '#f95d6a',
+          '#ff7c43',
           '#ffa600',
         ],
-        // ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600", "#FF6384", "#36A2EB", "#FFCE56"]
-        // hoverBackgroundColor: ["#b9faf8", "#a663cc", "#cdc1ff"],
       },
     ],
   }
-
-  return (
+  return firebaseData.length > 0 ? (
     <StyledDashBody>
       <StyledTable>
-        <Form setDoughnut={setDoughnut} doughnut={doughnut} />
+      <p>Here is the place you can keep track of all your savings in all different currencies"</p>
+      <p>Press the button to start</p>
+      <br />
+      <br />
+      <br />
+      <br />
+        <Form setDoughnut={editSavings} doughnut={firebaseData} />
 
         <Table
-          doughnut={doughnut}
+          doughnut={firebaseData}
+          setDoughnut={editSavings}
           totalAmount={totalAmount}
           setTotalAmount={setTotalAmount}
+          firebase={firebase}
         />
       </StyledTable>
 
       <StyledDash>
         <div className='donutWrapper'>
-          {/* The Doughnut */}
           <Doughnut
             data={data}
             width={100}
@@ -87,11 +126,19 @@ const HomePage = () => {
         </div>
 
         <Chart />
+        <Chat />
       </StyledDash>
+    </StyledDashBody>
+  ) : (
+    <StyledDashBody>
+      <StyledTable>
+        {/* <button onClick={updateSavings}>Update</button> */}
+        <Form setDoughnut={editSavings} doughnut={firebaseData} />
+      </StyledTable>
     </StyledDashBody>
   )
 }
 
 const condition = (authUser) => !!authUser
 
-export default withAuthorization(condition)(HomePage)
+export default withAuthorization(condition)(withFirebase(HomePage))

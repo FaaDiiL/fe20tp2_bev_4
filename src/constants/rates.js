@@ -7,7 +7,7 @@ export const rates = [
     },
     success: true,
     timeseries: true,
-    base: "EUR",
+    base: "SEK",
     start_date: "2020-01-01",
     end_date: "2020-07-01",
     rates: {

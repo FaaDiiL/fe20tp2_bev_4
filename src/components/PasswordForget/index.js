@@ -27,6 +27,10 @@ button {
   display: block;
   margin: 0 auto;
 }
+h2{
+  display: block;
+  text-align: center;
+}
 
 h3{
   display: block;
@@ -93,7 +97,7 @@ class PasswordForgetFormBase extends Component {
 
     return (
       <DIV>
-    <h3>No worries! Type in your e-mail and we'll send you a link to reset your password.</h3>
+      <h2>No worries! Type in your e-mail and we'll send you a link to reset your password.</h2>
       <form onSubmit={this.onSubmit}>
         <input
           name="email"

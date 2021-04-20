@@ -10,9 +10,8 @@ var config = {
   projectId: "fe20tp2-bev-4",
   storageBucket: "fe20tp2-bev-4.appspot.com",
   messagingSenderId: "180893030057",
-  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8"
-}
-
+  appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8",
+};
 
 // Initialize Firebase
 class Firebase {
@@ -20,6 +19,8 @@ class Firebase {
     app.initializeApp(config);
     this.auth = app.auth();
     this.db = app.database();
+
+    this.googleProvider = new app.auth.GoogleAuthProvider();
   }
 
   doCreateUserWithEmailAndPassword = (email, password) =>
@@ -27,6 +28,9 @@ class Firebase {
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
+    
+  doSignInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider);
 
   doSignOut = () => this.auth.signOut();
 
@@ -61,18 +65,51 @@ class Firebase {
     });
 
   // *** User API ***
+
   user = (uid) => this.db.ref(`users/${uid}`);
+
   users = () => this.db.ref("users");
+
+  // *** Message API ***
+
+  message = (uid) => this.db.ref(`messages/${uid}`);
+
+  messages = () => this.db.ref("messages");
+
   getCurrentUser = async () => {
-    const myUserBank = await this.db.ref(`users/ ${this.auth.currentUser.uid}`).get()
-    const response = await myUserBank()
-    return response
+    const myUserBank = await this.db
+      .ref(`users/${this.auth.currentUser.uid}`)
+      .get();
+    const response = await myUserBank();
+    return response;
+  };
+  updateCurrentUserBank = (bank) => {
+    this.db
+      .ref(`users/${this.auth.currentUser.uid}`)
+      .update({ bank: `${bank}` });
+  };
+  // *** Function to delete current user ***
+  deleteCurrentUser = async () => {
+    try {
+      // Try deleting the user from the user list and localStorage
+      this.auth.currentUser.delete();
+      // If successful, also delete the post of the user in the realtime database
+      let userRef = this.db.ref(`users/${this.auth.currentUser.uid}`);
+      userRef.remove();
+      window.localStorage.clear();
+      await this.auth.signOut();
+    } catch (error) {
+      alert(
+        "Error. It was too long ago since you logged in. Please log out, and then back in, and try deleting your account again"
+      );
+    }
+  };
 
-  }
-  updateCurrentUserBank = (bank) => this.db.ref(`users/ ${this.auth.currentUser.uid}`).update({bank: `${bank}`})
-
-    
-  
+  // getDataFromDatabase = (id, setDoughnut, setTempDatabaseSavings, doughnut) => {
+  //   let localCurrentUser = JSON.parse(localStorage.getItem("authUser")).savings;
+  //   setDoughnut(localCurrentUser);
+  //   setTempDatabaseSavings(localCurrentUser);
+  // };
 }
 
 export default Firebase;
