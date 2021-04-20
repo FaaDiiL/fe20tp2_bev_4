@@ -2,14 +2,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import React, { useEffect, useState } from "react";
 
 import Chart from "./Chart";
-import {
-  ConvertContainer,
-  CurrencyContainer,
-  FlexBoxContainer,
-  Labels,
-  StyledBody,
-  StyledCont,
-} from "./style";
+import { ConvertContainer, CurrencyContainer, FlexBoxContainer, Labels, StyledBody, StyledCont } from "./style";
 
 const Landing = (props) => {
   const API_URL =
@@ -169,7 +162,6 @@ const Landing = (props) => {
       </ConvertContainer>
 
       <Chart
-        rates={rates}
         selct1={select1}
         currencyCode={currencyCode}
         todaysDate={newDate}

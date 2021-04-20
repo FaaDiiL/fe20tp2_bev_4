@@ -98,7 +98,7 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
           className="dashboard-add-cur-btn"
           style={{ width: "100%" }}
         >
-          Add Currency
+          Add Savings
           <Arrow className={arrowRotate ? "active" : ""} />
         </Button>
       }

@@ -1,7 +1,8 @@
-// import { rates } from "../../constants/rates";
+// import { useEffect, useState } from "../../constants/rates";
+import {useState, useEffect} from 'react'
 import { Line } from "react-chartjs-2";
 
-const Chart = ({ currencyCode, select1 = "SEK", rates, todaysDate }) => {
+const Chart = ({ currencyCode, select1= 'SEK', todaysDate }) => {
   //BEGINNING
 
   function calculateSixMonthBefore() {
@@ -24,73 +25,37 @@ const Chart = ({ currencyCode, select1 = "SEK", rates, todaysDate }) => {
     //sixMonths.setMonth(new Date().getMonth()+1 - 6);
   }
 
-  fetch(
-    `https://api.exchangerate.host/timeseries?base=${select1}start_date=${calculateSixMonthBefore()}&end_date=${todaysDate}`
-  )
-    .then((res) => res.json())
-    .then((data) => console.log("test: ", data));
+  const URL = `https://api.exchangerate.host/timeseries?symbols=${currencyCode}&start_date=2020-01-01&end_date=2020-07-01&base=${select1}`;
 
-  const ratesData = {
-    base: "EUR",
-    rates: {
-      "2020-01-01": {
-        USD: 1.1221,
-        AUD: 1.5993,
-        EUR: 1,
-      },
-      "2020-01-02": {
-        USD: 1.1221,
-        AUD: 1.5982,
-        EUR: 1,
-      },
-      "2020-02-01": {
-        USD: 1.1171,
-        AUD: 1.5994,
-        EUR: 1,
-      },
-      "2020-03-01": {
-        USD: 1.1171,
-        AUD: 1.5994,
-        EUR: 1,
-      },
-    },
-  };
+  const [rates, setRates] = useState({});
 
-  // console.log(Object.entries(rates));
-  calculateSixMonthBefore();
-  Object.entries(ratesData.rates).forEach(([x, y]) => {
-    if (x.endsWith("01")) {
-      console.log(` ${""}`);
-      console.log(Object.values(y)[0]);
+  useEffect(() => {
+    fetch(`${URL}`)
+      .then((res) => res.json())
+      .then((data) => setRates(data.rates));
+  }, [select1, currencyCode, URL]);
+
+  const ratesData = Object.entries(rates);
+
+  let dates = [];
+  let rateOfDate = [];
+
+  for (let i = 0; i < ratesData.length; i++) {
+    if (ratesData[i][0].endsWith("01")) {
+      dates.push(ratesData[i][0]);
+      rateOfDate.push(ratesData[i][1][currencyCode]);
     }
-  });
+  }
 
-  const chartData = {
-    labels: [],
-    values: [],
-  };
-  Object.entries(ratesData.rates).forEach(([x, y]) => {
-    if (x.endsWith("01")) {
-      chartData.labels.push(x);
-      chartData.values.push(Object.values(y)[0]);
-    }
-  }); // END
-  // filters the api to only get the date that ends with 01.
-  //The first day of the month and pushes them to chartData to be used by the Chart
-  // console.log(chartData);
-  // console.log(ratesData);
-
-  const newRateData = {
-    // necessary data to set up the chart from Chart.js
-    labels: chartData.labels,
+  const rateData = {
+    labels: dates,
     datasets: [
       {
-        label: `${select1} To ${currencyCode}`,
-        base: ratesData.base,
+        label: `${select1} / ${currencyCode}`,
         backgroundColor: "rgba(245, 150, 20, 0.5)",
-        borderColor: "#003F5C",
+                borderColor: "#003F5C",
         borderWidth: 2,
-        data: chartData.values,
+        data: rateOfDate,
       },
     ],
   };
@@ -113,7 +78,7 @@ const Chart = ({ currencyCode, select1 = "SEK", rates, todaysDate }) => {
   return (
     <div>
       <Line
-        data={newRateData}
+        data={rateData}
         width={600}
         height={400}
         options={{

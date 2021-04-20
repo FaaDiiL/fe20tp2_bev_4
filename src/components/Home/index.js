@@ -88,6 +88,12 @@ const HomePage = ({ firebase }) => {
   return firebaseData.length > 0 ? (
     <StyledDashBody>
       <StyledTable>
+      <p>Here is the place you can keep track of all your savings in all different currencies"</p>
+      <p>Press the button to start</p>
+      <br />
+      <br />
+      <br />
+      <br />
         <Form setDoughnut={editSavings} doughnut={firebaseData} />
 
         <Table
