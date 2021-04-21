@@ -1,18 +1,20 @@
-import React, { Component, createRef, useState } from "react";
-import { withAuthorization, AuthUserContext } from "../Session";
-import { withFirebase } from "../Firebase";
-import Firebase from "firebase";
-import { StyledDiv } from "./style";
-import Settings from "./SettingsButton";
 import CancelIcon from "@material-ui/icons/Cancel";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
+import { MD5 } from 'crypto-js'
+import Firebase from "firebase";
+import React, { Component, createRef, useState } from "react";
+import Avatar from 'react-avatar'
+
+import { withFirebase } from "../Firebase";
+import { AuthUserContext, withAuthorization } from "../Session";
+import Settings from "./SettingsButton";
+import { StyledDiv } from "./style";
 
 const Chat = () => {
   const [minimize, setMinimize] = useState(false);
 
   const handleMinimize = () => {
     setMinimize(!minimize);
-    console.log(minimize);
   };
 
   return (
@@ -99,6 +101,7 @@ class MessagesBase extends Component {
       text: this.state.text,
       userId: authUser.uid,
       username: authUser.username,
+      email: authUser.email,
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
     });
     this.setState({ text: "" });
@@ -106,6 +109,7 @@ class MessagesBase extends Component {
 
   onEditMessage = (message, text) => {
     const { uid, ...messageSnapshot } = message;
+    text.length !== 0 &&
     this.props.firebase.message(message.uid).set({
       ...messageSnapshot,
       text,
@@ -139,6 +143,7 @@ class MessagesBase extends Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                text.length !== 0 &&
                 this.onCreateMessage(authUser);
               }}
             >
@@ -210,7 +215,13 @@ class MessageItem extends Component {
         ) : (
           <div className="messageWrapper">
             <div className="username">
-              <span>{message.username.substring(0, 2)}</span>
+            <Avatar
+                            title={`${message.username}`}
+                            size='35'
+                            md5Email={`${MD5(message.email)}`}
+                            value={`${message.username.substring(0, 2).toUpperCase()}`}
+                            round
+                          />
             </div>
             <span className="text">{message.text}</span>
           </div>

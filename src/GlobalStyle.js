@@ -236,10 +236,10 @@ export const GlobalStyleSB = createGlobalStyle`
 }
 
 .sent .username {
-    background: var(--headerFontColor);
+    ${'' /* background: var(--headerFontColor); */}
   }
   .received .username {
-    background:  #571d85;
+    ${'' /* background:  #571d85; */}
   }
 `;
 
@@ -364,10 +364,10 @@ export const GlobalStyleLF = createGlobalStyle`
 }
 
 .sent .username {
-    background: var(--headerFontColor);
+    ${'' /* background: var(--headerFontColor); */}
   }
   .received .username {
-    background:  #571d85;
+    ${'' /* background:  #571d85; */}
   }
 `;
 
