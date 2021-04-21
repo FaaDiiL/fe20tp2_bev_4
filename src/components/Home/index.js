@@ -124,8 +124,6 @@ const HomePage = ({ firebase }) => {
             }}
           />
         </div>
-
-        <Chart />
         <Chat />
       </StyledDash>
     </StyledDashBody>
