@@ -1,31 +1,55 @@
 import styled from "styled-components";
 
-export const StyledDiv = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: calc(100% - 350px);
-  background: white;
-  width: 310px;
-  height: 450px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border: 2px solid #e5e5ea;
+export const StyledIconDiv = styled.div``;
 
-  @media (max-width: 350px) {
-    width: 100vw;
-    left: 0;
+export const StyledDiv = styled.div`
+  .icon {
+    position: fixed;
+    bottom: 30px;
+    left: calc(100% - 120px);
+    /* padding: 15px 18px; */
+    /* margin-top: 18px; */
+    cursor: pointer;
+    border-radius: 50px;
+    background: darkblue;
+    aspect-ratio: 1 / 1;
+    & > {
+      transform: translateX(5px);
+    }
   }
+  .icon > {
+    position: absolute;
+    top: 10px;
+    
+  }
+
+  .innerWrapper {
+    position: fixed;
+    bottom: 30px;
+    left: calc(100% - 350px);
+    background: white;
+    width: 280px;
+    height: 450px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px solid #e5e5ea;
+
+    @media (max-width: 350px) {
+      width: calc(100vw - 20px);
+      left: 0;
+      margin: 0 auto;
+    }
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-  }
 
-  .innerWrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    & > div {
+      cursor: pointer;
+    }
   }
 
   .main {
@@ -133,5 +157,10 @@ export const StyledDiv = styled.div`
     button {
       width: 20%;
     }
+  }
+  .editbtn {
+    padding: 3px;
+    margin: 0 3px;
+    border-radius: 5px;
   }
 `;

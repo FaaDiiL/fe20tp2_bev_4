@@ -102,6 +102,11 @@ const GlobalStyle = createGlobalStyle`
     background-color:var(--buttonHoverColor);
   }
 }
+
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
+
 .window-view-height{
  min-height: 75vh;
 }
@@ -222,15 +227,19 @@ export const GlobalStyleSB = createGlobalStyle`
   }
 }
 
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
+
 .window-view-height{
  min-height: 65vh;
 }
 
 .sent .username {
-    background: var(--headerFontColor);
+    ${'' /* background: var(--headerFontColor); */}
   }
   .received .username {
-    background:  #571d85;
+    ${'' /* background:  #571d85; */}
   }
 `;
 
@@ -346,15 +355,19 @@ export const GlobalStyleLF = createGlobalStyle`
   }
 }
 
+.Error-page-infobox{
+  background-color: var(--headerFontColor);
+}
+
 .window-view-height{
  min-height: 65vh;
 }
 
 .sent .username {
-    background: var(--headerFontColor);
+    ${'' /* background: var(--headerFontColor); */}
   }
   .received .username {
-    background:  #571d85;
+    ${'' /* background:  #571d85; */}
   }
 `;
 

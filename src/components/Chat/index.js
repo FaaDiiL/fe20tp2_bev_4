@@ -1,22 +1,44 @@
-import React, { Component, createRef } from "react";
-import { withAuthorization, AuthUserContext } from "../Session";
-import { withFirebase } from "../Firebase";
-import Firebase from "firebase";
-import { StyledDiv } from "./style";
-import Settings from "./SettingsButton";
 import CancelIcon from "@material-ui/icons/Cancel";
+import InsertCommentIcon from "@material-ui/icons/InsertComment";
+import { MD5 } from 'crypto-js'
+import Firebase from "firebase";
+import React, { Component, createRef, useState } from "react";
+import Avatar from 'react-avatar'
+
+import { withFirebase } from "../Firebase";
+import { AuthUserContext, withAuthorization } from "../Session";
+import Settings from "./SettingsButton";
+import { StyledDiv } from "./style";
 
 const Chat = () => {
+  const [minimize, setMinimize] = useState(false);
+
+  const handleMinimize = () => {
+    setMinimize(!minimize);
+  };
+
   return (
     <StyledDiv>
-      <div className="innerWrapper">
-        <div className="header">
-          <h1>Chat</h1>
-          <CancelIcon />
-        </div>
+      {minimize ? (
+        <div className="innerWrapper">
+          <div className="header">
+            <h1>Chat</h1>
+            <div>
+              <CancelIcon onClick={handleMinimize} />
+            </div>
+          </div>
 
-        <Messages />
-      </div>
+          <Messages />
+        </div>
+      ) : (
+        <div className="icon" onClick={handleMinimize}>
+          <InsertCommentIcon
+            style={{ fontSize: 40, color: "white" }}
+            onClick={handleMinimize}
+            className={!minimize && "closed"}
+          />
+        </div>
+      )}
     </StyledDiv>
   );
 };
@@ -52,6 +74,17 @@ class MessagesBase extends Component {
     this.scrollPoint = createRef();
   }
 
+  componentDidUpdate(prevState) {
+    if (prevState.messages != this.state.messages) {
+      if (this.state.messages.length > 5) {
+        this.scrollPoint.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.props.firebase.messages().off();
   }
@@ -68,19 +101,15 @@ class MessagesBase extends Component {
       text: this.state.text,
       userId: authUser.uid,
       username: authUser.username,
+      email: authUser.email,
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
     });
     this.setState({ text: "" });
-
-    this.scrollPoint.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
   };
 
   onEditMessage = (message, text) => {
     const { uid, ...messageSnapshot } = message;
+    text.length !== 0 &&
     this.props.firebase.message(message.uid).set({
       ...messageSnapshot,
       text,
@@ -114,6 +143,7 @@ class MessagesBase extends Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                text.length !== 0 &&
                 this.onCreateMessage(authUser);
               }}
             >
@@ -185,7 +215,13 @@ class MessageItem extends Component {
         ) : (
           <div className="messageWrapper">
             <div className="username">
-              <span>{message.username.substring(0, 2)}</span>
+            <Avatar
+                            title={`${message.username}`}
+                            size='35'
+                            md5Email={`${MD5(message.email)}`}
+                            value={`${message.username.substring(0, 2).toUpperCase()}`}
+                            round
+                          />
             </div>
             <span className="text">{message.text}</span>
           </div>
@@ -193,9 +229,13 @@ class MessageItem extends Component {
         {authUser.uid === message.userId && (
           <span>
             {editMode ? (
-              <span className="buttons">
-                <button onClick={this.onSaveEditText}>Save</button>
-                <button onClick={this.onToggleEditMode}>Reset</button>
+              <span>
+                <button className="editbtn" onClick={this.onSaveEditText}>
+                  Save
+                </button>
+                <button className="editbtn" onClick={this.onToggleEditMode}>
+                  Reset
+                </button>
               </span>
             ) : (
               <Settings
