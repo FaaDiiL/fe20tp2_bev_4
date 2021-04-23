@@ -1,9 +1,9 @@
 import CancelIcon from "@material-ui/icons/Cancel";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-import { MD5 } from 'crypto-js'
+import { MD5 } from "crypto-js";
 import Firebase from "firebase";
 import React, { Component, createRef, useState } from "react";
-import Avatar from 'react-avatar'
+import Avatar from "react-avatar";
 
 import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../Session";
@@ -33,7 +33,7 @@ const Chat = () => {
       ) : (
         <div className="icon" onClick={handleMinimize}>
           <InsertCommentIcon
-            style={{ fontSize: 40, color: "white" }}
+            style={{ fontSize: 30, color: "white" }}
             onClick={handleMinimize}
             className={!minimize && "closed"}
           />
@@ -110,11 +110,11 @@ class MessagesBase extends Component {
   onEditMessage = (message, text) => {
     const { uid, ...messageSnapshot } = message;
     text.length !== 0 &&
-    this.props.firebase.message(message.uid).set({
-      ...messageSnapshot,
-      text,
-      editedAt: Firebase.database.ServerValue.TIMESTAMP,
-    });
+      this.props.firebase.message(message.uid).set({
+        ...messageSnapshot,
+        text,
+        editedAt: Firebase.database.ServerValue.TIMESTAMP,
+      });
   };
 
   render() {
@@ -143,8 +143,7 @@ class MessagesBase extends Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                text.length !== 0 &&
-                this.onCreateMessage(authUser);
+                text.length !== 0 && this.onCreateMessage(authUser);
               }}
             >
               <input type="text" value={text} onChange={this.onChangeText} />
@@ -215,13 +214,13 @@ class MessageItem extends Component {
         ) : (
           <div className="messageWrapper">
             <div className="username">
-            <Avatar
-                            title={`${message.username}`}
-                            size='35'
-                            md5Email={`${MD5(message.email)}`}
-                            value={`${message.username.substring(0, 2).toUpperCase()}`}
-                            round
-                          />
+              <Avatar
+                title={`${message.username}`}
+                size="35"
+                md5Email={`${MD5(message.email)}`}
+                value={`${message.username.substring(0, 2).toUpperCase()}`}
+                round
+              />
             </div>
             <span className="text">{message.text}</span>
           </div>
@@ -240,8 +239,8 @@ class MessageItem extends Component {
             ) : (
               <Settings
                 deleteFunc={() => onRemoveMessage(message.uid)}
-                editFunc={this.onToggleEditMode}
                 valueDelete={"Delete"}
+                editFunc={this.onToggleEditMode}
                 valueEdit={"Edit"}
               />
             )}

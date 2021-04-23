@@ -1,8 +1,18 @@
 // import { useEffect, useState } from "../../constants/rates";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import styled from "styled-components";
 
-const Chart = ({ currencyCode, select1= 'SEK', todaysDate }) => {
+const StyledChart = styled.div`
+  width: 100%;
+  max-width: 600px;
+
+  % > {
+    width: 90%;
+  }
+`;
+
+const Chart = ({ currencyCode, select1 = "SEK", todaysDate }) => {
   //BEGINNING
 
   function calculateSixMonthBefore() {
@@ -13,16 +23,6 @@ const Chart = ({ currencyCode, select1= 'SEK', todaysDate }) => {
     let sixMonthsAgo = datum.getMonth() - 6;
     datum.setMonth(sixMonthsAgo, today);
     return datum.toISOString().split("T")[0];
-
-    // let AddOneDay = 86400;
-    // let min = parseInt("1");
-    // let max = parseInt("12");
-
-    // console.log("Now", monthOfTodaysDate);
-
-    // console.log("Before6Month", monthOfTodaysDate - 4);
-
-    //sixMonths.setMonth(new Date().getMonth()+1 - 6);
   }
 
   const URL = `https://api.exchangerate.host/timeseries?symbols=${currencyCode}&start_date=2020-01-01&end_date=2020-07-01&base=${select1}`;
@@ -53,34 +53,19 @@ const Chart = ({ currencyCode, select1= 'SEK', todaysDate }) => {
       {
         label: `${select1} / ${currencyCode}`,
         backgroundColor: "rgba(245, 150, 20, 0.5)",
-                borderColor: "#003F5C",
+        borderColor: "#003F5C",
         borderWidth: 2,
         data: rateOfDate,
       },
     ],
   };
 
-  // const rateData = {
-  //   // necessary data to set up the chart from Chart.js
-  //   labels: chartData.labels,
-  //   datasets: [
-  //     {
-  //       label: "SEK / USD",
-  //       base: select1,
-  //       backgroundColor: "rgba(245, 150, 20, 0.5)",
-  //       borderColor: "#003F5C",
-  //       borderWidth: 2,
-  //       data: chartData.values,
-  //     },
-  //   ],
-  // }; // CHART.JS docs for more info about the syntax
-
   return (
-    <div>
+    <StyledChart>
       <Line
         data={rateData}
-        width={600}
-        height={400}
+        width={60}
+        height={60}
         options={{
           title: {
             display: true,
@@ -93,7 +78,7 @@ const Chart = ({ currencyCode, select1= 'SEK', todaysDate }) => {
           },
         }}
       />
-    </div>
+    </StyledChart>
   );
 };
 

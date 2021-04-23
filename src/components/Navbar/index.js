@@ -13,7 +13,7 @@ import logoBevSbImg from '../../img/owlSb.svg'
 import logoSbImg from '../../img/swedbank.png'
 import { AuthUserContext } from '../Session'
 import SignOutButton from '../SignOut'
-import { Container, StyledSignIn } from './style'
+import { Container, StyledSignIn, StyledName } from './style'
 
 class Index extends Component {
   constructor(props) {
@@ -198,7 +198,7 @@ class Index extends Component {
                             value={`${authUser.username.substring(0, 2)}`}
                             round
                           />
-                          <p style={{ marginLeft: '10px' }}>
+                          <StyledName style={{ marginLeft: '10px' }}>
                             {authUser.username.split(/\s/).length > 1
                               ? authUser.username
                                   .split(/\s/, [1])
@@ -210,7 +210,7 @@ class Index extends Component {
                                   .toUpperCase()
                               : authUser.username.length < 10 &&
                                 authUser.username.toUpperCase()}
-                          </p>
+                          </StyledName>
                         </Box>
                       </Link>
                     </>

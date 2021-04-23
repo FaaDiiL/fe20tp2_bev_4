@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Collapsible from "react-collapsible";
 
-import { withFirebase } from "../Firebase"
+import { withFirebase } from "../Firebase";
 import { Arrow, Button } from "./styles.js";
 
 const Form = ({ setDoughnut, doughnut, firebase }) => {
   const [latestRates, setLatestRates] = useState([]);
-  const defaultDate  =  new Date().toISOString().substr(0, 10)
+  const defaultDate = new Date().toISOString().substr(0, 10);
   const [arrowRotate, setArrowRotate] = useState(false);
 
   const handleRotate = () => {
     setArrowRotate(!arrowRotate);
   };
 
-  
   useEffect(() => {
     const newDate = new Date().toISOString().split("T")[0];
     if (localStorage.getItem(newDate)) {
@@ -21,13 +20,10 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
     }
   }, []);
 
- 
-  
   const handleKeyDown = (e) => {
     ["-", "+", "e", "E"].includes(e.key) && e.preventDefault();
   };
-  
-    
+
   function addNewCurrency(e) {
     e.preventDefault();
     let labels = e.target[0].value.toUpperCase();
@@ -85,8 +81,6 @@ const Form = ({ setDoughnut, doughnut, firebase }) => {
         //     baseTotalToday,
         //   },
         // ]}])
-
-        
       });
   }
 

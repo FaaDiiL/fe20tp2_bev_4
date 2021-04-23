@@ -28,9 +28,8 @@ class Firebase {
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
-    
-  doSignInWithGoogle = () =>
-    this.auth.signInWithPopup(this.googleProvider);
+
+  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
 
   doSignOut = () => this.auth.signOut();
 
@@ -75,6 +74,12 @@ class Firebase {
   message = (uid) => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref("messages");
+
+  // *** Savings API ***
+
+  saving = (uid) => this.db.ref(`users/${uid}/savings/`);
+
+  savings = () => this.db.ref("savings");
 
   getCurrentUser = async () => {
     const myUserBank = await this.db

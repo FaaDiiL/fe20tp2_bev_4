@@ -79,6 +79,7 @@ const PageContainer = styled.div`
 
   width: 550px;
   border-radius: 4px;
+
 `;
 
 const Show = styled.div`

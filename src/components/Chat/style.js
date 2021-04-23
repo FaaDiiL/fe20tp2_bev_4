@@ -7,10 +7,10 @@ export const StyledDiv = styled.div`
     position: fixed;
     bottom: 30px;
     left: calc(100% - 120px);
-    /* padding: 15px 18px; */
+    padding: 10px;
     /* margin-top: 18px; */
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 100vh;
     background: darkblue;
     aspect-ratio: 1 / 1;
     & > {
@@ -19,8 +19,6 @@ export const StyledDiv = styled.div`
   }
   .icon > {
     position: absolute;
-    top: 10px;
-    
   }
 
   .innerWrapper {

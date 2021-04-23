@@ -11,6 +11,8 @@ export const StyledDashBody = styled.main`
   margin: 0 auto;
 `;
 
+
+
 export const StyledDash = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,7 +23,16 @@ export const StyledDash = styled.div`
   .donutWrapper {
     margin: 0 auto;
     width: 100%;
-    margin-bottom: 100px;
+    max-width: 500px;
+    /* min-width: 90%; */
+    margin-bottom:50px;
+
+    @media(max-width: 700px){
+      max-width: 400px;
+      display:flex;
+      justify-content:center;
+
+    }
   }
 `;
 
@@ -30,6 +41,19 @@ export const StyledTable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 900px){
+    width: 80%;
+
+    li{
+      font-size: 14px;
+      padding-left: 20px;
+      &:hover:not(:nth-child(-n + 2)) {
+    cursor: pointer;
+   background-color: #ededed;
+  }
+    }
+  }
 
   input,
   select {
@@ -55,6 +79,7 @@ export const StyledTable = styled.div`
     width: 100%;
     padding: 15px 5px;
     border-bottom: 1px solid #d4d0dc;
+    
   }
   span {
     width: 100%;
