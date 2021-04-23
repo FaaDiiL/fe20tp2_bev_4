@@ -69,7 +69,7 @@ const Chart = ({ currencyCode, select1 = "SEK", todaysDate }) => {
         options={{
           title: {
             display: true,
-            text: "Fluctuations over time",
+           
             fontSize: 10,
           },
           legend: {

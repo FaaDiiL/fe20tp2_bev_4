@@ -11,15 +11,12 @@ const PageContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
-  h1 {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    display: block;
+  h2 {
+    margin-bottom: 10px;
   }
   p {
     margin-bottom: 50px;
   }
-
   form {
     display: flex;
     flex-direction: column;
@@ -105,7 +102,7 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      // isAdmin,
+      isAdmin,
       bank,
       error,
     } = this.state;
@@ -164,15 +161,15 @@ class SignUpFormBase extends Component {
             <option value="SB">Swedbank</option>
             <option value="LF">Länsförsäkringar</option>
           </select>
-          {/*           <label>
+          <label>
             Admin:
-            <input
-              name="isAdmin"
-              type="checkbox"
-              checked={isAdmin}
-              onChange={this.onChangeCheckbox}
-            />
-          </label> */}
+              <input
+                name="isAdmin"
+                type="checkbox"
+                checked={isAdmin}
+                onChange={this.onChangeCheckbox}
+              />
+          </label>
           <button disabled={isInvalid} type="submit">
             Sign Up
           </button>

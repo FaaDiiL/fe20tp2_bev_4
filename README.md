@@ -56,6 +56,7 @@
 - [styled-components](https://styled-components.com/)
 - [React-router-dom](https://reactrouter.com/web/guides/quick-start)
 - [Chart.js](https://www.chartjs.org/)
+- [Trello](https://trello.com/b/cVkB9caj/tp2-grupp-4)
 
 ## Getting Started
 

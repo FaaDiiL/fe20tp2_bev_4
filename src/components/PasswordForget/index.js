@@ -4,15 +4,14 @@ import { withFirebase } from "../Firebase";
 
 import styled from 'styled-components'
 
-const PageContainer = styled.div`
+ const PageContainer = styled.div`
 display: flex;
 align-items: center;
 justify-content: center; 
 flex-direction: column;
 
-h1 { 
-margin-top: 100px;
-display: block;
+h2 { 
+font-size: 16px;
 }
 
 p{
@@ -36,7 +35,7 @@ h3{
   display: block;
   text-align: center;
 }
-`;
+`; 
 
 const DIV = styled.div`
 display: flex;
@@ -44,18 +43,27 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 
-h3{
+h2{
   display: block;
   text-align: center;
   margin-bottom: 40px;
-  width: 180px;
 }
 `;
 
- const PasswordForgetPage = () => (
-  <PageContainer>
-    <h1> Reset your password by entering your e-mail:</h1>
+const ErrorMessage = styled.p `
+width: 80%;
+margin-left: 20px;
+font-size: 10px;
+color: red;
+margin-top: 15px;
+text-align: center;
+border: 1px solid red;
+padding: 5px;
+margin-bottom: 0px;
+`;
 
+  const PasswordForgetPage = () => (
+  <PageContainer>
    <PasswordForgetForm />
   </PageContainer>
 ); 
@@ -97,7 +105,7 @@ class PasswordForgetFormBase extends Component {
 
     return (
       <DIV>
-      <h2>No worries! Type in your e-mail and we'll send you a link to reset your password.</h2>
+      <h2>Type in your e-mail and we'll send you a link to reset your password.</h2>
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -110,14 +118,14 @@ class PasswordForgetFormBase extends Component {
         <button disabled={isInvalid} type="submit">
           Reset My Password
         </button>
-        {error && <p>{error.message}</p>}
+        {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </form>
     </DIV>);
   }
 }
 
 
- export default PasswordForgetPage;
+ export default PasswordForgetPage; 
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 

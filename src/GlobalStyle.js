@@ -37,12 +37,17 @@ const GlobalStyle = createGlobalStyle`
   }
   select{
     color:black;
-    /* box-shadow: 1px 3px 5px #9e9e9e; */
-    border-bottom: 3px solid var(--headerFontColor)
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 3px solid var(--headerFontColor);
   }
   .dashboard-form input {
     margin-top: 15px;
     color: black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     border-bottom: 3px solid var(--headerFontColor); 
   }
 
@@ -58,14 +63,17 @@ const GlobalStyle = createGlobalStyle`
       color: var(--buttonHoverColor); 
     }
   }
-
   .mainNav li{
     &:hover  {
-      color: var(--headerFontColor);
+        color: white;
+        background-color: #571d85;
     }
   }
   input {
     color: black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     border-bottom: 3px solid var(--headerFontColor)
   }
   .borderColor{
@@ -169,9 +177,11 @@ export const GlobalStyleSB = createGlobalStyle`
     color: white;
       }
 
+
   .mainNav li{
     &:hover  {
-      color: var(--headerFontColor);
+      color: white;
+      background-color: var(--headerFontColor);
     }
   }
   .borderColor{
@@ -199,8 +209,6 @@ export const GlobalStyleSB = createGlobalStyle`
   .footer { 
       box-shadow: 0 5px 30px -10px var(--buttonHoverColor);
   }
-
- 
 
 .dashboard-add-cur-btn { 
   &:hover{
@@ -299,7 +307,8 @@ export const GlobalStyleLF = createGlobalStyle`
 
   .mainNav li{
     &:hover  {
-      color: var(--headerFontColor);
+      color: white;
+      background-color: var(--headerFontColor);
     }
   }
   .borderColor{

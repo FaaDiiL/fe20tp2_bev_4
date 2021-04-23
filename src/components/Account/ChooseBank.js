@@ -5,6 +5,8 @@ import { withFirebase } from "../Firebase";
 const BankContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   h2 {
     margin: 0 auto;
@@ -21,6 +23,7 @@ const BankContainer = styled.div`
   button {
     display: block;
     padding: 5px;
+    margin: 0 auto;
 
     &:hover {
       cursor: pointer;

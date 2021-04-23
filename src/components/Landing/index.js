@@ -161,8 +161,9 @@ const Landing = (props) => {
         )}
       </ConvertContainer>
 
+<h2>Currency value over time</h2>
       <Chart
-        selct1={select1}
+        select1={select1}
         currencyCode={currencyCode}
         todaysDate={newDate}
       />
