@@ -13,21 +13,21 @@ import Table from './table'
 const HomePage = ({ firebase }) => {
   const authUser = useContext(AuthUserContext)
   const [firebaseData, setFirebaseData] = useState([])
-  const [doughnut, setDoughnut] = useState(
-    JSON.parse(localStorage.getItem('authUser')).savings
-      ? JSON.parse(localStorage.getItem('authUser')).savings
-      : [
-          {
-            labels: 'USD',
-            amount: 500,
-            ratesOnDate: 0.8532,
-            baseTotal: 4700,
-            date: '2021-01-03',
-            currPerfomancePercentage: '15',
-            currPerfomanceAmount: '142',
-          },
-        ]
-  )
+  // const [doughnut, setDoughnut] = useState(
+  //   JSON.parse(localStorage.getItem('authUser')).savings
+  //     ? JSON.parse(localStorage.getItem('authUser')).savings
+  //     : [
+  //         {
+  //           labels: 'USD',
+  //           amount: 500,
+  //           ratesOnDate: 0.8532,
+  //           baseTotal: 4700,
+  //           date: '2021-01-03',
+  //           currPerfomancePercentage: '15',
+  //           currPerfomanceAmount: '142',
+  //         },
+  //       ]
+  // )
 
   const [totalAmount, setTotalAmount] = useState([])
 
