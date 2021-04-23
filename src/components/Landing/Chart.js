@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "../../constants/rates";
 import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
@@ -13,17 +12,6 @@ const StyledChart = styled.div`
 `;
 
 const Chart = ({ currencyCode, select1 = "SEK", todaysDate }) => {
-  //BEGINNING
-
-  function calculateSixMonthBefore() {
-    // monthOfTodaysDate = dagens månad
-
-    let datum = new Date();
-    let today = datum.getDay();
-    let sixMonthsAgo = datum.getMonth() - 6;
-    datum.setMonth(sixMonthsAgo, today);
-    return datum.toISOString().split("T")[0];
-  }
 
   const URL = `https://api.exchangerate.host/timeseries?symbols=${currencyCode}&start_date=2020-01-01&end_date=2020-07-01&base=${select1}`;
 

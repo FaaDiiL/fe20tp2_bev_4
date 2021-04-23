@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import { CgTrash } from "react-icons/cg";
-import { Link, Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+import {Container} from '@material-ui/core'
+import React, { Component } from 'react'
+import { CgInfo, CgTrash } from 'react-icons/cg'
+import { Link, Route, Switch } from 'react-router-dom'
+import styled from 'styled-components'
 
-import * as ROLES from "../../constants/roles";
-import * as ROUTES from "../../constants/routes";
-import { withFirebase } from "../Firebase";
-import { withAuthorization } from "../Session";
-
-import "firebase/auth";
+import * as ROLES from '../../constants/roles'
+import * as ROUTES from '../../constants/routes'
+import { withFirebase } from '../Firebase'
+import { withAuthorization } from '../Session'
 
 const Header = styled.div`
   padding: 15px;
@@ -36,20 +35,20 @@ const Header = styled.div`
     text-align: center;
     padding: 15px;
   }
-`;
+`
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   margin: 10px;
   width: 75%;
   min-height: 400px;
   color: black;
-  box-shadow: 1px 3px 5px #571d85;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 414px) {
     width: 300px;
@@ -58,7 +57,7 @@ const Container = styled.div`
       font-size: 10px;
     }
   }
-`;
+`
 
 const Div = styled.div`
   display: flex;
@@ -66,13 +65,17 @@ const Div = styled.div`
   justify-content: space-around;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 
+  .last {
+    text-align: right;
+  }
+
   span {
     padding: 20px;
     color: black;
     width: 35%;
     font-weight: bold;
   }
-`;
+`
 
 const Members = styled.div`
   display: flex;
@@ -85,7 +88,6 @@ const Members = styled.div`
     flex-direction: column;
     width: 100%;
     list-style: none;
-    padding-inline-start: 20px;
   }
 
   li {
@@ -93,21 +95,21 @@ const Members = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    border-bottom: 1px solid gray;
   }
 
   button {
-    font-size: 1.3rem;
     color: black;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: white;
     border-radius: 4px;
     border: none;
-    padding: 3px;
-    position: relative;
-    right: 22px;
-    top: 5px;
+    margin: auto 5px;
     &:hover {
+      background-color: transparent;
       cursor: pointer;
-      text-decoration: underline;
+    }
+    & > * {
+      font-size: 1.3rem;
     }
   }
 
@@ -115,7 +117,17 @@ const Members = styled.div`
     padding: 20px;
     width: 30%;
   }
-`;
+  span.detail {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 5px;
+
+    a {
+      color: black;
+    }
+  }
+`
 
 const ResetPasswordButton = styled.button`
   border-radius: 4px;
@@ -124,19 +136,13 @@ const ResetPasswordButton = styled.button`
   padding: 15px;
   color: white;
   border: none;
-  background-color: #571d85;
 
   &:hover {
     cursor: pointer;
-    text-decoration: underline;
   }
-`;
+`
 
 const Menu = styled.div`
-  background-image: linear-gradient(
-    rgba(109, 84, 129, 0.829),
-    rgb(96, 57, 128)
-  );
   width: 220px;
   height: 400px;
 
@@ -187,34 +193,43 @@ const Menu = styled.div`
       padding: 4px;
     }
   }
-`;
+`
 
 const MemberCont = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 auto;
-  border: 2px solid #571d85;
   width: 550px;
   border-radius: 4px;
-`;
+`
 
 const Show = styled.div`
   display: flex;
-  justify-content: center;
+  width:100%;
+  justify-content:space-evenly;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto;
 
-  h3 {
-    margin-bottom: 10px;
-    color: #571d85;
+  h2 {
+    margin-bottom: 20px;
   }
-`;
+  &::last-child{
+    justify-self: flex-start;
+  }
+`
 
-const Back = styled.div`
-  text-align: center;
-  padding: 30px;
-`;
+const Back = styled.button`
+  border-radius: 4px;
+  outline: none;
+  font-size: 12px;
+  padding: 15px;
+  color: white;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 const AdminPage = () => (
   <div>
@@ -223,59 +238,58 @@ const AdminPage = () => (
       <Route exact path={ROUTES.ADMIN} component={UserList} />
     </Switch>
   </div>
-);
+)
 
 class UserListBase extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       loading: false,
       users: [],
-    };
+    }
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
+    this.setState({ loading: true })
 
-    //Listener to fetch users in database
-    this.props.firebase.users().on("value", (snapshot) => {
-      const usersObject = snapshot.val();
+    this.props.firebase.users().on('value', (snapshot) => {
+      const usersObject = snapshot.val()
 
       const usersList = Object.keys(usersObject).map((key) => ({
         ...usersObject[key],
         uid: key,
-      }));
+      }))
 
       this.setState({
         users: usersList,
         loading: false,
-      });
-    });
+      })
+    })
   }
 
   componentWillUnmount() {
-    this.props.firebase.users().off();
+    this.props.firebase.users().off()
   }
 
   render() {
-    const { users, loading } = this.state;
+    const { users, loading } = this.state
 
     return (
-      <div>
+      <Container maxWidth='lg'>
         <Header>
-          <h1>Admin Dashboard</h1>
+          <h2>Admin Dashboard</h2>
           <h2>Members</h2>
         </Header>
 
         <PageContainer>
           {loading && <div>Loading ...</div>}
 
-          <Container>
+          <StyledContainer>
             <Div>
               <span>USERNAME:</span>
               <span>EMAIL:</span>
-              <span>DETAILS:</span>
+              <span className='last'>DETAILS:</span>
             </Div>
             <Members>
               <ul>
@@ -283,74 +297,74 @@ class UserListBase extends Component {
                   <li key={user.uid}>
                     <span>{user.username}</span>
                     <span>{user.email}</span>
-                    <span>
+                    <span className='detail'>
                       <Link
                         to={{
                           pathname: `${ROUTES.ADMIN}/${user.uid}`,
                           state: { user },
                         }}
                       >
-                        Details
+                        <CgInfo />
                       </Link>
+                      <button>
+                        <CgTrash className='deleteIcon' />
+                      </button>
                     </span>
-                    <button>
-                      <CgTrash className="icon" />
-                    </button>
                   </li>
                 ))}
               </ul>
             </Members>
-          </Container>
+          </StyledContainer>
         </PageContainer>
-      </div>
-    );
+      </Container>
+    )
   }
 }
 
 class UserItemBase extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       loading: false,
       user: null,
       ...props.location.state,
-    };
+    }
   }
   componentDidMount() {
     if (this.state.user) {
-      return;
+      return
     }
-    this.setState({ loading: true });
+    this.setState({ loading: true })
     this.props.firebase
       .user(this.props.match.params.id)
-      .on("value", (snapshot) => {
+      .on('value', (snapshot) => {
         this.setState({
           user: snapshot.val(),
           loading: false,
-        });
-      });
+        })
+      })
   }
   componentWillUnmount() {
-    this.props.firebase.user(this.props.match.params.id).off();
+    this.props.firebase.user(this.props.match.params.id).off()
   }
 
   onSendPasswordResetEmail = () => {
-    this.props.firebase.doPasswordReset(this.state.user.email);
+    this.props.firebase.doPasswordReset(this.state.user.email)
 
-    alert("E-mail sent!");
-  };
+    alert('E-mail sent!')
+  }
 
   render() {
-    const { user, loading } = this.state;
+    const { user, loading } = this.state
     return (
       <>
         <Header>
-          <h1>Admin Dashboard</h1>
+          <h2>Admin Dashboard</h2>
         </Header>
 
-        <MemberCont>
+        <MemberCont className='borderColor'>
           {loading && <div>Loading ...</div>}
-          <Menu>
+          <Menu className='adminMenu'>
             <h1>Member Details</h1>
             <h3>Username:</h3>
             <span> {user.username}</span>
@@ -360,33 +374,34 @@ class UserItemBase extends Component {
             <span> {user.email}</span>
           </Menu>
           <Show>
-            <h3>Reset member password</h3>
-            <ResetPasswordButton
-              type="button"
-              onClick={this.onSendPasswordResetEmail}
-            >
-              Password Reset
-            </ResetPasswordButton>
+              <h2>Reset member password</h2>
+              <ResetPasswordButton
+                type='button'
+                className='adminResetPassword'
+                onClick={this.onSendPasswordResetEmail}
+              >
+                Password Reset
+              </ResetPasswordButton>
+              <Back>
+                <Link
+                  to={{
+                    pathname: `${ROUTES.ADMIN}`,
+                  }}
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  Back
+                </Link>
+              </Back>
           </Show>
         </MemberCont>
-
-        <Back>
-          <Link
-            to={{
-              pathname: `${ROUTES.ADMIN}`,
-            }}
-          >
-            Back
-          </Link>
-        </Back>
       </>
-    );
+    )
   }
 }
 
-const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
+const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN]
 
-const UserList = withFirebase(UserListBase);
-const UserItem = withFirebase(UserItemBase);
+const UserList = withFirebase(UserListBase)
+const UserItem = withFirebase(UserItemBase)
 
-export default withAuthorization(condition)(withFirebase(AdminPage));
+export default withAuthorization(condition)(withFirebase(AdminPage))

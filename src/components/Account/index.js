@@ -18,6 +18,7 @@ const Menu = styled.div`
   width: 210px;
   height: 400px;
 
+
   h1 {
     display: block;
     letter-spacing: 1.5px;
@@ -40,7 +41,7 @@ const Menu = styled.div`
     }
   }
   @media (max-width: 320px) {
-    width: 130px;
+    width: 120px;
 
     h1 {
       font-size: 14px;
@@ -79,6 +80,14 @@ const PageContainer = styled.div`
 
   width: 550px;
   border-radius: 4px;
+
+  @media (max-width: 500px) {
+    margin: 20px;
+    }
+
+  @media (max-width: 320px) {
+    margin: 20px;
+  }
 
 `;
 

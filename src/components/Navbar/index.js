@@ -13,7 +13,7 @@ import logoBevSbImg from "../../img/owlSb.svg";
 import logoSbImg from "../../img/swedbank.png";
 import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
-import { Container, SignInButton } from "./style";
+import { Container, SignInButton, StyledName } from "./style";
 
 class Index extends Component {
   constructor(props) {

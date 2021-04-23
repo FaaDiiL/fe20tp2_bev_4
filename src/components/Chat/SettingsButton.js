@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   root: {
     border: 0,
     padding: 5,
+    alignSelf: "center",
   },
 });
 

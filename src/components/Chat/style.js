@@ -1,35 +1,22 @@
 import styled from "styled-components";
-
-export const StyledIconDiv = styled.div``;
+import "@fontsource/roboto"
 
 export const StyledDiv = styled.div`
-  .icon {
-    position: fixed;
-    bottom: 30px;
-    left: calc(100% - 120px);
-    padding: 10px;
-    /* margin-top: 18px; */
-    cursor: pointer;
-    border-radius: 100vh;
-    background: darkblue;
-    aspect-ratio: 1 / 1;
-    & > {
-      transform: translateX(5px);
-    }
-  }
-  .icon > {
-    position: absolute;
-  }
+
+  font-family: roboto;
+  font-size: 14px;
+  z-index: 300;
+
 
   .innerWrapper {
     position: fixed;
     bottom: 30px;
-    left: calc(100% - 350px);
+    right: 30px;
     background: white;
     width: 280px;
     height: 450px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    z-index: 100;
+    border-radius:12px;
     border: 2px solid #e5e5ea;
 
     @media (max-width: 350px) {
@@ -38,6 +25,24 @@ export const StyledDiv = styled.div`
       margin: 0 auto;
     }
   }
+
+  .icon {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 30px;
+    cursor: pointer;
+    border-radius: 100vh;
+    z-index: 100;
+
+  }
+  .icon > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 
   .header {
     display: flex;
@@ -51,8 +56,7 @@ export const StyledDiv = styled.div`
   }
 
   .main {
-    overflow-y: scroll;
-    height: 360px;
+    height: 350px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -61,13 +65,13 @@ export const StyledDiv = styled.div`
       width: 5px;
     }
     &::-webkit-scrollbar-track {
-      background: darkgray;
-      border-radius: 10px;
+      background: lightgray;
+      border-radius: 20px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: black;
-      border-radius: 10px;
+      background: darkgray;
+      border-radius: 20px;
     }
   }
 
@@ -93,9 +97,6 @@ export const StyledDiv = styled.div`
     min-width: 40px;
     min-height: 40px;
     aspect-ratio: 1 / 1;
-  }
-  .messageWrapper div span {
-    font-size: 14px;
   }
 
   .messageWrapper {
@@ -130,32 +131,52 @@ export const StyledDiv = styled.div`
     background: #e5e5ea;
   }
   .text {
+    margin: 0 0 0 0;
     border-radius: 8px;
     padding: 8px;
     width: 70%;
-    /* padding: 5px; */
   }
 
   form {
     display: inline-flex;
-    /* position: absolute;
-    bottom: 0; */
-    width: 100%;
+    width: calc(100% + 2px);
     height: 40px;
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
 
     & > * {
       height: 100%;
     }
 
     input {
-      font-size: 16px;
+      font-size: 14px;
       padding: 0 5px;
       width: 80%;
+      border: 1px solid darkgray;
+      border-top: 1px solid darkgray;
+      border-top-left-radius:12px;
+      border-bottom-left-radius:12px;
+
+      &:focus{
+        outline: none;
+      }
+      &:active{
+        outline: none;
+      }
     }
     button {
       width: 20%;
+      border-top-right-radius:12px;
+      border-bottom-right-radius:12px;
     }
   }
+
+  .settingsWrapper{
+    display:flex;
+    align-items: center;
+  }
+
   .editbtn {
     padding: 3px;
     margin: 0 3px;

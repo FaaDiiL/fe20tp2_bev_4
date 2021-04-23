@@ -17,7 +17,6 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    text-decoration: underline;
   }
 `;
 

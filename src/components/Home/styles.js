@@ -11,8 +11,6 @@ export const StyledDashBody = styled.main`
   margin: 0 auto;
 `;
 
-
-
 export const StyledDash = styled.div`
   display: flex;
   flex-direction: row;
@@ -27,11 +25,8 @@ export const StyledDash = styled.div`
     /* min-width: 90%; */
     margin-bottom:50px;
 
-    @media(max-width: 700px){
-      max-width: 400px;
-      display:flex;
-      justify-content:center;
-
+    @media(max-width: 500px){
+      width: 90%;
     }
   }
 `;
@@ -42,18 +37,24 @@ export const StyledTable = styled.div`
   flex-direction: column;
   align-items: center;
 
+  @media (max-width: 400px){
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
   @media (max-width: 900px){
     width: 80%;
 
     li{
-      font-size: 14px;
-      padding-left: 20px;
-      &:hover:not(:nth-child(-n + 2)) {
-    cursor: pointer;
-   background-color: #ededed;
-  }
+        font-size: 14px;
+        padding-left: 20px;
+        
+        &:hover:not(:nth-child(-n + 2)) {
+        cursor: pointer;
+        background-color: #ededed;
+        }
+      }
     }
-  }
 
   input,
   select {
@@ -84,6 +85,9 @@ export const StyledTable = styled.div`
   span {
     width: 100%;
   }
+  p {
+    text-align: center;
+  }
 
   .first {
     width: 50%;
@@ -111,7 +115,21 @@ export const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    text-decoration: underline;
+    
+  }
+`;
+
+export const AddButton = styled.button`
+  padding: 5px 20px;
+  border: none;
+  margin-bottom: 5px;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    
   }
 `;
 
@@ -133,7 +151,23 @@ export const Arrow = styled(BiDownArrow)`
 export const StyledChart = styled.div`
   margin-top: 100px;
   width: 75%;
-  margin: 0 auto;
+  margin: 15 auto;
 `;
 
 // Finished Dashboard styles
+
+// Table styles
+
+export const StyledButton = styled.button`
+
+  padding: 10px 17px 10px 10px;
+  border: none;
+  margin-bottom: 5px;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+
+`

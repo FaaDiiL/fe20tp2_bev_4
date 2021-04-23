@@ -6,8 +6,10 @@ import GlobalStyle, { GlobalStyleLF, GlobalStyleSB } from "../../GlobalStyle";
 import About from "../About";
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
+import Chat from "../Chat";
 import ContactPage from "../Contact";
 import Error from "../Error";
+import Footer from "../Footer";
 import HomePage from "../Home";
 import LandingPage from "../Landing";
 import Navbar from "../Navbar";
@@ -16,7 +18,6 @@ import { withAuthentication } from "../Session";
 import { AuthUserContext } from "../Session";
 import SignInPage from "../SignIn";
 import SignUpPage from "../SignUp";
-import Footer from "../Footer";
 
 const App = () => (
   <Router>
@@ -24,16 +25,26 @@ const App = () => (
       {(authUser) =>
         authUser ? (
           authUser.bank === "LF" ? (
-            <GlobalStyleLF />
+            <>
+              <GlobalStyleLF />
+              <Chat />
+            </>
           ) : authUser.bank === "SB" ? (
-            <GlobalStyleSB />
+              <>
+                <GlobalStyleSB />
+                <Chat />
+              </>
           ) : (
-            <GlobalStyle />
+            <>
+              <GlobalStyle />
+              <Chat />
+            </>
           )
         ) : (
-          <GlobalStyle />
+            <GlobalStyle />
         )
       }
+
     </AuthUserContext.Consumer>
     <Navbar />
 

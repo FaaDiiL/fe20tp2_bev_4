@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { withFirebase } from "../Firebase";
 
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Form = styled.form`
 display: flex;
@@ -18,7 +18,7 @@ h2 {
   margin-bottom: 50px;
 }
 
-form { 
+form{
   display: flex;
   flex-direction: column;
 }
@@ -26,7 +26,7 @@ form { 
 input {
   padding: 5px 15px 5px 5px;
   margin: 2px;
-margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 button {

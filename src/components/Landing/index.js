@@ -103,7 +103,6 @@ const Landing = (props) => {
             <select
               onChange={handleSelect1}
               value={select1}
-              id="countries"
               name="currency"
             >
               {/** Adding the base for SEK */}

@@ -61,7 +61,6 @@ export const StyledCont = styled.div`
   .btn {
     width: 180px;
     letter-spacing: 1.5px;
-    /* color: #ffffff; */
     border: none;
     padding: 8px;
     font-weight: bold;

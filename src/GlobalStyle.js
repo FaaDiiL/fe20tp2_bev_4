@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import "@fontsource/roboto"
+import "fontsource-montserrat"
 
 // Default
 const GlobalStyle = createGlobalStyle`
@@ -9,14 +11,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
+    font-family: "Montserrat";
     min-width: 325px;
     margin-top: 150px;
   }
   :root {
     --headerFontColor: #571d85;
-    --buttonHoverColor: #3f1363;
+    --buttonHoverColor: #571996f1;
   }
-
+  
   h1,h2,h3,h4,h5,h6{
     color: var(--headerFontColor);
   }
@@ -24,6 +27,13 @@ const GlobalStyle = createGlobalStyle`
     background: var(--headerFontColor);
     color: white;
     border: none;
+    border-radius: 4px;
+    font-family: 'roboto';
+
+    &:hover{
+      background-color: var(--buttonHoverColor);
+      
+    }
   }
 
   .dashboard-add-btn{
@@ -31,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 5px;
     color: white;
     border: none;
+    font-family: 'roboto';
     &:hover{
       background-color:var(--headerFontColor);
     }
@@ -79,6 +90,9 @@ const GlobalStyle = createGlobalStyle`
   .borderColor{
     border: 2px solid var(--headerFontColor);
   }
+  .adminMenu{
+    background: var(--headerFontColor);
+  }
   .accountMenu{
     background: var(--headerFontColor);
   }    
@@ -106,7 +120,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 .contact-form-btn {
-  background-color: var(--buttonHoverColor);
+  background-color: var(--headerFontColor);
   &:hover{
     background-color:var(--buttonHoverColor);
   }
@@ -118,6 +132,9 @@ const GlobalStyle = createGlobalStyle`
 
 .window-view-height{
  min-height: 75vh;
+}
+.icon{
+  background: var(--headerFontColor);
 }
 `;
 
@@ -132,6 +149,8 @@ export const GlobalStyleSB = createGlobalStyle`
   body{
     margin: 0 auto;
     margin-top: 150px;
+    font-family: roboto;
+
   }
 
   :root {
@@ -143,10 +162,15 @@ export const GlobalStyleSB = createGlobalStyle`
     color: var(--headerFontColor);
   }
   button{
-    background: var(--buttonHoverColor);
+    background: var(--headerFontColor);
     color: white;
     border: none;
+    border-radius: 4px;
+    font-family: 'roboto';
     
+    &:hover{
+      background-color: var(--buttonHoverColor);
+    }
   }
   .curr-conv-arrow-btn{ 
     background: none;
@@ -186,6 +210,9 @@ export const GlobalStyleSB = createGlobalStyle`
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
+  }
+  .adminMenu{
+    background: var(--headerFontColor);
   }
   .accountMenu{
     background: var(--headerFontColor);
@@ -212,7 +239,7 @@ export const GlobalStyleSB = createGlobalStyle`
 
 .dashboard-add-cur-btn { 
   &:hover{
-    background-color:var(--headerFontColor);
+    background-color:var(--buttonHoverColor);
   }
 }
 
@@ -222,7 +249,7 @@ export const GlobalStyleSB = createGlobalStyle`
   color: white;
   border: none;
   &:hover{
-    background-color:var(--headerFontColor);
+    background-color:var(--buttonHoverColor);
   }
 }
 
@@ -230,7 +257,7 @@ export const GlobalStyleSB = createGlobalStyle`
   background-color: var(--headerFontColor);
 }
 .contact-form-btn {
-  background-color: var(--buttonHoverColor);
+  background-color: var(--headerFontColor);
   &:hover{
     background-color:var(--buttonHoverColor);
   }
@@ -244,12 +271,9 @@ export const GlobalStyleSB = createGlobalStyle`
  min-height: 65vh;
 }
 
-.sent .username {
-    ${'' /* background: var(--headerFontColor); */}
-  }
-  .received .username {
-    ${'' /* background:  #571d85; */}
-  }
+.icon{
+  background: var(--headerFontColor);
+}
 `;
 
 // Länsförsäkringar
@@ -262,6 +286,8 @@ export const GlobalStyleLF = createGlobalStyle`
   body{
     margin: 0 auto;
     margin-top: 150px;
+    font-family: roboto;
+
   }
     :root {
     --headerFontColor: #005aa0;
@@ -271,10 +297,15 @@ export const GlobalStyleLF = createGlobalStyle`
     color: var(--headerFontColor);
   }
   button{
-    background: var(--buttonHoverColor);
+    background: var(--headerFontColor);
     color: white;
     border: none;
+    border-radius: 4px;
+    font-family: 'roboto';
     
+    &:hover{
+      background-color: var(--buttonHoverColor);
+    }
   }
   .curr-conv-arrow-btn{ 
     background: none;
@@ -313,6 +344,16 @@ export const GlobalStyleLF = createGlobalStyle`
   }
   .borderColor{
     border: 2px solid var(--headerFontColor);
+  }
+  .adminMenu{
+    background: var(--headerFontColor);
+  }
+  .adminResetPassword{
+    background: var(--headerFontColor);
+    &:hover {
+        cursor: pointer;
+        background-color: var(--buttonHoverColor); 
+      }
   }
   .accountMenu{
     background: var(--headerFontColor);
@@ -341,7 +382,7 @@ export const GlobalStyleLF = createGlobalStyle`
 
 .dashboard-add-cur-btn { 
   &:hover{
-    background-color:var(--headerFontColor);
+    background-color:var(--buttonHoverColor);
   }
 }
 
@@ -351,7 +392,7 @@ export const GlobalStyleLF = createGlobalStyle`
   color: white;
   border: none;
   &:hover{
-    background-color:var(--headerFontColor);
+    background-color:var(--buttonHoverColor);
   }
 }
 
@@ -359,7 +400,7 @@ export const GlobalStyleLF = createGlobalStyle`
   background-color: var(--headerFontColor);
 }
 .contact-form-btn {
-  background-color: var(--buttonHoverColor);
+  background-color: var(--headerFontColor);
   &:hover{
     background-color:var(--buttonHoverColor);
   }
@@ -373,12 +414,9 @@ export const GlobalStyleLF = createGlobalStyle`
  min-height: 65vh;
 }
 
-.sent .username {
-    ${'' /* background: var(--headerFontColor); */}
-  }
-  .received .username {
-    ${'' /* background:  #571d85; */}
-  }
+.icon{
+  background: var(--headerFontColor);
+}
 `;
 
 export default GlobalStyle;

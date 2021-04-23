@@ -10,10 +10,11 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import Settings from "./SettingsButton";
 import { StyledDiv } from "./style";
 
-const Chat = () => {
+const Chat = ({messages}) => {
+
   const [minimize, setMinimize] = useState(false);
 
-  const handleMinimize = () => {
+  const handleMinimize = (e) => {
     setMinimize(!minimize);
   };
 
@@ -29,6 +30,7 @@ const Chat = () => {
           </div>
 
           <Messages />
+
         </div>
       ) : (
         <div className="icon" onClick={handleMinimize}>
@@ -75,13 +77,13 @@ class MessagesBase extends Component {
   }
 
   componentDidUpdate(prevState) {
-    if (prevState.messages != this.state.messages) {
+    if (prevState.messages !== this.state.messages) {
       if (this.state.messages.length > 5) {
         this.scrollPoint.current.scrollIntoView({
           behavior: "smooth",
           block: "end",
         });
-      }
+      }      
     }
   }
 
@@ -102,8 +104,8 @@ class MessagesBase extends Component {
       userId: authUser.uid,
       username: authUser.username,
       email: authUser.email,
-      createdAt: Firebase.database.ServerValue.TIMESTAMP,
-    });
+      createdAt: Firebase.database.ServerValue.TIMESTAMP
+    })
     this.setState({ text: "" });
   };
 
@@ -133,7 +135,6 @@ class MessagesBase extends Component {
                   authUser={authUser}
                 />
                 <div
-                  // style={{ marginBottom: "60px" }}
                   ref={this.scrollPoint}
                 ></div>
               </div>
@@ -226,7 +227,7 @@ class MessageItem extends Component {
           </div>
         )}
         {authUser.uid === message.userId && (
-          <span>
+          <span className="settingsWrapper">
             {editMode ? (
               <span>
                 <button className="editbtn" onClick={this.onSaveEditText}>
@@ -237,12 +238,12 @@ class MessageItem extends Component {
                 </button>
               </span>
             ) : (
-              <Settings
-                deleteFunc={() => onRemoveMessage(message.uid)}
-                valueDelete={"Delete"}
-                editFunc={this.onToggleEditMode}
-                valueEdit={"Edit"}
-              />
+                <Settings
+                  deleteFunc={() => onRemoveMessage(message.uid)}
+                  valueDelete={"Delete"}
+                  editFunc={this.onToggleEditMode}
+                  valueEdit={"Edit"}
+                />
             )}
           </span>
         )}

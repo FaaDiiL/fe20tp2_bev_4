@@ -22,6 +22,7 @@ const StyledContainer = styled.div`
     width: 70%;
     margin-top: 40px;
     line-height: 1.5;
+    text-align: center;
   }
 `;
 

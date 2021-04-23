@@ -1,7 +1,7 @@
-import app from "firebase/app";
+import app from 'firebase/app'
 
-import "firebase/auth";
-import "firebase/database";
+import 'firebase/auth';  
+import 'firebase/database'
 
 var config = {
   apiKey: "AIzaSyDWcMs5a_HcHqqDqHTiWZtsP_35CQ2F-I4",
@@ -13,7 +13,6 @@ var config = {
   appId: "1:180893030057:web:d7afa06d4ecfcc46677bb8",
 };
 
-// Initialize Firebase
 class Firebase {
   constructor() {
     app.initializeApp(config);
@@ -77,7 +76,7 @@ class Firebase {
 
   // *** Savings API ***
 
-  saving = (uid) => this.db.ref(`users/${uid}/savings/`);
+  saving = (uid, index) => this.db.ref(`users/${uid}/savings/${index}`);
 
   savings = () => this.db.ref("savings");
 
@@ -110,11 +109,6 @@ class Firebase {
     }
   };
 
-  // getDataFromDatabase = (id, setDoughnut, setTempDatabaseSavings, doughnut) => {
-  //   let localCurrentUser = JSON.parse(localStorage.getItem("authUser")).savings;
-  //   setDoughnut(localCurrentUser);
-  //   setTempDatabaseSavings(localCurrentUser);
-  // };
 }
 
 export default Firebase;

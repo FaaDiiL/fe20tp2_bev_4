@@ -1,8 +1,6 @@
-// import { useContext, useEffect, useState } from '@testing-library/dom'
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 
-import Chat from "../Chat";
 import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../Session";
 import Form from "./form";
@@ -31,6 +29,7 @@ const HomePage = ({ firebase }) => {
   const editSavings = (dataObj) => {
     firebase.user(authUser.uid).child("savings").update(dataObj);
   };
+
   const myLabels = firebaseData.map((cur) => cur.labels);
   const myAmount = firebaseData.map((cur) => cur.amount);
   const data = {
@@ -71,8 +70,8 @@ const HomePage = ({ firebase }) => {
     <StyledDashBody>
       <StyledTable>
         <p>
-          Here is the place you can keep track of all your savings in all
-          different currencies"
+          Here you can keep track of all your savings in all
+          different currencies
         </p>
         <p>Press the button to start</p>
         <br />
@@ -109,7 +108,6 @@ const HomePage = ({ firebase }) => {
             }}
           />
         </div>
-        <Chat />
       </StyledDash>
     </StyledDashBody>
   ) : (
