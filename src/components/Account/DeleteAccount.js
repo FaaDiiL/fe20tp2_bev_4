@@ -6,6 +6,8 @@ import { AuthUserContext, withAuthorization } from "../Session";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   h2 {
     margin: 20px;

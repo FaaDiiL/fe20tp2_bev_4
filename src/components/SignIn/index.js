@@ -4,7 +4,6 @@ import GoogleButton from 'react-google-button'
 import { withRouter } from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-
 import * as ROUTES from '../../constants/routes'
 import { withFirebase } from '../Firebase'
 import { PasswordForgetForm } from '../PasswordForget'
@@ -15,6 +14,13 @@ const LogIn = styled.div`
   align-items: center;
   display: flex;
 `
+const SignInFormLayout = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
+
+`;
 
 const PageContainer = styled.div`
   margin-top: 100px;
@@ -28,11 +34,6 @@ const PageContainer = styled.div`
     margin-bottom: 70px;
     display: block;
   }
-
-  p {
-    margin-bottom: 50px;
-  }
-
   input {
     padding: 5px 15px 5px 5px;
     margin: 5px;
@@ -43,6 +44,11 @@ const PageContainer = styled.div`
     display: block;
     padding: 5px;
     margin: 0 auto;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 `
 
@@ -106,11 +112,32 @@ const SelectMenu = styled.div`
   }
 `
 
+const LogInErrorMessage = styled.p `
+width: 60%;
+font-size: 10px;
+color: red;
+margin-top: 15px;
+text-align: center;
+border: 1px solid red;
+padding: 5px;
+margin-bottom: 0px;
+`;
+
+const SignInWithGoogleContainer = styled.div`
+display: flex;
+justify-content: center; 
+align-items: center; 
+flex-direction: column;
+margin-top: 20px;
+`;
+
+
 const Show = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  max-width: 120px;
 
   select {
     margin: 10px;
@@ -216,12 +243,9 @@ class SignInFormBase extends Component {
 
     return (
       <div>
-              
-              
+       <SignInFormLayout>
+           <form onSubmit={this.onSubmit}>
 
-      <form onSubmit={this.onSubmit}>
-
-        
         <label>
           E-mail
           <input
@@ -243,22 +267,20 @@ class SignInFormBase extends Component {
             placeholder='Password'
           />
         </label>
+     
 
         <button disabled={isInvalid} type='submit'>
           Sign In
         </button>
-        {error && <p>{error.message}</p>}
+    
       </form>
-      
+      {error && <LogInErrorMessage>{error.message}</LogInErrorMessage>}
+      </SignInFormLayout>
   
-      <div style={{width: '100%'}}>
-      <br />
-      <span style={{textAlign: 'center', width: '100%'}}>OR</span>
-      <br />
-      <hr />
-      <br />
+      <SignInWithGoogleContainer>
+      <span>OR</span>
       <SignInGoogle />
-      </div>
+      </SignInWithGoogleContainer>
       </div>
     )
   }
@@ -295,7 +317,7 @@ class SignInGoogleBase extends Component {
       <form onSubmit={this.onSubmit}>
       <button style={{backgroundColor: 'transparent'}} type="submit"><GoogleButton /></button>
      
-        {error && <p>{error.message}</p>}
+        {error && <LogInErrorMessage>{error.message}</LogInErrorMessage>}
       </form>
     )
   }

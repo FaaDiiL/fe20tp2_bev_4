@@ -13,7 +13,7 @@ import logoBevSbImg from '../../img/owlSb.svg'
 import logoSbImg from '../../img/swedbank.png'
 import { AuthUserContext } from '../Session'
 import SignOutButton from '../SignOut'
-import { Container, StyledSignIn } from './style'
+import { Container, StyledSignIn, SignInButton } from './style'
 
 class Index extends Component {
   constructor(props) {
@@ -120,7 +120,7 @@ class Index extends Component {
                       }
                     >
                       <Link to={ROUTES.LANDING}>
-                        <li>Landing</li>
+                        <li>Home</li>
                       </Link>
 
                       <Link to={ROUTES.HOME}>
@@ -143,9 +143,9 @@ class Index extends Component {
                           <li>Admin</li>
                         </Link>
                       )}
-                      <li>
-                        <SignOutButton />
-                      </li>
+                     
+                     
+                     <SignOutButton />
                     </ul>
                   ) : (
                     <ul
@@ -158,7 +158,7 @@ class Index extends Component {
                       }
                     >
                       <Link to={ROUTES.LANDING}>
-                        <li>Landing</li>
+                        <li>Home</li>
                       </Link>
 
                       <Link to={ROUTES.ABOUT}>
@@ -167,12 +167,6 @@ class Index extends Component {
 
                       <Link to={ROUTES.CONTACT}>
                         <li>Contact</li>
-                      </Link>
-
-                      <Link to={ROUTES.SIGN_IN}>
-                        <StyledSignIn>
-                          <button>Sign In</button>
-                        </StyledSignIn>
                       </Link>
                     </ul>
                   )
@@ -195,8 +189,9 @@ class Index extends Component {
                             title={`${authUser.username}`}
                             size='35'
                             md5Email={`${MD5(authUser.email)}`}
-                            value={`${authUser.username.substring(0, 2)}`}
+                            value={`${authUser.username.substring(0, 2).toUpperCase()}`}
                             round
+                            color=''
                           />
                           <p style={{ marginLeft: '10px' }}>
                             {authUser.username.split(/\s/).length > 1
@@ -215,7 +210,7 @@ class Index extends Component {
                       </Link>
                     </>
                   ) : (
-                    <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+                    <Link to={ROUTES.SIGN_IN}><SignInButton>Sign In </SignInButton></Link>
                   )
                 }
               </AuthUserContext.Consumer>
