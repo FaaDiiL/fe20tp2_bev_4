@@ -4,7 +4,12 @@ import "@fontsource/audiowide";
 export const Container = styled.div`
   li {
     list-style: none;
-    padding: 3vh 40px; 
+    padding: 3vh 0;
+    text-align: center;
+
+    &:hover  {
+      color: #571d85;
+    }
   }
 
   .header {
@@ -13,7 +18,7 @@ export const Container = styled.div`
     left: 0;
     width: 100%;
     color: #333;
-    z-index: 10;
+    z-index: 100;
     background-color: #fff;
   }
 
@@ -76,6 +81,7 @@ export const Container = styled.div`
     margin-bottom: 4px;
     background-color: #333;
     border-radius: 5px;
+    transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09);
   }
   .navToggle.open span {
     background: #333;
@@ -92,7 +98,7 @@ export const Container = styled.div`
     width: 250px;
     height: 100vh;
     background-color: #f4f4f4;
-   padding-top: 100px;
+    padding-top: 100px;
     z-index: 3;
     transform: translateX(100%);
     transition: transform 0.25s ease;
@@ -144,14 +150,19 @@ export const StyledSignIn = styled.li`
   }
 `;
 
-export const SignInButton = styled.button `
-border: 1px solid #571d85; 
-border-radius: 4px; 
-padding: 5px;
-margin-right: 10px;
+export const StyledName = styled.div`
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
+`;
+export const SignInButton = styled.button`
+  border: 1px solid #571d85;
+  border-radius: 4px;
+  padding: 5px;
+  margin-right: 10px;
 
-&:hover { 
-  cursor: pointer;
-  text-decoration: underline;
-}
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
